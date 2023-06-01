@@ -22,7 +22,7 @@ header{
 .logos{
     display: inline-flex;
     align-items: center;
-    gap: 15px;
+    gap: 50px;
 }
 .names{
     display: inline-flex;
@@ -30,7 +30,6 @@ header{
     gap: 15px;
 }
 img{
-    width: 50px;
     height: 50px;
 }
 .searchContainer{
@@ -50,10 +49,13 @@ img{
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: white;
+    cursor: pointer;
 }
 main{
     background-color: #F2F2FF;
 }
 footer{
     background-color: #F2F2FF;
+    display: flex;
+    justify-content: center;
 }
