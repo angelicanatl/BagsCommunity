@@ -1,0 +1,34 @@
+html, body{
+    width: 100%;
+    height: 100%;
+}
+*{
+    margin: 0;
+    font-family: "nunito-medium";
+    color: #00113E;
+}
+body{
+    display: grid;
+    grid-template-rows: 70px 1fr;
+}
+main{
+    background-color: #F2F2FF;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+#addbagitem{
+    width: 300px;
+    height: 250px;
+    border-radius: 20px;
+    margin: 100px;
+    font-size: large;
+    background-color: #E6E8FA;
+    border: none;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgb(185, 185, 185);
+}
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
