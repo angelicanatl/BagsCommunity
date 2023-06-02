@@ -1,0 +1,59 @@
+
+html, body{
+    background-color: #F2F2FF;
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fotoProfil{
+    margin-top: 25px;
+    grid-column: 1;
+}
+
+#AdminOptions{
+    grid-column: 2;  
+     
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#AdminOptions section{
+    align-items: center;
+}
+
+div div{
+    background-color: #E6E8FA;
+    text-align: center;
+    width: 150px;
+    height: 100px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 20px
+}
+
+p{
+    text-align: center;
+}
