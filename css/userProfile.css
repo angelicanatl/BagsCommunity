@@ -56,6 +56,17 @@ img{
     align-items: center;
 }
 
+#Follow{
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #Reviews{
     grid-column: 2;  
      
