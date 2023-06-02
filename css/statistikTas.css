@@ -1,0 +1,60 @@
+html, body{
+    background-color: #F2F2FF;
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#dateInput{
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px;
+}
+
+form{
+    display: flex;
+    justify-content: center; 
+}
+
+input[type="date"]{
+    margin: 10px;
+}
+
+#forGraph{
+    width: 400px;
+
+    grid-column: 2; 
+    background-color: white; 
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+}
+
+div#forInput div{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+#forGraph p{
+    text-align: center;
+}
+
+hr{
+    margin-left: 20px;
+    margin-right: 20px;
+}
