@@ -4,6 +4,7 @@ html, body{
 }
 *{
     margin: 0;
+    font-family: "nunito-medium";
 }
 body{
     display: grid;
@@ -58,4 +59,13 @@ footer{
     background-color: #F2F2FF;
     display: flex;
     justify-content: center;
+}
+.namePage{
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
 }

@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    font-family: "nunito-medium";
 }
 html, body{
     width: 100%;
@@ -19,4 +20,8 @@ div{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
 }

@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    font-family: "nunito-medium";
 }
 html, body{
     width: 100%;
@@ -25,9 +26,18 @@ form{
     grid-template-columns: 2fr 3fr;
     grid-template-rows: 30px 50px 1fr 1fr 1fr 1fr;
 }
+#head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 h2{
     grid-column-start: 1;
     grid-column-end: 3;
+    padding-right: 5px;
+}
+img{
+    height: 50px;
 }
 p{
     grid-column-start: 1;
@@ -64,4 +74,8 @@ div{
 }
 #submit{
     grid-row-start: 6;
+}
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
 }
