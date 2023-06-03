@@ -1,0 +1,64 @@
+html, body{
+    width: 100%;
+    height: 100%;
+}
+*{
+    margin: 0;
+    font-family: "nunito-medium";
+    color: #00113E;
+}
+body{
+    display: grid;
+    grid-template-rows: 70px 1fr;
+}
+main{
+    background-color: #F2F2FF;
+}
+.addCategory{
+    display: grid;
+    grid-template-columns: 125px 500px 35px;
+    gap: 10px;
+    height: fit-content;
+    padding: 15px;
+    margin: 25px 100px;
+    border-bottom: solid 1px #00113E;
+}
+.addCategory>input{
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px rgb(185, 185, 185);
+}
+.addCategory>button{
+    border: none;
+    border-radius: 10px;
+    background-color: #E6E8FA;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgb(185, 185, 185);
+}
+.category{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    margin: 25px 125px;
+    gap: 20px;
+}
+.category>button{
+    background-color: white;
+    border-radius: 10px;
+    padding: 8px 15px;
+    font-family: "nunito-bold";
+    font-size: smaller;
+    border: none;
+    text-align-last: left;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgb(185, 185, 185);
+}
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
+@font-face {
+    font-family: "nunito-bold";
+    src: url(../assets/nunito/Nunito-Bold.ttf);
+}

@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bag's Community</title>
-    <!-- <link rel="stylesheet" href="../css/upload.css"> -->
+    <link rel="stylesheet" href="../css/reviewSet.css">
 </head>
 <body>
+    <header></header>
     <form id="review" method="post" action="/uploadFile">
         <h2>Dashboard</h2>
         <hr>
@@ -16,7 +17,12 @@
         <h2>Rentang Nilai Review</h2>
         <hr>
         <label for="rentang">Rentang Review:</label>
-        <input type="radio" name="rentang">
+        <div id="rentang">
+            <input type="radio" name="rentang5">
+            <label for="rentang5">1 sampai 5</label>
+            <input type="radio" name="rentang10">
+            <label for="rentang10">1 sampai 10</label>
+        </div>
         <label for="arti">Arti Nilai Review:</label>
         <div id="nilai">
             <label for="1">1:</label>

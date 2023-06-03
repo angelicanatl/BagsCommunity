@@ -44,6 +44,7 @@ form#manual{
     
     display: grid;
     grid-template-columns: 2fr 5fr;
+    height: fit-content;
 }
 form#manual #lab{
     display: grid;
