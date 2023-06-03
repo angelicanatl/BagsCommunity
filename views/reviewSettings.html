@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bag's Community</title>
+    <!-- <link rel="stylesheet" href="../css/reviewSet.css"> -->
+</head>
+<body>
+    <header></header>
+    <form id="review" method="post" action="/uploadFile">
+        <h2>Dashboard</h2>
+        <hr>
+        <label for="minimal">Jumlah Minimal Review:</label>
+        <input type="text" name="minimal">
+        <h2>Rentang Nilai Review</h2>
+        <hr>
+        <label for="rentang">Rentang Review:</label>
+        <div id="rentang">
+            <input type="radio" name="rentang5">
+            <label for="rentang5">1 sampai 5</label>
+            <input type="radio" name="rentang10">
+            <label for="rentang10">1 sampai 10</label>
+        </div>
+        <label for="arti">Arti Nilai Review:</label>
+        <div id="nilai">
+            <label for="1">1:</label>
+            <input type="text" name="1">
+            <label for="2">2:</label>
+            <input type="text" name="2">
+            <label for="3">3:</label>
+            <input type="text" name="3">
+            <label for="4">4:</label>
+            <input type="text" name="4">
+            <label for="5">5:</label>
+            <input type="text" name="5">
+        </div>
+        <div id="button">
+            <button name="cancel">Cancel</button>
+            <button name="upload">Update</button>
+        </div>
+    </form>
+</body>
+</html>

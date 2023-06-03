@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Setting - Bag's Community</title>
+    <link rel="stylesheet" href="../css/settingUser.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <form method="post" action="/updateProfile">
+            <div id="photo">
+                <img src="../assets/profile.png">
+            </div>
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" name="nama">
+            <label for="email">E-mail</label>
+            <input type="text" name="email">
+            <label for="username">Username</label>
+            <input type="text" name="username">
+            <label for="password">Password</label>
+            <input type="password" name="password">
+            <div id="button">
+                <button name="cancel">Cancel</button>
+                <button name="upload">Update</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
