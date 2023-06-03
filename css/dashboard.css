@@ -1,0 +1,128 @@
+html, body{
+    background-color: #F2F2FF;
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    color: #a48df0;
+    margin-bottom: 30px;
+}
+
+section{
+    display: grid; 
+    grid-template-columns: 1fr 1.5fr;
+}
+
+#grafikTopTen{
+    grid-column: 1;
+    width: 100%;
+    margin-right: 20px;
+}
+
+#graphs{
+    background-color: white;
+    width: 400px;
+    height: 400px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Back, .forward {  
+    font-size: 40px;
+    color: #a48df0;
+    margin: 10px;
+}
+
+
+#Bags{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+*{
+    margin: 0;
+    font-family: "nunito-medium";
+}
+
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
+
+.bag{
+    background-color: white;
+    width: 300px;
+    height: 120px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.left{
+    grid-column: 1;
+}
+
+.right{
+    grid-column: 2;
+}
+
+.prof{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    text-align: left;
+}
+
+.fotoTas{
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+}
+
+.Merek{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fotoProf{
+    margin:7px;
+    width: 30px;
+    height: 30px;
+}
+
+.profile{
+    text-align: left;
+    font-size: 14px;
+    display: flex;
+    margin-top: 15px;
+}
+
+.bintang{
+    margin:3px;
+    width: 20px;
+    height: 20px;
+}
+
+.reviewUser{
+    text-align: left;
+    font-size: 12px;
+} 
