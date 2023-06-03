@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - Bag's Community</title>
+    <title>Add Review - Bag's Community</title>
     <link rel="stylesheet" href="../css/addReview.css">
 </head>
 <body>
     <header></header>
     <main>
-        <form method="post" action="/addReview">
+        <div id="head">
             <h2>ADD REVIEW</h2>
-            <hr>
+        </div>
+        <form method="post" action="/addReview">
             <div id="nilai">
                 <input type="radio" name="nilai1">
                 <label for="nilai1">1</label>
@@ -29,7 +30,10 @@
                 <label for="review">Write your review</label>
                 <textarea name="review"></textarea>
             </div>
-            <button>Upload Your Review</button>
+            <div id="button">
+                <button name="cancel">Cancel</button>
+                <button name="upload">Upload Your Review</button>
+            </div>
         </form>
     </main>
 </body>

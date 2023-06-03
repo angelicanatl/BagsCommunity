@@ -21,7 +21,59 @@ form{
     text-align: center;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
     display: grid;
+<<<<<<< Updated upstream
     grid-template-rows: 15fr 1fr;
+=======
+    grid-template-rows: 3fr 8fr 2fr;
+}
+#text{
+    text-align: center;
+    align-self: end;
+    background-color: #E6E8FA;
+    padding: 8px 15px;
+}
+form#manual{
+    align-items: center;
+    background-color: #B29DF8;
+    border-radius: 10px;
+    row-gap: 1px;
+    border: none;
+    padding: 10px;
+    /* align-self: stretch;     */
+    width: 500px;
+    text-align: left;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
+form#manual #lab{
+    display: grid;
+    row-gap: 11px;
+    grid-template-rows: repeat(10, 1fr);
+}
+form#manual #inp{
+    display: grid;
+    row-gap: 10px;
+    grid-template-rows: repeat(10, 1fr);
+}
+form#manual select{
+    border: none;
+    height: 35px;
+    padding: 8px 15px;
+}
+form#manual input{
+    border: none;
+    padding: 8px 15px;
+}
+form#manual label{
+    background-color: #E6E8FA;
+    padding: 8px 15px;
+    height: 20px;
+}
+#file{
+    background-color: #FFFF;
+>>>>>>> Stashed changes
     justify-content: center;
     align-items: center;
 }
