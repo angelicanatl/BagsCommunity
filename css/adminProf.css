@@ -3,6 +3,7 @@ html, body{
     background-color: #F2F2FF;
     height: 100%;
     width: 100%;
+    font-family: "nunito-medium";
 }
 
 body{
@@ -56,4 +57,9 @@ div div{
 
 p{
     text-align: center;
+}
+
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
 }
