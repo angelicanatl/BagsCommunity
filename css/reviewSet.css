@@ -10,47 +10,78 @@ html, body{
 body{
     display: grid;
     grid-template-rows: 70px 1fr;
-}
-main{
+    padding: 15px;
     background-color: #F2F2FF;
 }
-.addCategory{
-    display: grid;
-    grid-template-columns: 125px 500px 35px;
-    gap: 10px;
-    height: fit-content;
-    padding: 15px;
-    margin: 25px 100px;
-    border-bottom: solid 1px #00113E;
+form{
+    display:grid;
+    grid-template-rows: 100px 300px 35px;
 }
-.addCategory>input{
+#dashboard{
+    grid-row: 1;
+}
+#minimal{
+    display: grid;
+    grid-template-columns: 200px 300px;
+    margin: 15px;
+}
+#dashboard>input{
+    grid-column: 2;
+}
+#rentangNilai{
+    grid-row: 2;
+}
+#rentang{
+    display: grid;
+    grid-template-columns: 200px 300px 300px;
+    margin: 15px;
+}
+#artiNilai{
+    display: grid;
+    grid-template-columns: 200px 300px 300px;
+    margin: 15px;
+}
+#nilai{
+    display: grid;
+    grid-column: 2;
+    grid-template-columns: 30px 300px;
+    grid-template-rows: repeat(5, 30px);
+    row-gap: 10px;
+}
+h2{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    border-bottom: solid 1px black;
+}
+input[type="text"]{
     border: none;
     padding: 8px 15px;
-    border-radius: 20px;
+    height: 10px;
+    width: 100px;
+    border-radius: 5px;
     box-shadow: 3px 3px 5px rgb(185, 185, 185);
 }
-.addCategory>button{
+#button{
+    display: flex;
+    flex-direction: row-reverse;
+}
+#button>button{
     border: none;
-    border-radius: 10px;
+    height: 30px;
+    width: 100px;
+    margin: 5px;
+    border-radius: 5px;
     background-color: #E6E8FA;
     cursor: pointer;
     box-shadow: 3px 3px 5px rgb(185, 185, 185);
 }
-.category{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
-    margin: 25px 125px;
-    gap: 20px;
-}
-.category>button{
-    background-color: white;
-    border-radius: 10px;
-    padding: 8px 15px;
-    font-family: "nunito-bold";
-    font-size: smaller;
+#rentang>button{
     border: none;
-    text-align-last: left;
+    height: 30px;
+    width: 200px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #E6E8FA;
     cursor: pointer;
     box-shadow: 3px 3px 5px rgb(185, 185, 185);
 }
