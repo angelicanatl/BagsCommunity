@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    font-family: "nunito-medium";
 }
 html, body{
     width: 100%;
@@ -11,8 +12,7 @@ body{
     align-items: center;
     justify-content: center;
 }
-form#file{
-    align-items: center;
+form{
     background-color: #B29DF8;
     border-radius: 10px;
     row-gap: 8px;
@@ -20,64 +20,61 @@ form#file{
     width: 450px;
     text-align: center;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
-
     display: grid;
-    grid-template-rows: 3fr 8fr 2fr;
-}
-#text{
-    text-align: center;
-    align-self: end;
-    background-color: #E6E8FA;
-    padding: 8px 15px;
-}
-form#manual{
-    align-items: center;
-    background-color: #B29DF8;
-    border-radius: 10px;
-    row-gap: 1px;
-    border: none;
-    padding: 10px;
-    /* align-self: stretch;     */
-    width: 500px;
-    text-align: left;
-    box-shadow: 5px 5px 10px rgb(185, 185, 185);
-    
-    display: grid;
-    grid-template-columns: 2fr 5fr;
-    height: fit-content;
-}
-form#manual #lab{
-    display: grid;
-    row-gap: 11px;
-    grid-template-rows: repeat(10, 1fr);
-}
-form#manual #inp{
-    display: grid;
-    row-gap: 10px;
-    grid-template-rows: repeat(10, 1fr);
-}
-form#manual select{
-    border: none;
-    height: 35px;
-    padding: 8px 15px;
-}
-form#manual input{
-    border: none;
-    padding: 8px 15px;
-}
-form#manual label{
-    background-color: #E6E8FA;
-    padding: 8px 15px;
-    height: 20px;
-}
-#file{
-    background-color: #FFFF;
+    grid-template-rows: 15fr 1fr;
     justify-content: center;
-    align-self: start;
-    padding: 50px 15px;
+    align-items: center;
+}
+#lab{
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: 2fr 5fr;
+    row-gap: 10px;
+}
+#lab>label{
+    background-color: #E6E8FA;
+    padding: 8px 15px;
+    text-align: left;
+}
+#lab>select{
+    background-color: white;
+    border: none;
+    padding: 8px 15px;
+}
+#lab>input{
+    background-color: white;
+    border: none;
+    padding: 8px 15px;
 }
 #button{
     display: flex;
-    grid-column: 2;
-    justify-content: right;
+    justify-content: flex-end;
+}
+#button>button{
+    background-color: #B29DF8;
+    border: none;
+    cursor: pointer;
+}
+
+#text{
+    display: flex;
+    flex-direction: column;
+}
+#text>input{
+    background-color: white;
+    width: 400px;
+    height: 200px;
+    cursor: pointer;
+}
+#text>label{
+    background-color: #E6E8FA;
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
 }
