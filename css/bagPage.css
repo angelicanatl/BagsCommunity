@@ -1,0 +1,196 @@
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
+
+@font-face {
+    font-family: "nunito-bold";
+    src: url(../assets/nunito/Nunito-Bold.ttf);
+}
+
+html, body{
+    background-color: #F2F2FF;
+    height: 100%;
+    width: 100%;
+}
+
+#all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1,h2{
+    font-family: "nunito-bold";
+}
+
+p{
+    font-family: "nunito-medium";
+}
+section{
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+}
+
+#left{
+    grid-column: 1;
+}
+
+#right{
+    grid-column: 2;
+    width: 500px;
+}
+
+#photos{
+    background-color: white;
+    width: 400px;
+    height: 500px;
+
+    margin-right: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px ;
+}
+
+#depan{
+    grid-column: 1/5 ;
+    grid-row: 1/5;
+    width: 400px;
+    width: 400px;
+}
+
+#belakang{
+    grid-column: 1 ;
+    grid-row: 5;
+    width: 100px;
+    width: 100px;
+}
+
+#kanan{
+    grid-column: 2 ;
+    grid-row: 5;
+    width: 100px;
+    width: 100px;
+}
+
+#kiri{
+    grid-column: 3 ;
+    grid-row: 5;
+    width: 100px;
+    width: 100px;
+}
+
+#dalam{
+    grid-column: 4 ;
+    grid-row: 5;
+    width: 100px;
+    width: 100px;
+}
+
+#details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(7, 1fr);
+    row-gap: 10px;
+}
+
+#details p{
+    background-color: #cfd3f1;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#upperR{
+    display: flex;
+    align-items: center;
+}
+
+#right h2{
+    margin: 10px;
+}
+
+input[type="button"]{
+    margin-left: auto;
+    background-color: #cfd3f1;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+}
+
+input[type="text"]{   
+    border: 0;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.userReviews{
+    background-color: white;
+    width: 500px;
+    height: 160px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    display: grid;
+    grid-template-columns: 0.7fr 2fr;
+}
+
+.left{
+    grid-column: 1;
+}
+
+.right{
+    grid-column: 2;
+}
+
+
+.prof{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    text-align: left;
+}
+
+.fotoTas{
+    width: 100px;
+    height: 100px;
+    margin: 10px 10px 0 10px;
+}
+
+.Merek{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fotoProf{
+    margin:7px;
+    width: 40px;
+    height: 40px;
+}
+
+.profile{
+    text-align: left;
+    font-size: 18px;
+    display: flex;
+    margin-top: 15px;
+}
+
+.bintang{
+    margin:3px;
+    width: 25px;
+    height: 25px;
+}
+
+.reviewUser{
+    text-align: left;
+    font-size: 14px;
+} 
