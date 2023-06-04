@@ -21,7 +21,7 @@ form{
     text-align: center;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
     display: grid;
-    grid-template-rows: 15fr 1fr;
+    grid-template-rows: 1fr 15fr 1fr;
     justify-content: center;
     align-items: center;
 }
