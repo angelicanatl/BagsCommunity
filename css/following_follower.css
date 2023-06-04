@@ -62,6 +62,12 @@ img{
     margin:15px;
 }
 
+#Folls{
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 300px;
+}
+
 #Folls div{
     margin: 5px;
     background-color: white;
@@ -74,10 +80,17 @@ img{
     display: grid;
     grid-template-columns: 1fr 5fr;
     text-align: left;
-
-    /* BELUMBISA SCROLLING */
 }
 
 hr{
     width: 450px;
+}
+
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
+
+p{
+    font-family: "nunito-medium";
 }

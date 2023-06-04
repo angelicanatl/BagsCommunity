@@ -69,10 +69,12 @@ img{
 
 #Reviews{
     grid-column: 2;  
-     
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 400px; 
 }
 
-#Reviews section div{
+/* #Reviews section div{
     margin: 10px;
     background-color: white;
     border-radius: 10px;
@@ -80,10 +82,80 @@ img{
 
     width: 450px;
     height: 120px;
-
-    /* BUAT NANTI TAS */
-}
+} */
 
 p{
     text-align: center;
+    font-family: "nunito-medium";
 }
+
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
+
+.bag{
+    background-color: white;
+    width: 350px;
+    height: 120px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.left{
+    grid-column: 1;
+}
+
+.right{
+    grid-column: 2;
+}
+
+.prof{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    text-align: left;
+}
+
+.fotoTas{
+    width: 80px;
+    height: 80px;
+    margin: 10px 10px 10px 15px;
+}
+
+.Merek{
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fotoProf{
+    margin:7px;
+    width: 30px;
+    height: 30px;
+}
+
+.profile{
+    text-align: left;
+    font-size: 14px;
+    display: flex;
+    margin-top: 15px;
+}
+
+.bintang{
+    margin:3px;
+    width: 20px;
+    height: 20px;
+}
+
+.reviewUser{
+    text-align: left;
+    font-size: 12px;
+} 

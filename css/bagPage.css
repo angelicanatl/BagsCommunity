@@ -34,11 +34,20 @@ section{
 
 #left{
     grid-column: 1;
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 800px;
+    width: 500px;
+
+    margin-right: 50px;
 }
 
 #right{
     grid-column: 2;
-    width: 500px;
+    width: 530px;
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 800px;
 }
 
 #photos{
