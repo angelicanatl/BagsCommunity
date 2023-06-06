@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+}
+
+html, body{
+    background-color: #F2F2FF;
+    height: 100%;
+    width: 100%;
+    font-family: "nunito-medium";
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fotoProfil{
+    grid-column: 1;
+}
+
+#AdminOptions{
+    grid-column: 2;  
+     
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#AdminOptions section{
+    align-items: center;
+}
+
+div div{
+    background-color: #E6E8FA;
+    text-align: center;
+    width: 150px;
+    height: 100px;
+    padding: 30px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 20px
+}
+
+p{
+    text-align: center;
+}
+
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
