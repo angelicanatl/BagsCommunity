@@ -16,13 +16,15 @@ body{
 
 section{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 4fr;
+    justify-items: center;
 }
 
 #dateInput{
     display: flex;
     justify-content: flex-start;
     margin: 10px;
+    align-items: center;
 }
 
 form{
@@ -43,12 +45,18 @@ input[type="date"]{
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
 }
 
+#forInput{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 div#forInput div{
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
 
-    width: 80%;
+    width: 350px;
     padding: 10px;
     border-radius: 10px;
     margin: 10px;

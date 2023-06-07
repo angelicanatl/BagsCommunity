@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="../css/addBagItem.css">
 </head>
 <body>
-    <header></header>
-    <!-- <% nanti tambahin headerAdmin %> -->
+    <%- include('headerAdmin') %>
     <main>
-        <button id="addbagitem">Input File CSV</button>
-        <button id="addbagitem">Input Data Secara Manual</button>
+        <a id="addbagitem" href="/uploadFile">Input File CSV</a>
+        <a id="addbagitem" href="/uploadManual">Input Data Secara Manual</a>
     </main>
 </body>
 </html>

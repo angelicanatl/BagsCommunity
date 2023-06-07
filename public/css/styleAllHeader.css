@@ -19,6 +19,10 @@ header{
     justify-content: space-around;
     align-items: center;
     box-shadow: 0px 2px 10px rgb(185, 185, 185);
+    position: sticky;
+}
+a{
+    text-decoration:none;
 }
 /* E6E8FA */
 /* F2F2FF */
@@ -26,13 +30,15 @@ header{
     display: inline-flex;
     align-items: center;
     gap: 50px;
+    cursor: pointer;
 }
 .names{
     display: inline-flex;
+    flex-direction: row;
     align-items: center;
     gap: 15px;
 }
-img{
+header img{
     height: 50px;
 }
 .searchContainer{
@@ -61,7 +67,6 @@ main{
     background-color: #F2F2FF;
 }
 footer{
-    background-color: #F2F2FF;
     display: flex;
     justify-content: center;
 }

@@ -1,7 +1,9 @@
 *{
     margin: 0;
 }
-
+a{
+    text-decoration:none;
+}
 html, body{
     background-color: #F2F2FF;
     height: 100%;
@@ -21,14 +23,11 @@ section{
     align-items: center;
 }
 
-img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 #fotoProfil{
     grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #AdminOptions{
@@ -42,7 +41,7 @@ img{
     align-items: center;
 }
 
-div div{
+section a{
     background-color: #E6E8FA;
     text-align: center;
     width: 150px;
@@ -56,7 +55,7 @@ div div{
     justify-content: center;
     align-items: center;
 
-    margin: 20px
+    margin: 20px;
 }
 
 p{

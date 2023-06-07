@@ -7,6 +7,11 @@ html, body{
     font-family: "nunito-medium";
     color: #00113E;
 }
+a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
 body{
     display: grid;
     grid-template-rows: 70px 1fr;
@@ -36,6 +41,10 @@ main{
     cursor: pointer;
     box-shadow: 3px 3px 5px rgb(185, 185, 185);
 }
+.addCategory>p{
+    display: flex;
+    align-items: center;
+}
 .category{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -43,7 +52,7 @@ main{
     margin: 25px 125px;
     gap: 20px;
 }
-.category>button{
+.category a{
     background-color: white;
     border-radius: 10px;
     padding: 8px 15px;

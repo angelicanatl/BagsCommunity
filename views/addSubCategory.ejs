@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Category</title>
+    <title>Add Sub-Category</title>
     <link rel="stylesheet" href="../css/addCatSubCat.css">
 </head>
 <body>
-    <header></header>
-    <!-- <% nanti tambahin headerAdmin %> -->
+    <%- include('headerAdmin') %>
     <main>
         <div class="addCategory">
-            <p>Add Category</p>
+            <a href="/addCatAndSub"><%= kategori %></a>
             <input type="text" placeholder="Tambah kategori.." name="addCat">
             <button type="submit">+</button>
         </div>
         <div class="category">
-            <button>Back Pack</button>
-            <button>Koper</button>
-            <button>Hand Bag</button>
-            <button>Another Bag</button>
+            <% for(let i=0; i<subkategori.length; i++){ %>
+            <a><%= subkategori[i] %></a>
+            <% } %>
         </div>
     </main>
 </body>
