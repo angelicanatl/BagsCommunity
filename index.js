@@ -80,10 +80,13 @@ const cekPengguna = (conn, username, password) => {
 
 app.post('/signup', (req, res) => {
     const data = req.body;
-    addPengguna(conn,data)
-    .then((result) => {
-        res.render('login');
-    })
+    if (data){
+        addPengguna(conn,data).then((result) => {
+            res.render('login');
+        });
+    } else {
+        res.redirect('/signup');
+    }
 });
 
 const addPengguna = (conn, data) => {
