@@ -35,8 +35,56 @@ app.use(session({
     name: 'nama',
     secret: 'rahasiasecret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true,
+    cookie: { secure: true }
 }));
+
+app.get('/', (req, res) => {
+    res.render('login');
+});
+
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+let sessions;
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    if (username && password) {
+        cekPengguna(conn, username, password).then((nama) => {
+            if (!nama[0]){
+                res.redirect('/');
+            } else {
+                sessions = req.session;
+                sessions.username = username;
+                sessions.nama = nama;
+                res.redirect('Dashboard');
+            }
+        })
+    } else {
+        res.redirect('/');
+    }
+})
+
+const cekPengguna = (conn, username, password) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_lengkap FROM pengguna WHERE username=? AND password=?", [username, password], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.post('/signup', (req, res) => {
+    const data = req.body;
+    addPengguna(conn,data)
+    .then((result) => {
+        res.render('login');
+    })
+});
 
 const addPengguna = (conn, data) => {
     return new Promise((resolve, reject) => {
@@ -49,34 +97,19 @@ const addPengguna = (conn, data) => {
         })
     })
 }
-app.get('/', (req, res) => {
-    res.render('login');
-});
-
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
-
-app.post('/signup', (req, res) => {
-    const data = req.body;
-    addPengguna(conn,data)
-    .then((result) => {
-        res.render('login');
-    })
-});
     
-let username = 'joan_nat';
-let nama = 'Joan Natalie'; // nnti ambil dari database
-app.get('/Dasboard', (req, res) => {
+// let username = 'joan_nat';
+// let nama = 'Joan Natalie'; // nnti ambil dari database
+app.get('/Dashboard', (req, res) => {
     res.render('Dashboard', {
-        username: username,
-        nama: nama
+        username: sessions.username,
+        nama: sessions.nama
     });
 });
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        username: username
+        username: sessions.username
     });
 });
 
