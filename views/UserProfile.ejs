@@ -8,31 +8,30 @@
     <link rel="stylesheet" href="../css/userProfile.css">
 </head>
 <body>
-    <!-- header -->
-
+    <%- include('header') %>
     <section>
         <div id="profil">
             <img src="../assets/profile.png" width="100px" height="100px">
-            <p> USERNAME_USER </p>
+            <p><%- username %></p>
 
             <section id="dataUser">
                 <div id ="Review">
                     <p> 3 </p>
-                    <p> Reviews</p>
+                    <p>Reviews</p>
                 </div>
 
                 <div id ="Followers">
                     <p> 5 </p>
-                    <p> Followers</p>
+                    <p>Followers</p>
                 </div>
 
                 <div id ="Following">
                     <p> 5 </p>
-                    <p> Following</p>
+                    <p>Following</p>
                 </div>
             </section>
             <div id = "EditProfile">
-                <p> Edit Profile</p>
+                <p>Edit Profile</p>
             </div>
         </div>
 

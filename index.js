@@ -116,6 +116,12 @@ app.get('/about', (req, res) => {
     });
 });
 
+app.get('/UserProfile', (req, res) => {
+    res.render('UserProfile', {
+        username: sessions.username
+    });
+});
+
 app.get('/AdminProfile', (req, res) => {
     res.render('AdminProfile', {
         username: username,

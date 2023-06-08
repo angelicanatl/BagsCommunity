@@ -31,6 +31,7 @@ a{
     align-items: center;
     gap: 50px;
     cursor: pointer;
+    flex-direction: row;
 }
 .names{
     display: inline-flex;
@@ -46,7 +47,7 @@ header img{
     grid-template-columns: 1fr 30px;
     height: fit-content;
     width: 600px;
-    
+    align-items: stretch;
 }
 .searchContainer>input{
     border: none;
