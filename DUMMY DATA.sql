@@ -6,13 +6,13 @@
 --
 -- Table structure for table `pengguna`
 --
- -- DROP TABLE follow;
- -- DROP TABLE pengguna;
- -- DROP TABLE merek;
- -- DROP TABLE designer;
- -- DROP TABLE kategori;
- -- DROP TABLE sub_kategori;
- -- DROP TABLE tas;
+-- DROP TABLE follow;
+--  DROP TABLE pengguna;
+--  DROP TABLE merek;
+--  DROP TABLE designer;
+--  DROP TABLE sub_kategori;
+--  DROP TABLE kategori;
+--  DROP TABLE tas;
  -- DROP TABLE write_review;
  -- DROP TABLE review;
 
@@ -103,6 +103,8 @@ CREATE TABLE kategori
 --
 -- Dumping data for table `kategori`
 --
+INSERT INTO kategori (nama_kategori) VALUES('Backpack');
+INSERT INTO kategori (nama_kategori) VALUES('Koper');
 INSERT INTO kategori (nama_kategori) VALUES('Handbag');
 
 -- --------------------------------------------------------
@@ -120,6 +122,43 @@ CREATE TABLE sub_kategori
 );
 
 --
--- Dumping data for table `kategori`
+-- Dumping data for table `sub_kategori`
 --
-INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 1);
+
+INSERT INTO sub_kategori (nama_sub_kategori, tas_id) VALUES('School Backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori,tas_id) VALUES('Crossbody Backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori, tas_id) VALUES('Mini backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tas`
+--
+
+CREATE TABLE tas
+(	tas_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	panjang INTEGER NOT NULL,
+	lebar INTEGER NOT NULL,
+	tinggi INTEGER NOT NULL,
+	warna_utama varchar(30) NOT NULL,
+	tampak_depan BLOB NOT NULL,
+	tampak_belakang BLOB NOT NULL,
+	tampak_kiri BLOB NOT NULL,
+	tampak_kanan BLOB NOT NULL,
+    tampak_dalam BLOB NOT NULL,
+	merek_id INTEGER,
+	designer_id INTEGER,
+	sub_kat_id INTEGER,
+	--FOREIGN KEY (merek_id) 
+ --   REFERENCES merek(merek_id)
+	--ON DELETE CASCADE,
+	--FOREIGN KEY (designer_id) 
+ --   REFERENCES designer(designer_id)
+	--ON DELETE CASCADE,
+	--FOREIGN KEY (sub_kat_id) 
+ --   REFERENCES sub_kategori(sub_kat_id)
+	--ON DELETE CASCADE
+);
+
+-- MASIH ERROR ! MySQL said: Documentation #1005 - Can't create table `testing1`.`tas` (errno: 150 "Foreign key constraint is incorrectly formed") (Details…)
