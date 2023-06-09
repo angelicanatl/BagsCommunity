@@ -58,6 +58,13 @@ app.post('/login', (req, res) => {
                 sessions = req.session;
                 sessions.username = username;
                 sessions.nama = nama;
+
+                if (sessions.username == 'Admin123'){
+                    sessions.url = '/AdminProfile';
+                } else {
+                    sessions.url = '/UserProfile';
+                }
+
                 res.redirect('Dashboard');
             }
         })
@@ -100,40 +107,43 @@ const addPengguna = (conn, data) => {
         })
     })
 }
-    
-// let username = 'joan_nat';
-// let nama = 'Joan Natalie'; // nnti ambil dari database
+
 app.get('/Dashboard', (req, res) => {
     res.render('Dashboard', {
         username: sessions.username,
-        nama: sessions.nama
+        nama: sessions.nama,
+        url: sessions.url
     });
 });
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        username: sessions.username
+        username: sessions.username,
+        url: sessions.url
     });
 });
 
 app.get('/UserProfile', (req, res) => {
     res.render('UserProfile', {
-        username: sessions.username
+        username: sessions.username,
+        url: sessions.url
     });
 });
 
 app.get('/AdminProfile', (req, res) => {
     res.render('AdminProfile', {
-        username: username,
-        nama: nama
+        username: sessions.username,
+        nama: sessions.nama,
+        url: sessions.url
     });
 });
 
 const kategori = ['Back Pack', 'Koper', 'Hand Bag', 'Another Bag']
 app.get('/addCatAndSub', (req, res) => {
     res.render('addCategory', {
-        username: username,
-        kategori: kategori
+        username: sessions.username,
+        kategori: kategori,
+        url: sessions.url
     });
 });
 
@@ -143,15 +153,17 @@ const subkategori = ['School backpack', 'Cross Body backpack', 'Mini backpack', 
 // nanti ambil subkategori di database
 app.get('/addSubCategory', (req, res) => {
     res.render('addSubCategory', {
-        username: username,
+        username: sessions.username,
         kategori: namaKat,
-        subkategori: subkategori
+        subkategori: subkategori,
+        url: sessions.url
     });
 });
 
 app.get('/addBagItem', (req, res) => {
     res.render('addBagItem', {
-        username: username
+        username: sessions.username,
+        url: sessions.url
     });
 });
 
@@ -170,13 +182,15 @@ app.get('/uploadManual', (req, res) => {
 
 app.get('/reviewSettings', (req, res) => {
     res.render('reviewSettings', {
-        username: username
+        username: sessions.username,
+        url: sessions.url
     });
 });
 
 app.get('/statistikTas', (req, res) => {
     res.render('statistikTas', {
-        username: username
+        username: sessions.username,
+        url: sessions.url
     });
 });
  
