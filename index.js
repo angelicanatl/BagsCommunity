@@ -130,6 +130,8 @@ app.get('/UserProfile', (req, res) => {
     });
 });
 
+//-----------------------Admin-----------------------------------------------------------
+
 app.get('/AdminProfile', (req, res) => {
     res.render('AdminProfile', {
         username: sessions.username,
@@ -138,27 +140,110 @@ app.get('/AdminProfile', (req, res) => {
     });
 });
 
-const kategori = ['Back Pack', 'Koper', 'Hand Bag', 'Another Bag']
-app.get('/addCatAndSub', (req, res) => {
-    res.render('addCategory', {
-        username: sessions.username,
-        kategori: kategori,
-        url: sessions.url
+//-------------------------kategori dan sub kategori-------------------------------------
+
+const kategori = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT * FROM kategori", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.get('/addCategory', (req, res) => {
+    kategori(conn).then((result) => {
+        res.render('addCategory', {
+            username: sessions.username,
+            kategori: result,
+            url: sessions.url
+        });
     });
 });
 
-const namaKat = 'BackPack';
-// nanti ambil nama kategori yang dipilih buat WHERE sintaks
-const subkategori = ['School backpack', 'Cross Body backpack', 'Mini backpack', 'Laptop backpack'];
-// nanti ambil subkategori di database
-app.get('/addSubCategory', (req, res) => {
-    res.render('addSubCategory', {
-        username: sessions.username,
-        kategori: namaKat,
-        subkategori: subkategori,
-        url: sessions.url
+const addKategori = (conn, addCat) => {
+    return new Promise((resolve, reject) => {
+        conn.query("INSERT INTO kategori (nama_kategori) VALUES (?)", [addCat], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.post('/addCategory', (req, res) => {
+    const { addCat } = req.body;
+    addKategori(conn, addCat).then((result) => {
+        res.redirect('addCategory');
     });
 });
+
+const SubKategori = (conn, idKategori) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_sub_kategori FROM sub_kategori WHERE kategori_id=?", [idKategori], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+let idKategori = '';
+const cariKat = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_kategori FROM kategori WHERE kategori_id=?", [idKategori], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                // retrun katanya aja
+                resolve(result);
+            }
+        })
+    })
+}
+let kat = '';
+app.get('/addSubCategory/:idKategori', (req, res) => {
+    idKategori = req.params.idKategori;
+    SubKategori(conn, idKategori).then((result) => {
+        cariKat(conn).then((namaKat) => {
+            console.log(namaKat[0].nama_kategori);
+            res.render('addSubCategory', {
+                username: sessions.username,
+                kategori: kat,
+                subkategori: result,
+                url: sessions.url
+            });
+        });
+    });
+});
+
+const addSubKategori = (conn, addSubCat, idKategori) => {
+    return new Promise((resolve, reject) => {
+        conn.query("INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES (?,?)", [addSubCat, idKategori], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.post('/addSubCategory/:idKategori', (req, res) => {
+    const { addSubCat } = req.body;
+    addSubKategori(conn, addSubCat, idKategori).then((result) => {
+        res.redirect('addSubCategory');
+    });
+});
+
+//-------------------------tambah item bag----------------------------------------------
 
 app.get('/addBagItem', (req, res) => {
     res.render('addBagItem', {

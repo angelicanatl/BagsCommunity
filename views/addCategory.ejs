@@ -10,14 +10,14 @@
 <body>
     <%- include('headerAdmin') %>
     <main>
-        <div class="addCategory">
+        <form class="addCategory" method="post" action="/addCategory">
             <p>Add Category</p>
             <input type="text" placeholder="Tambah kategori.." name="addCat">
             <button type="submit">+</button>
-        </div>
+        </form>
         <div class="category">
             <% for(let i=0; i<kategori.length; i++){ %>
-            <a href="/addSubCategory"> <%= kategori[i]  %></a>
+            <a href="/addSubCategory/<%- kategori[i].kategori_id %>" value="<%- kategori[i].kategori_id %>" name="<%- kategori[i].kategori_id %>"> <%= kategori[i].nama_kategori  %></a>
             <% } %>
         </div>
     </main>
