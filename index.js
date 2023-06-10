@@ -93,13 +93,31 @@ const cekPengguna = (conn, username, password) => {
 app.post('/signup', (req, res) => {
     const data = req.body;
     if (data){
-        addPengguna(conn,data).then((result) => {
-            res.render('login');
+        cekUsername(conn, data.username).then((result) => {
+            if (result[0].count == 0){
+                addPengguna(conn,data).then((result) => {
+                    res.render('login');
+                });
+            } else {
+                res.redirect('/signup');
+            }
         });
     } else {
         res.redirect('/signup');
     }
 });
+
+const cekUsername = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(nama_lengkap) as count FROM pengguna WHERE username=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
 
 const addPengguna = (conn, data) => {
     return new Promise((resolve, reject) => {
@@ -128,11 +146,66 @@ app.get('/about', (req, res) => {
     });
 });
 
+//-----------------------------------------User Profile----------------------------------------------------
+
+const cariPengguna = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT * FROM pengguna WHERE username=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 app.get('/UserProfile', (req, res) => {
     res.render('UserProfile', {
         username: sessions.username,
         url: sessions.url
     });
+});
+
+app.get('/userProfileSettings', (req, res) => {
+    cariPengguna(conn, sessions.username).then((result) => {
+        res.render('userProfileSettings', {
+            nama: result[0].nama_lengkap,
+            email: result[0].email,
+            username: sessions.username,
+            password: result[0].password,
+            url: sessions.url
+        });
+    });
+});
+
+const updatePengguna = (conn, data, usernameOld) => {
+    return new Promise((resolve, reject) => {
+        conn.query("UPDATE Pengguna SET nama_lengkap=?, email=?, password=? WHERE username=?", [data.nama, data.email, data.password, usernameOld], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.post('/userProfileSettings', (req, res) => {
+    const data = req.body;
+    if (data){ 
+        cekUsername(conn, sessions.username).then((result) => {
+            if (result[0].count == 1){
+                updatePengguna(conn, data, sessions.username).then((result) => {
+                    res.render('login');
+                });
+            } else {
+                res.redirect('/userProfileSettings');
+            }
+        });
+    } else {
+        res.redirect('/userProfileSettings');
+    }
 });
 
 //-----------------------Admin-----------------------------------------------------------

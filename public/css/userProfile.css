@@ -17,6 +17,9 @@ section{
     display: grid; 
     grid-auto-columns: 1fr 1fr;
     justify-items: center;
+    align-items: center;
+    margin: 0 80px;
+    justify-content: space-around;
 }
 
 img{
@@ -26,20 +29,17 @@ img{
 }
 
 #profil{
-    margin-top: 25px;
-    grid-column: 1;
-    width: 400px;
-    padding: 10px;
+    width: 500px;
+    display: grid;
+    gap: 10px;
 }
 
 #profil div{
     background-color: #E6E8FA;
-    margin-right: 10px;
 }
 
 #dataUser{
-    margin-top: 30px;
-    
+    margin: 10px 0;
     display: flex;
     justify-content: space-between;
 }
@@ -56,7 +56,7 @@ img{
     margin-top: 20px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
-    
+    background-color: #E6E8FA;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,18 +77,19 @@ img{
     grid-column: 2;  
     overflow-y: auto ;
     overflow-x: hidden;
-    height: 400px; 
+    height: 500px; 
+    width: 500px;
 }
 
-/* #Reviews section div{
+#Reviews section div{
     margin: 10px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
 
     width: 450px;
-    height: 120px;
-} */
+    height: 160px;
+}
 
 p{
     text-align: center;
