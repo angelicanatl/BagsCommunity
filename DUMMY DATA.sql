@@ -125,9 +125,9 @@ CREATE TABLE sub_kategori
 -- Dumping data for table `sub_kategori`
 --
 
-INSERT INTO sub_kategori (nama_sub_kategori, tas_id) VALUES('School Backpack',1);
-INSERT INTO sub_kategori (nama_sub_kategori,tas_id) VALUES('Crossbody Backpack',1);
-INSERT INTO sub_kategori (nama_sub_kategori, tas_id) VALUES('Mini backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('School Backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Crossbody Backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Mini backpack',1);
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 3);
 
 -- --------------------------------------------------------
@@ -161,4 +161,4 @@ CREATE TABLE tas
 	--ON DELETE CASCADE
 );
 
--- MASIH ERROR ! MySQL said: Documentation #1005 - Can't create table `testing1`.`tas` (errno: 150 "Foreign key constraint is incorrectly formed") (Details…)
+-- MASIH ERROR ! MySQL said: Documentation #1005 - Can't create table `testing1`.`tas` (errno: 150 "Foreign key constraint is incorrectly formed") (Detailsï¿½)

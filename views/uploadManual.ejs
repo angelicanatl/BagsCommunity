@@ -15,13 +15,29 @@
         </div>
         <div id="lab">
             <label for="merek">Merek</label>
-            <select name="merek"></select>
+            <select name="merek">
+                <% for(let i=0; i<merek.length; i++){ %>
+                    <option value="<%= merek[i].nama_merek %>"><%= merek[i].nama_merek %></option>
+                <% } %>
+            </select>
             <label for="designer">Designer</label>
-            <select name="designer"></select>
+            <select name="designer">
+                <% for(let i=0; i<designer.length; i++){ %>
+                    <option value="<%= designer[i].nama_designer %>"><%= designer[i].nama_designer %></option>
+                <% } %>
+            </select>
             <label for="kategori">Kategori</label>
-            <select name="kategori"></select>
+            <select name="kategori">
+                <% for(let i=0; i<kategori.length; i++){ %>
+                    <option value="<%= kategori[i].nama_kategori %>"><%= kategori[i].nama_kategori %></option>
+                <% } %>
+            </select>
             <label for="subkat">Sub-Kategori</label>
-            <select name="subkat"></select>
+            <select name="subkat">
+                <% for(let i=0; i<subkat.length; i++){ %>
+                    <option value="<%= subkat[i].nama_sub_kategori %>"><%= subkat[i].nama_sub_kategori %></option>
+                <% } %>
+            </select>
             <label for="warna">Warna</label>
             <input type="text" name="warna">
             <label for="panjang">Panjang</label>
@@ -35,7 +51,7 @@
         </div>
         <div id="button">
             <a name="cancel" href="/addBagItem">Cancel</a>
-            <a name="upload">Upload</a>
+            <a name="upload" type="submit">Upload</a>
         </div>
     </form>
 </body>
