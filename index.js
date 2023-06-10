@@ -32,13 +32,16 @@ const SessionStore = memoryStore(session);
 
 app.use(session({
     store: new SessionStore({
-        checkPeriod: 1*60*60*1000
+        checkPeriod: 1*60*60*1000   //ms
     }),
     name: 'nama',
     secret: 'rahasiasecret',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { 
+        secure: true, 
+        maxAge:10*60*1000 
+    }
 }));
 
 app.get('/', (req, res) => {
@@ -180,9 +183,13 @@ const addKategori = (conn, addCat) => {
 
 app.post('/addCategory', (req, res) => {
     const { addCat } = req.body;
-    addKategori(conn, addCat).then((result) => {
-        res.redirect('addCategory');
-    });
+    if (addCat) {
+        addKategori(conn, addCat).then((result) => {
+            res.redirect('/addCategory');
+        });
+    } else {
+        res.redirect('/addCategory');
+    }
 });
 
 const SubKategori = (conn, idKategori) => {
@@ -210,12 +217,13 @@ const cariKat = (conn) => {
         })
     })
 }
+
 let kat = '';
 app.get('/addSubCategory/:idKategori', (req, res) => {
     idKategori = req.params.idKategori;
     SubKategori(conn, idKategori).then((result) => {
         cariKat(conn).then((namaKat) => {
-            console.log(namaKat[0].nama_kategori);
+            kat = namaKat[0].nama_kategori;
             res.render('addSubCategory', {
                 username: sessions.username,
                 kategori: kat,
@@ -240,10 +248,14 @@ const addSubKategori = (conn, addSubCat, idKategori) => {
 
 app.post('/addSubCategory/:idKategori', (req, res) => {
     const { addSubCat } = req.body;
-    addSubKategori(conn, addSubCat, idKategori).then((result) => {
-        res.redirect('addSubCategory');
-    });
-});
+    if (addSubCat){
+        addSubKategori(conn, addSubCat, idKategori).then((result) => {
+            res.redirect(`/addSubCategory/${idKategori}`);
+        });
+    } else {
+        res.redirect(`/addSubCategory/${idKategori}`);
+    }
+}); 
 
 //-------------------------tambah item bag----------------------------------------------
 //ambil id dari database
@@ -414,7 +426,7 @@ app.post('/uploadManual', (req,res) => {
     })
 })
 
-//-------------------------Review Setting----------------------------------------------
+//------------------------------------Review Setting----------------------------------------------
 
 
 app.get('/reviewSettings', (req, res) => {

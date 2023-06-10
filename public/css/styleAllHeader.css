@@ -41,6 +41,7 @@ a{
 }
 header img{
     height: 50px;
+    display: block;
 }
 .searchContainer{
     display: grid;

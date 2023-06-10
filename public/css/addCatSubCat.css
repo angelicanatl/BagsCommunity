@@ -71,7 +71,6 @@ main{
     font-size: smaller;
     border: none;
     text-align-last: left;
-    cursor: pointer;
     box-shadow: 3px 3px 5px rgb(185, 185, 185);
 }
 @font-face {

@@ -11,7 +11,7 @@
     <%- include('headerAdmin') %>
     <main>
         <form class="addCategory" method="post" action="/addSubCategory/:idKategori">
-            <a href="/addCategory"><%= kategori[0].nama_kategori %></a>
+            <a href="/addCategory"><%= kategori %></a>
             <input type="text" placeholder="Tambah sub kategori.." name="addSubCat">
             <button type="submit">+</button>
         </form>
