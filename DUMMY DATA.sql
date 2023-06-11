@@ -27,6 +27,7 @@ CREATE TABLE pengguna
 -- Dumping data for table `usergroups`
 --
 
+
 -- ADMIN
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '12345678', 'ADMIN', 'admin@gmail.com');
 -- PENGGUNA 1 ANGEL
