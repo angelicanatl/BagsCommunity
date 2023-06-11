@@ -62,8 +62,7 @@ app.post('/login', (req, res) => {
             } else {
                 sessions = req.session;
                 sessions.username = username;
-                sessions.nama = nama;
-
+                sessions.nama = nama[0].nama_lengkap;
                 if (sessions.username == 'Admin123'){
                     sessions.url = '/AdminProfile';
                 } else {
@@ -147,7 +146,45 @@ app.get('/about', (req, res) => {
 });
 
 //-----------------------------------------User Profile----------------------------------------------------
+app.get('/UserProfile', (req, res) => {
+    following(conn, sessions.username).then((jmlhFollowing) => {
+        follower(conn, sessions.username).then((jmlhFollower) => {
+            res.render('UserProfile', {
+                review: 0,
+                followers: jmlhFollower[0].jumlahFollower,
+                following: jmlhFollowing[0].jumlahFollowing,
+                username: sessions.username,
+                url: sessions.url
+            });
+        });
+    });
+});
 
+const following = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(username2) as jumlahFollowing FROM follow WHERE username1=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const follower = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(username1) as jumlahFollower FROM follow WHERE username2=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+// -----------------------------------User settings--------------------------------------------------------
 const cariPengguna = (conn, username) => {
     return new Promise((resolve, reject) => {
         conn.query("SELECT * FROM pengguna WHERE username=?", [username], (err, result) => {
@@ -159,13 +196,6 @@ const cariPengguna = (conn, username) => {
         })
     })
 }
-
-app.get('/UserProfile', (req, res) => {
-    res.render('UserProfile', {
-        username: sessions.username,
-        url: sessions.url
-    });
-});
 
 app.get('/userProfileSettings', (req, res) => {
     cariPengguna(conn, sessions.username).then((result) => {
