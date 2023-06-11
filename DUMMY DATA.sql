@@ -10,11 +10,10 @@
 --  DROP TABLE pengguna;
 --  DROP TABLE merek;
 --  DROP TABLE designer;
---  DROP TABLE sub_kategori;
+-- DROP TABLE sub_kategori;
 --  DROP TABLE kategori;
---  DROP TABLE tas;
- -- DROP TABLE write_review;
- -- DROP TABLE review;
+-- DROP TABLE write_review;
+--  DROP TABLE review;
 
 CREATE TABLE pengguna
 ( 	nama_lengkap VARCHAR(50) NOT NULL,
@@ -26,7 +25,6 @@ CREATE TABLE pengguna
 --
 -- Dumping data for table `usergroups`
 --
-
 
 -- ADMIN
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '12345678', 'ADMIN', 'admin@gmail.com');
@@ -127,7 +125,7 @@ CREATE TABLE sub_kategori
 --
 
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('School Backpack',1);
-INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Crossbody Backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Crossbody Backpack',1);
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Mini backpack',1);
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 3);
 
@@ -143,23 +141,70 @@ CREATE TABLE tas
 	lebar INTEGER NOT NULL,
 	tinggi INTEGER NOT NULL,
 	warna_utama varchar(30) NOT NULL,
-	tampak_depan BLOB NOT NULL,
-	tampak_belakang BLOB NOT NULL,
-	tampak_kiri BLOB NOT NULL,
-	tampak_kanan BLOB NOT NULL,
-    tampak_dalam BLOB NOT NULL,
+	tampak_depan BLOB NULL, -- SEMENTARA NULL DULU
+	tampak_belakang BLOB NULL, -- SEMENTARA NULL DULU
+	tampak_kiri BLOB NULL, -- SEMENTARA NULL DULU
+	tampak_kanan BLOB NULL, -- SEMENTARA NULL DULU
+    tampak_dalam BLOB NULL, -- SEMENTARA NULL DULU
 	merek_id INTEGER,
 	designer_id INTEGER,
-	sub_kat_id INTEGER,
-	--FOREIGN KEY (merek_id) 
- --   REFERENCES merek(merek_id)
-	--ON DELETE CASCADE,
-	--FOREIGN KEY (designer_id) 
- --   REFERENCES designer(designer_id)
-	--ON DELETE CASCADE,
-	--FOREIGN KEY (sub_kat_id) 
- --   REFERENCES sub_kategori(sub_kat_id)
-	--ON DELETE CASCADE
+	sub_kategori_id INTEGER,
+	FOREIGN KEY (merek_id) 
+    REFERENCES merek(merek_id),
+	FOREIGN KEY (designer_id) 
+    REFERENCES designer(designer_id),
+	FOREIGN KEY (sub_kategori_id) 
+    REFERENCES sub_kategori(sub_kategori_id)
 );
 
--- MASIH ERROR ! MySQL said: Documentation #1005 - Can't create table `testing1`.`tas` (errno: 150 "Foreign key constraint is incorrectly formed") (Details�)
+--
+-- Dumping data for table `tas`
+--
+
+-- BELOM ADA FOTO!
+INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	20, 17, 8, 'hitam', 1, 1, 4
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE review
+(	review_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	angka_review INTEGER NOT NULL,
+	teks_review varchar(300),
+	tas_id INTEGER NOT NULL,
+	FOREIGN KEY (tas_id) 
+    REFERENCES tas(tas_id)
+);
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Bagus bgt tasnya recommended pokoknya', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `write_review`
+--
+
+CREATE TABLE write_review
+(	tanggal datetime NOT NULL,
+	username VARCHAR(15) NOT NULL,
+	review_id INTEGER NOT NULL,
+	FOREIGN KEY (username) 
+    REFERENCES pengguna(username),
+	FOREIGN KEY (review_id) 
+    REFERENCES review(review_id)
+);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:45', 'Joan',1);
+
+
+
