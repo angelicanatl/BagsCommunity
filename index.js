@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import mysql from 'mysql';
 import session from 'express-session';
 import memoryStore from 'memorystore';
+import multer from 'multer';
+import path from 'path' ;
 import csvParser from 'csv-parser';
 import fs from 'fs';
 
@@ -452,8 +454,8 @@ const get_idsubkat = (conn, subkat) => {
 }
 const addBagManual = (conn, bag_prop, idmerek, iddesigner,idsubkat) => {
     return new Promise((resolve, reject) => {
-        conn.query("INSERT INTO tas VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-        [bag_prop.bagid, bag_prop.panjang, bag_prop.lebar, bag_prop.tinggi, bag_prop.warna, bag_prop.foto, bag_prop.foto, bag_prop.foto, bag_prop.foto, bag_prop.foto, idmerek, iddesigner, idsubkat], (err, result) => {
+        conn.query("INSERT INTO tas VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+        [bag_prop.bagid, bag_prop.panjang, bag_prop.lebar, bag_prop.tinggi, bag_prop.warna, bag_prop.foto, idmerek, iddesigner, idsubkat], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -529,6 +531,20 @@ app.post('/uploadManual', (req,res) => {
     })
 })
 
+//COBAIN ADD MULTER: TP BELOM JALAN NANGES
+const storageUploadFoto = multer.diskStorage({
+    destination: (req, file, callBack) => {
+        const id = _id;
+        callBack(null, `./public/images/${id}/`);
+    },
+    filename: function (req, file, callBack){
+        callBack(null, Date.now() + path.extname(file.originalname))
+    }
+})
+ 
+let upload = multer({
+    storage: storageUploadFoto
+});
 //------------------------------------Review Setting----------------------------------------------
 
 
