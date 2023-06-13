@@ -559,20 +559,49 @@ app.post('/uploadManual', (req,res) => {
     })
 })
 
+
 //COBAIN ADD MULTER: TP BELOM JALAN NANGES
 const storageUploadFoto = multer.diskStorage({
-    destination: (req, file, callBack) => {
-        const id = _id;
+    destination: function (req, file, callBack) {
+        const id = _id; //UNDEFINED
+        console.log(id);
+        const bukti = `./public/images/${id}`;
+        try {
+            if (!fs.existsSync(bukti)) {
+                fs.mkdirSync(bukti);
+            }
+        } catch (err) {
+            console.error(err);
+        }
         callBack(null, `./public/images/${id}/`);
     },
     filename: function (req, file, callBack){
-        callBack(null, Date.now() + path.extname(file.originalname))
+        callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
  
 let upload = multer({
     storage: storageUploadFoto
 });
+
+app.post('/uploadManual', upload.single('image'), (req,res) => {
+    const {bag_prop} = req.body;
+    const file = req.file.filename;
+    let idmerek, iddesigner, idsubkat;
+    get_idmerek(conn,bag_prop.merek).then((result) => {
+        idmerek = (JSON.parse(JSON.stringify(result))[0].merek_id); // GA JALAN !
+    })
+    get_iddesigner(conn,bag_prop.designer).then((result) => {
+        iddesigner = (JSON.parse(JSON.stringify(result))[0].designer_id);
+    })
+    get_idsubkat(conn,bag_prop.subkat).then((result) => {
+        idsubkat = (JSON.parse(JSON.stringify(result))[0].sub_kategori_id);
+    })
+    const bukti = `./public/images/${id}/${file}`;
+    addBagManual(conn, bag_prop, bukti, idmerek, iddesigner, idsubkat).then((result) => {
+        res.render('addBagItem');
+    })
+})
 //------------------------------------Review Setting----------------------------------------------
 
 

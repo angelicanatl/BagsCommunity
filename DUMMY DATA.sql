@@ -32,7 +32,7 @@ INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Angel', '12345678', 'Angelica Natalie', 'angelica@gmail.com');
 -- PENGGUNA 2 JOAN
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Joan', '12345678', 'Joan Arc', 'joan@gmail.com');
-
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Ketherine', '12345678', 'Ketherine Goenawan', 'keth@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE follow
 
 INSERT INTO follow (username1,username2) VALUES('Angel' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('Joan' , 'Angel');
-
+INSERT INTO follow (username1,username2) VALUES('Ketherine' , 'Angel');
 -- --------------------------------------------------------
 
 --
@@ -141,11 +141,7 @@ CREATE TABLE tas
 	lebar INTEGER NOT NULL,
 	tinggi INTEGER NOT NULL,
 	warna_utama varchar(30) NOT NULL,
-	tampak_depan BLOB NULL, -- SEMENTARA NULL DULU
-	tampak_belakang BLOB NULL, -- SEMENTARA NULL DULU
-	tampak_kiri BLOB NULL, -- SEMENTARA NULL DULU
-	tampak_kanan BLOB NULL, -- SEMENTARA NULL DULU
-    tampak_dalam BLOB NULL, -- SEMENTARA NULL DULU
+	foto varchar(100), -- UDAH GANTI VARCHAR BUAT PATH
 	merek_id INTEGER,
 	designer_id INTEGER,
 	sub_kategori_id INTEGER,
@@ -161,22 +157,10 @@ CREATE TABLE tas
 -- Dumping data for table `tas`
 --
 
--- BELOM ADA FOTO!
-INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, 'hitam', 1, 1, 4
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	20, 17, 8, './public/images/1/ladydior.png', 'hitam', 1, 1, 4
 );
-INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, 'hitam', 1, 1, 4
-);
-INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, 'hitam', 1, 1, 4
-);
-INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, 'hitam', 1, 1, 4
-);
-INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, 'hitam', 1, 1, 4
-);
+
 -- --------------------------------------------------------
 
 --
@@ -198,7 +182,10 @@ CREATE TABLE review
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Bagus bgt tasnya recommended pokoknya', 1);
-
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Bagus bgt mo meninggal', 1);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Y', 1);
 -- --------------------------------------------------------
 
 --
@@ -216,6 +203,7 @@ CREATE TABLE write_review
 );
 
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:45', 'Joan',1);
-
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:46', 'Angel',2);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:49', 'Ketherine',3);
 
 
