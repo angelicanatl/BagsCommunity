@@ -426,20 +426,10 @@ const data_kategori = (conn) => {
         })
     })
 }
-const data_subkat = (conn, id_kat) => {
-    return new Promise((resolve, reject) => {
-        conn.query("SELECT nama_sub_kategori FROM sub_kategori WHERE kategori_id=(SELECT kategori_id FROM kategori WHERE nama_kategori='?')", [id_kat], (err, result) => {
-            if(err){
-                reject(err);
-            } else{
-                resolve(result);
-            }
-        })
-    })
-}
 const get_idmerek = (conn, merek) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT merek_id FROM merek WHERE nama_merek=?", [merek], (err, result) => {
+        const sql = 'SELECT merek_id FROM merek WHERE nama_merek = ?';
+        conn.query(sql, [merek], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -470,10 +460,22 @@ const get_idsubkat = (conn, subkat) => {
         })
     })
 }
-const addBagManual = (conn, bag_prop, idmerek, iddesigner,idsubkat) => {
+const data_subkat = (conn, id_kat) => {
     return new Promise((resolve, reject) => {
-        conn.query("INSERT INTO tas VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-        [bag_prop.bagid, bag_prop.panjang, bag_prop.lebar, bag_prop.tinggi, bag_prop.warna, bag_prop.foto, idmerek, iddesigner, idsubkat], (err, result) => {
+        const sql = 'SELECT nama_sub_kategori FROM sub_kategori WHERE kategori_id=?';
+        conn.query(sql, id_kat, (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+const addBagManual = (conn, panjang, lebar, tinggi, warna, foto, idmerek, iddesigner, idsubkat) => {
+    return new Promise((resolve, reject) => {
+        conn.query("INSERT INTO tas VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+        [panjang, lebar, tinggi, warna, foto, idmerek, iddesigner, idsubkat], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -501,6 +503,11 @@ let _merek = [];
 let _designer = [];
 let _kategori = [];
 let _subkat = [];
+// app.get("/getSubkat", (req, res) => {
+//     const { kategori } = req.query;
+//     console.log(kategori);
+//     res.json(kategori);
+// })
 app.get('/uploadManual', (req, res) => {
     data_merek(conn).then((result) => {
         _merek = result;
@@ -514,16 +521,16 @@ app.get('/uploadManual', (req, res) => {
 
     // function get_kat(req, res){
     //     const k = req.body;
-    //     return k;
+    //     console.log(k);
+    //     res.json({
+    //         response: k
+    //     });
+    //     return;
     // }
     // data_subkat(conn, get_kat).then((result) => {
     //     _subkat = result;
     // })
     
-    // console.log(_merek);
-    // console.log(_designer);
-    // console.log(_kategori);
-    // console.log(_subkat);
     set_id(conn).then((result) => {
         _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
         result+=1;
@@ -537,16 +544,12 @@ app.get('/uploadManual', (req, res) => {
     })
 });
 
-app.get("/getSubkat", (req, res) => {
-    const { kategori } = req.query;
-    res.json(kategori);
-})
 
 //MULTER
 const storageUploadFoto = multer.diskStorage({
     destination: function (req, file, callBack) {
         const id = _id; 
-        console.log(id);
+        // console.log(id);
         const bukti = `./public/images/${id}`;
         try {
             if (!fs.existsSync(bukti)) {
@@ -567,23 +570,27 @@ let upload = multer({
 });
 
 app.post('/uploadManual', upload.single('image'), (req,res) => {
-    const {bag_prop} = req.body;
-    // console.log("phase 1");
+    const {bagid, panjang, lebar, tinggi, warna, foto, merek, designer, subkat} = req.body;
     const file = req.file.filename;
     let idmerek, iddesigner, idsubkat;
-    console.log("phase 2");
-    get_idmerek(conn,bag_prop.merek).then((result) => {
+    get_idmerek(conn,merek).then((result) => {
         idmerek = (JSON.parse(JSON.stringify(result))[0].merek_id); // GA JALAN !
+        // console.log(idmerek);
     })
-    get_iddesigner(conn,bag_prop.designer).then((result) => {
+    get_iddesigner(conn,designer).then((result) => {
         iddesigner = (JSON.parse(JSON.stringify(result))[0].designer_id);
+        // console.log(iddesigner);
     })
-    get_idsubkat(conn,bag_prop.subkat).then((result) => {
+    get_idsubkat(conn,subkat).then((result) => {
         idsubkat = (JSON.parse(JSON.stringify(result))[0].sub_kategori_id);
+        // console.log(idsubkat);
     })
-    const bukti = `./public/images/${id}/${file}`;
-    addBagManual(conn, bag_prop, bukti, idmerek, iddesigner, idsubkat).then((result) => {
-        res.render('addBagItem');
+    const bukti = `./public/images/${bagid}/${file}`;
+    addBagManual(conn, bagid, panjang, lebar, tinggi, warna, bukti, idmerek, iddesigner, idsubkat).then((result) => {
+        res.render('addBagItem', {
+            username: sessions.username,
+            url: sessions.url
+        });
     })
 })
 //------------------------------------Review Setting----------------------------------------------
