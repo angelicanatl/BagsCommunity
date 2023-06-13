@@ -28,11 +28,14 @@ CREATE TABLE pengguna
 
 -- ADMIN
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '12345678', 'ADMIN', 'admin@gmail.com');
--- PENGGUNA 1 ANGEL
+
+-- PENGGUNA 
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Angel', '12345678', 'Angelica Natalie', 'angelica@gmail.com');
--- PENGGUNA 2 JOAN
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Joan', '12345678', 'Joan Arc', 'joan@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Ketherine', '12345678', 'Ketherine Goenawan', 'keth@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Naomixue', 'zxcvbnm', 'Naomi Elianora', 'naomiii@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Diyanss', 'asdfgh', 'Dian Estri', 'oskangwur@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('dree_andrea', '234567890', 'Andrea Miranti', 'miranti@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('ketherinegoenawan', 'lkjhgfdsa', 'Ketherine Goenawan', 'kg@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -57,7 +60,11 @@ CREATE TABLE follow
 
 INSERT INTO follow (username1,username2) VALUES('Angel' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('Joan' , 'Angel');
-INSERT INTO follow (username1,username2) VALUES('Ketherine' , 'Angel');
+INSERT INTO follow (username1,username2) VALUES('ketherinegoenawan' , 'Angel');
+INSERT INTO follow (username1,username2) VALUES('Naomixue' , 'Joan');
+INSERT INTO follow (username1,username2) VALUES('Diyanss' , 'Joan');
+INSERT INTO follow (username1,username2) VALUES('dree_andrea' , 'Joan');
+INSERT INTO follow (username1,username2) VALUES('ketherinegoenawan' , 'Joan');
 -- --------------------------------------------------------
 
 --
