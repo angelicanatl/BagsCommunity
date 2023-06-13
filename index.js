@@ -45,7 +45,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { 
         secure: true, 
-        maxAge:10*60*1000 
+        maxAge:30*60*1000 
     }
 }));
 
@@ -73,7 +73,6 @@ app.post('/login', (req, res) => {
                 } else {
                     sessions.url = '/UserProfile';
                 }
-
                 res.redirect('Dashboard');
             }
         })
@@ -152,21 +151,43 @@ app.get('/about', (req, res) => {
 
 //-----------------------------------------User Profile----------------------------------------------------
 app.get('/UserProfile', (req, res) => {
+    
     following(conn, sessions.username).then((jmlhFollowing) => {
         follower(conn, sessions.username).then((jmlhFollower) => {
             review(conn, sessions.username).then((jmlhReview) => {
-                console.log(jmlhReview[0])
-                res.render('UserProfile', {
-                    review: jmlhReview[0].jumlahReview,
-                    followers: jmlhFollower[0].jumlahFollower,
-                    following: jmlhFollowing[0].jumlahFollowing,
-                    username: sessions.username,
-                    url: sessions.url
+                listFollowing(conn, sessions.username).then((lsFollowing) => {
+                    listFollower(conn, sessions.username).then((lsFollower) => {
+                        listReview(conn, sessions.username).then((lsReview) => {
+                            console.log(lsReview)
+                            res.render('UserProfile', {
+                                review: jmlhReview[0].jumlahReview,
+                                followers: jmlhFollower[0].jumlahFollower,
+                                following: jmlhFollowing[0].jumlahFollowing,
+                                lsFollower: lsFollower,
+                                lsFollowing: lsFollowing,
+                                lsReview: lsReview,
+                                username: sessions.username,
+                                url: sessions.url
+                            });
+                        });
+                    });
                 });
             });
         });
     });
 });
+
+const listReview  = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek` FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE `write_review`.`username`=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
 
 const review = (conn, username) => {
     return new Promise((resolve, reject) => {
@@ -195,6 +216,30 @@ const following = (conn, username) => {
 const follower = (conn, username) => {
     return new Promise((resolve, reject) => {
         conn.query("SELECT COUNT(username1) as jumlahFollower FROM follow WHERE username2=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const listFollowing = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT username2 FROM follow WHERE username1=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const listFollower = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT username1 FROM follow WHERE username2=?", [username], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -503,11 +548,11 @@ let _merek = [];
 let _designer = [];
 let _kategori = [];
 let _subkat = [];
-// app.get("/getSubkat", (req, res) => {
-//     const { kategori } = req.query;
-//     console.log(kategori);
-//     res.json(kategori);
-// })
+app.get("/getSubkat", (req, res) => {
+    const { kategori } = req.query;
+    console.log("inix=",kategori);
+    res.json(kategori);
+})
 app.get('/uploadManual', (req, res) => {
     data_merek(conn).then((result) => {
         _merek = result;
@@ -564,6 +609,7 @@ const storageUploadFoto = multer.diskStorage({
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
+
  
 let upload = multer({
     storage: storageUploadFoto

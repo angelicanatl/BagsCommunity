@@ -79,3 +79,7 @@ div{
     font-family: "nunito-medium";
     src: url(../assets/nunito/Nunito-Medium.ttf);
 }
+#error{
+    font-size: smaller;
+    color: red;
+}

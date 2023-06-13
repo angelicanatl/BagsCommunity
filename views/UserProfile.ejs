@@ -14,18 +14,15 @@
         <div id="profil">
             <img src="../assets/profile.png" width="100px" height="100px">
             <p><%- username %></p>
-
             <section id="dataUser">
                 <div id ="Review">
                     <p><%= review %></p>
                     <p>Reviews</p>
                 </div>
-
                 <div id ="Followers">
                     <p><%= followers %></p>
                     <p>Followers</p>
                 </div>
-
                 <div id ="Following">
                     <p><%= following %></p>
                     <p>Following</p>
@@ -35,31 +32,63 @@
         </div>
         
         <div id="Reviews">
+            <% if(review==0){ %>
+                <h1>*User belum melakukan review :)</h1>
+            <% } %>
             <section>
-                <!-- pake looping ambil dari data base review -->
-                <div id ="bag1">
+                <% for(let i=0; i<lsReview.length; i++){ %>
+                <div class ="bag">
+                    <div class="left">
+                        <img src="<%= lsReview[i].foto %>" class="fotoTas">
+                        <p class="Merek"><%= lsReview[i].nama_merek %></p>
+                    </div>
+                    <div class="right">
+                        <div class="prof">
+                            <img src="../assets/profile.png" class="fotoProf">
+                            <p class="profile"><%= lsReview[i].username %></p>
+                            <% const date = new Date(lsReview[i].tanggal); %>
+                            <% const year = date.getFullYear(); %>
+                            <% const month = date.getMonth() + 1; %>
+                            <% const day = date.getDate(); %>
+                            <% const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`; %>
+                            <p class="time"><%= formattedDate %></p>
+                        </div>
+                        <div class="bintangs">
+                            <% for(let j=0; j<Number(lsReview[i].angka_review); j++){ %>
+                            <img src="../assets/gambar/bintang.png" class="bintang">
+                            <% } %>
+                        </div>
+                        <p class="reviewUser"><%= lsReview[i].teks_review %></p>
+                    </div>
                 </div>
-                <div id ="bag2">
-                </div>
-                <div id ="bag3">
-                </div>
+                <% } %>
             </section>
         </div>
 
         <section id="FollowingFollowers">
             <div id="Nav">
-                <p>Followers</p>
-                <p>Following</p>
+                <p id="kananFollower">Followers</p>
+                <p id="kananFollowing">Following</p>
             </div>
             <hr>
-            <div id="Folls">
+            <div id="Follows">
                 <section>
-                    <!-- pake looping dari data base follow -->
+                    <% for (let i=0; i<lsFollower.length; i++){ %>
+                    <div class="foll" name="<%= lsFollower[i].username1 %>">
+                        <img src="../assets/profile.png" width="50px" height="50px">
+                        <p name="<%= lsFollower[i].username1 %>"><%= lsFollower[i].username1 %></p>
+                    </div>
+                    <% } %>
+                </section>
+            </div>
+            <div id="Follings">
+                <section>
+                    <% for (let i=0; i<lsFollowing.length; i++){ %>
                     <div class="foll">
                         <img src="../assets/profile.png" width="50px" height="50px">
-                        <p> Angelica Natalie</p>
+                        <p name="<%= lsFollowing[i].username2 %>"><%= lsFollowing[i].username2 %></p>
                     </div>
-    
+                    <% } %>
                 </section>
             </div>
         </section>

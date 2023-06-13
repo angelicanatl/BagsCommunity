@@ -15,7 +15,7 @@ body{
 
 section{
     display: grid; 
-    grid-auto-columns: 1fr 1fr;
+    grid-auto-columns: 50% 50%;
     justify-items: center;
     align-items: center;
     margin: 0 80px;
@@ -49,6 +49,7 @@ img{
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
     padding: 10px;
+    cursor: pointer;
 }
 
 #EditProfile{
@@ -77,11 +78,11 @@ img{
     grid-column: 2;  
     overflow-y: auto ;
     overflow-x: hidden;
-    height: 500px; 
+    height: 400px; 
     width: 500px;
 }
 
-#Reviews section div{
+#Reviews section .bag{
     margin: 10px;
     background-color: white;
     border-radius: 10px;
@@ -96,10 +97,20 @@ p{
     font-family: "nunito-medium";
 }
 
+.foll{
+    cursor: pointer;
+}
 
 #FollowingFollowers{
     grid-column: 2; 
     display: none;
+    width: 500px;
+    height: 400px;
+}
+
+#FollowingFollowers p{
+    text-align: left;
+    padding: 0 10px;
 }
 
 #Nav{
@@ -108,16 +119,41 @@ p{
 }
 
 #Nav p {
-    margin:15px;
+    padding:15px;
+    cursor: pointer;
 }
 
-#Folls{
+#Follows{
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 348px;
+    display: block;
+}
+
+#Follows div{
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    width: 450px;
+    height: 55px;
+
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    text-align: left;
+    align-items: center;
+}
+
+#Follings{
     overflow-y: auto ;
     overflow-x: hidden;
     height: 300px;
+    display: block;
 }
 
-#Folls div{
+#Follings div{
     margin: 5px;
     padding: 5px;
     background-color: white;
@@ -137,7 +173,10 @@ hr{
     width: 490px;
 }
 
+#Reviews h1{
+    color: lightgray;
 
+}
 @font-face {
     font-family: "nunito-medium";
     src: url(../assets/nunito/Nunito-Medium.ttf);
@@ -145,10 +184,6 @@ hr{
 
 .bag{
     background-color: white;
-    width: 350px;
-    margin: 10px;
-    padding: 5px;
-
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
 
@@ -158,46 +193,51 @@ hr{
 
 .left{
     grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 20px;
 }
 
 .right{
-    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 20px;
+    align-items: flex-start;
 }
 
 .prof{
     display: grid;
     grid-template-columns: 1fr 5fr;
-    text-align: left;
-}
-
-.fotoTas{
-    width: 80px;
-    height: 80px;
-    margin: 10px 10px 10px 15px;
-}
-
-.Merek{
-    margin-top: 0;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    column-gap: 15px;
+    justify-items: start;
+}
+.time{
+    color: gray;
+    font-size: x-small;
+}
+.fotoTas{
+    width: 90px;
+    height: 90px;
 }
 
 .fotoProf{
-    margin:7px;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+    grid-row-start: 1;
+    grid-row-end: 3;
 }
-
 .profile{
-    text-align: left;
     font-size: 14px;
-    display: flex;
-    margin-top: 15px;
 }
-
+.bintangs{
+    display: flex;
+    gap: 5px;
+}
 .bintang{
-    margin:3px;
     width: 20px;
     height: 20px;
 }
@@ -205,4 +245,5 @@ hr{
 .reviewUser{
     text-align: left;
     font-size: 12px;
+    height: 55px;
 } 
