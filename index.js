@@ -542,28 +542,10 @@ app.get("/getSubkat", (req, res) => {
     res.json(kategori);
 })
 
-app.post('/uploadManual', (req,res) => {
-    const {bag_prop} = req.body;
-    let idmerek, iddesigner, idsubkat;
-    get_idmerek(conn,bag_prop.merek).then((result) => {
-        idmerek = (JSON.parse(JSON.stringify(result))[0].merek_id);
-    })
-    get_iddesigner(conn,bag_prop.designer).then((result) => {
-        iddesigner = (JSON.parse(JSON.stringify(result))[0].designer_id);
-    })
-    get_idsubkat(conn,bag_prop.subkat).then((result) => {
-        idsubkat = (JSON.parse(JSON.stringify(result))[0].sub_kategori_id);
-    })
-    addBagManual(conn, bag_prop, idmerek, iddesigner, idsubkat).then((result) => {
-        res.render('addBagItem');
-    })
-})
-
-
-//COBAIN ADD MULTER: TP BELOM JALAN NANGES
+//MULTER
 const storageUploadFoto = multer.diskStorage({
     destination: function (req, file, callBack) {
-        const id = _id; //UNDEFINED
+        const id = _id; 
         console.log(id);
         const bukti = `./public/images/${id}`;
         try {
@@ -586,8 +568,10 @@ let upload = multer({
 
 app.post('/uploadManual', upload.single('image'), (req,res) => {
     const {bag_prop} = req.body;
+    // console.log("phase 1");
     const file = req.file.filename;
     let idmerek, iddesigner, idsubkat;
+    console.log("phase 2");
     get_idmerek(conn,bag_prop.merek).then((result) => {
         idmerek = (JSON.parse(JSON.stringify(result))[0].merek_id); // GA JALAN !
     })

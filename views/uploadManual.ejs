@@ -9,7 +9,7 @@
     <script src="/js/uploadManual.js" defer></script>
 </head>
 <body>
-    <form id="manual" method="post" action="/uploadManual">
+    <form id="manual" method="post" action="/uploadManual" enctype="multipart/form-data">
         <div id="id">
             <label for="bagid">Bag ID</label>
             <input type="text" name="bagid" value="<%= id %>" disabled="true">
