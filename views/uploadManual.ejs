@@ -30,14 +30,11 @@
             <label for="kategori">Kategori</label>
             <select name="kategori">
                 <% for(let i=0; i<kategori.length; i++){ %>
-                    <option id="kat" value="<%= kategori[i].nama_kategori %>" name="pilih_kategori"><%= kategori[i].nama_kategori %></option>
+                    <option id="kat" value="<%= kategori[i].nama_kategori %>" name="kategori"><%= kategori[i].nama_kategori %></option>
                 <% } %>
             </select>
             <label for="subkat">Sub-Kategori</label>
-            <select name="subkat">
-                <% for(let i=0; i<subkat.length; i++){ %>
-                    <option id="subkat" value="<%= subkat[i].nama_sub_kategori %>"><%= subkat[i].nama_sub_kategori %></option>
-                <% } %>
+            <select name="subkat"  disabled>
             </select>
             <label for="warna">Warna</label>
             <input type="text" name="warna">
