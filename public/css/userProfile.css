@@ -96,6 +96,48 @@ p{
     font-family: "nunito-medium";
 }
 
+
+#FollowingFollowers{
+    grid-column: 2; 
+    display: none;
+}
+
+#Nav{
+    display: flex;
+    height: 50px;
+}
+
+#Nav p {
+    margin:15px;
+}
+
+#Folls{
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 300px;
+}
+
+#Folls div{
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    width: 450px;
+    height: 55px;
+
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    text-align: left;
+    align-items: center;
+}
+
+hr{
+    width: 490px;
+}
+
+
 @font-face {
     font-family: "nunito-medium";
     src: url(../assets/nunito/Nunito-Medium.ttf);

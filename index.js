@@ -7,12 +7,15 @@ import multer from 'multer';
 import path from 'path' ;
 import csvParser from 'csv-parser';
 import fs from 'fs';
+// import path from 'path';
+
+// import { follow } from './public/js/follow.js';
 
 const PORT = 8080;
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use(express.static('./public'));
+app.use(express.static(path.resolve('public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(PORT, (err) => {
@@ -151,16 +154,31 @@ app.get('/about', (req, res) => {
 app.get('/UserProfile', (req, res) => {
     following(conn, sessions.username).then((jmlhFollowing) => {
         follower(conn, sessions.username).then((jmlhFollower) => {
-            res.render('UserProfile', {
-                review: 0,
-                followers: jmlhFollower[0].jumlahFollower,
-                following: jmlhFollowing[0].jumlahFollowing,
-                username: sessions.username,
-                url: sessions.url
+            review(conn, sessions.username).then((jmlhReview) => {
+                console.log(jmlhReview[0])
+                res.render('UserProfile', {
+                    review: jmlhReview[0].jumlahReview,
+                    followers: jmlhFollower[0].jumlahFollower,
+                    following: jmlhFollowing[0].jumlahFollowing,
+                    username: sessions.username,
+                    url: sessions.url
+                });
             });
         });
     });
 });
+
+const review = (conn, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(review_id) as jumlahReview FROM write_review WHERE username=?", [username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
 
 const following = (conn, username) => {
     return new Promise((resolve, reject) => {
@@ -410,7 +428,7 @@ const data_kategori = (conn) => {
 }
 const data_subkat = (conn, id_kat) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT nama_sub_kategori FROM sub_kategori WHERE kategori_id=(SELECT kategori_id FROM kategori WHERE nama_kategori=?)", [id_kat], (err, result) => {
+        conn.query("SELECT nama_sub_kategori FROM sub_kategori WHERE kategori_id=(SELECT kategori_id FROM kategori WHERE nama_kategori='?')", [id_kat], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -493,10 +511,15 @@ app.get('/uploadManual', (req, res) => {
     data_kategori(conn).then((result) => {
         _kategori = result;
     })
-    const k = req.body.kategori;
-    data_subkat(conn, k).then((result) => {
-        _subkat = result;
-    })
+
+    // function get_kat(req, res){
+    //     const k = req.body;
+    //     return k;
+    // }
+    // data_subkat(conn, get_kat).then((result) => {
+    //     _subkat = result;
+    // })
+    
     // console.log(_merek);
     // console.log(_designer);
     // console.log(_kategori);
@@ -513,6 +536,11 @@ app.get('/uploadManual', (req, res) => {
         });
     })
 });
+
+app.get("/getSubkat", (req, res) => {
+    const { kategori } = req.query;
+    res.json(kategori);
+})
 
 app.post('/uploadManual', (req,res) => {
     const {bag_prop} = req.body;

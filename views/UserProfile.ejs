@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= username %>'s Profile - Bag's Community</title>
     <link rel="stylesheet" href="../css/userProfile.css">
+    <script src="/js/follow.js" defer></script>
 </head>
 <body>
     <%- include('header') %>
@@ -32,22 +33,36 @@
             </section>
             <a id="EditProfile" href="/userProfileSettings">Edit Profile</a>
         </div>
-
+        
         <div id="Reviews">
             <section>
+                <!-- pake looping ambil dari data base review -->
                 <div id ="bag1">
-                    
                 </div>
-
                 <div id ="bag2">
-                    
                 </div>
-
                 <div id ="bag3">
-                    
                 </div>
             </section>
         </div>
+
+        <section id="FollowingFollowers">
+            <div id="Nav">
+                <p>Followers</p>
+                <p>Following</p>
+            </div>
+            <hr>
+            <div id="Folls">
+                <section>
+                    <!-- pake looping dari data base follow -->
+                    <div class="foll">
+                        <img src="../assets/profile.png" width="50px" height="50px">
+                        <p> Angelica Natalie</p>
+                    </div>
+    
+                </section>
+            </div>
+        </section>
     </section>
 </body>
 </html>
