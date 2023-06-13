@@ -35,7 +35,7 @@ INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Joan', '1234
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Naomixue', 'zxcvbnm', 'Naomi Elianora', 'naomiii@gmail.com');
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Diyanss', 'asdfgh', 'Dian Estri', 'oskangwur@gmail.com');
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('dree_andrea', '234567890', 'Andrea Miranti', 'miranti@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('ketherinegoenawan', 'lkjhgfdsa', 'Ketherine Goenawan', 'kg@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('keth', 'lkjhgfdsa', 'Ketherine Goenawan', 'kg@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -60,11 +60,11 @@ CREATE TABLE follow
 
 INSERT INTO follow (username1,username2) VALUES('Angel' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('Joan' , 'Angel');
-INSERT INTO follow (username1,username2) VALUES('ketherinegoenawan' , 'Angel');
+INSERT INTO follow (username1,username2) VALUES('keth' , 'Angel');
 INSERT INTO follow (username1,username2) VALUES('Naomixue' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('Diyanss' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('dree_andrea' , 'Joan');
-INSERT INTO follow (username1,username2) VALUES('ketherinegoenawan' , 'Joan');
+INSERT INTO follow (username1,username2) VALUES('keth' , 'Joan');
 -- --------------------------------------------------------
 
 --
@@ -211,6 +211,6 @@ CREATE TABLE write_review
 
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:45', 'Joan',1);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:46', 'Angel',2);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:49', 'Ketherine',3);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:49', 'keth',3);
 
 
