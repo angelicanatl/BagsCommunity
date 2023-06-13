@@ -1,2 +1,1 @@
-panjang, lebar, tinggi, warna_utama, tampak_depan, tampak_belakang, tampak_kiri, tampak_kanan, tampak_dalam, merek_id,designer_id
-35, 20, 25, black, .\assets\gambar\ladydior.jpg, .\assets\gambar\depan.jpg, .\assets\gambar\samping.jpg, .\assets\gambar\samping.jpg, .\assets\gambar\dalam.jpg, 1,1
+35, 20, 25, black, .\assets\gambar\ladydior.jpg, 1, 1, 4

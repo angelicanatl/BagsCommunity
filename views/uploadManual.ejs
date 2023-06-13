@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Manual - Bag's Community</title>
     <link rel="stylesheet" href="../css/upload.css">
+    <script src="/uploadManual.js" defer></script>
 </head>
 <body>
     <form id="manual" method="post" action="/uploadManual">
@@ -29,13 +30,13 @@
             <label for="kategori">Kategori</label>
             <select name="kategori">
                 <% for(let i=0; i<kategori.length; i++){ %>
-                    <option value="<%= kategori[i].nama_kategori %>"><%= kategori[i].nama_kategori %></option>
+                    <option id="kat" value="<%= kategori[i].nama_kategori %>" name="pilih_kategori"><%= kategori[i].nama_kategori %></option>
                 <% } %>
             </select>
             <label for="subkat">Sub-Kategori</label>
             <select name="subkat">
                 <% for(let i=0; i<subkat.length; i++){ %>
-                    <option value="<%= subkat[i].nama_sub_kategori %>"><%= subkat[i].nama_sub_kategori %></option>
+                    <option id="subkat" value="<%= subkat[i].nama_sub_kategori %>"><%= subkat[i].nama_sub_kategori %></option>
                 <% } %>
             </select>
             <label for="warna">Warna</label>

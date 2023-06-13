@@ -165,7 +165,18 @@ CREATE TABLE tas
 INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
 	20, 17, 8, 'hitam', 1, 1, 4
 );
-
+INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	20, 17, 8, 'hitam', 1, 1, 4
+);
+INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	20, 17, 8, 'hitam', 1, 1, 4
+);
+INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	20, 17, 8, 'hitam', 1, 1, 4
+);
+INSERT INTO tas (panjang,lebar,tinggi,warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	20, 17, 8, 'hitam', 1, 1, 4
+);
 -- --------------------------------------------------------
 
 --

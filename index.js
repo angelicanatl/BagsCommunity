@@ -497,10 +497,10 @@ app.get('/uploadManual', (req, res) => {
     data_subkat(conn, k).then((result) => {
         _subkat = result;
     })
-    console.log(_merek);
-    console.log(_designer);
-    console.log(_kategori);
-    console.log(_subkat);
+    // console.log(_merek);
+    // console.log(_designer);
+    // console.log(_kategori);
+    // console.log(_subkat);
     set_id(conn).then((result) => {
         _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
         result+=1;
