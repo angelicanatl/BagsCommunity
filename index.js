@@ -5,7 +5,7 @@ import session from 'express-session';
 import memoryStore from 'memorystore';
 import multer from 'multer';
 import path from 'path' ;
-import csvParser from 'csv-parser';
+import parse from 'csv-parser';
 import fs from 'fs';
 // import path from 'path';
 
@@ -548,12 +548,6 @@ app.get('/addBagItem', (req, res) => {
     });
 });
 
-// const id = 1; // nanti ambil id dari database
-app.get('/uploadFile', (req, res) => {
-    res.redirect('uploadFile', {
-        id: id
-    });
-});
 let _id;
 let _merek = [];
 let _designer = [];
@@ -646,6 +640,56 @@ app.post('/uploadManual', upload.single('image'), async (req,res) => {
         });
     })
 })
+
+
+//upload pake csv
+app.get('/uploadFile', (req, res) => {
+    set_id(conn).then((result) => {
+        _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
+        result+=1;
+        res.render('uploadFile', {
+            id: _id
+        });
+    })
+});
+
+const storageUploadCSV = multer.diskStorage({
+    destination: function (req, file, callBack) {
+        callBack(null, './public/upload/');
+    },
+    filename: function (req, file, callBack){
+        callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+ 
+let uploadCSV = multer({
+    storage: storageUploadCSV
+});
+
+app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
+    if (!req.file) {
+        res.status(400).send('No file uploaded.');
+        return;
+      }
+    
+    const result = [];
+    const file = req.file.filename;
+    fs.createReadStream(`./public/upload/${file}`)
+        .on('error', (err) => {
+            console.error('Error reading file:', err);
+        })
+        .pipe(parse({ delimiter: ',', headers: false }))
+        .on('data', (data) => result.push(data))
+        .on('end', async () => {
+        for (let i of result) {
+            addBagManual(conn, bagid, panjang, lebar, tinggi, warna, bukti, idmerek, iddesigner, idsubkat)
+      }
+      res.render('addBagItem', {
+        username: sessions.username,
+        url: sessions.url
+      });
+    });
+});
 //------------------------------------Review Setting----------------------------------------------
 
 
@@ -665,3 +709,16 @@ app.get('/statistikTas', (req, res) => {
     });
 });
  
+//-------------------------- tas -------------------------------------------------------
+
+app.get('/bag', (req, res) => {
+    res.render('bag', {
+        username: sessions.username,
+        url: sessions.url,
+        id: _id
+        // merek: _merek,
+        // designer: _designer,
+        // kategori: _kategori,
+        // subkat: _subkat
+    });
+});
