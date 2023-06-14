@@ -557,7 +557,8 @@ let k, idK;
 app.get("/getSubkat", (req, res) => {
     k = req.query.kategori;
     get_idkat(conn, k).then((result)=>{
-        idK = (JSON.parse(JSON.stringify(result))[0]).kategori_id;
+        idK = (JSON.parse(JSON.stringify
+            (result))[0]).kategori_id;
         data_subkat(conn, idK).then((result2) => {
             _subkat = [];
             for(let i of result2){
@@ -618,10 +619,10 @@ let upload = multer({
     storage: storageUploadFoto
 });
 
+let idmerek, iddesigner, idsubkat;
 app.post('/uploadManual', upload.single('image'), async (req,res) => {
     const {bagid, panjang, lebar, tinggi, warna, merek, designer, subkat} = req.body; //bagid undefined
     const file = req.file.filename;
-    let idmerek, iddesigner, idsubkat;
     await get_idmerek(conn,merek).then((result) => {
         idmerek = (JSON.parse(JSON.stringify(result))[0].merek_id);
     })
@@ -632,7 +633,7 @@ app.post('/uploadManual', upload.single('image'), async (req,res) => {
         idsubkat = (JSON.parse(JSON.stringify(result))[0].sub_kategori_id);
     })
     const bukti = `./public/images/${id}/${file}`;
-    console.log(bukti);
+    // console.log(bukti);
     await addBagManual(conn, panjang, lebar, tinggi, warna, bukti, idmerek, iddesigner, idsubkat).then((result) => {
         res.render('addBagItem', {
             username: sessions.username,
@@ -682,7 +683,8 @@ app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
         .on('data', (data) => result.push(data))
         .on('end', async () => {
         for (let i of result) {
-            addBagManual(conn, bagid, panjang, lebar, tinggi, warna, bukti, idmerek, iddesigner, idsubkat)
+            let foto = `./public/images/${_id}/${i[4]}`;
+            addBagManual(conn, i[0], i[1], i[2], i[3], foto, i[5], i[6], i[7]);
       }
       res.render('addBagItem', {
         username: sessions.username,
