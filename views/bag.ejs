@@ -8,18 +8,17 @@
     <link rel="stylesheet" href="../css/bagPage.css">
 </head>
 <body>
-    <%- include('headerAdmin') %>
+    <%- include('headerAdmin') %> 
+    <!-- header admin atau biasa? -->
 
     <div id="all">
     <section>
     <div id="left">
         <h1> BAG <%= id %></h1>
-        <div id="photos">
-            <img src="../assets/gambar/ladydior.png" id="depan">
-            <img src="../assets/gambar/ladydior.png" id="belakang">
-            <img src="../assets/gambar/ladydior.png" id="kanan">
-            <img src="../assets/gambar/ladydior.png" id="kiri">
-            <img src="../assets/gambar/ladydior.png" id="dalam">
+        <div id="photoContainer">
+            <div id="photos">
+                <img src="<%= path %>" id="foto">
+            </div>
         </div>
 
         <h2> Details </h2>
@@ -45,7 +44,7 @@
         <div id="upperR">
             <h2> Reviews</h2>
             <img src="../assets/gambar/bintang.png" class="bintang">
-            <input type="button" value="+ Add Review">
+            <input type="button" value="+ Add Review" href="/addReview">
         </div>
         
         <div class ="reviews">

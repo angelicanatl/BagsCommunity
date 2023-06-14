@@ -438,7 +438,8 @@ const set_id = (conn) => {
             }
         })
     })
-}
+};
+
 const data_merek = (conn) => {
     return new Promise((resolve, reject) => {
         conn.query("SELECT nama_merek FROM merek", (err, result) => {
@@ -621,7 +622,7 @@ let upload = multer({
 
 let idmerek, iddesigner, idsubkat;
 app.post('/uploadManual', upload.single('image'), async (req,res) => {
-    const {bagid, panjang, lebar, tinggi, warna, merek, designer, subkat} = req.body; //bagid undefined
+    const {bagid, panjang, lebar, tinggi, warna, merek, designer, subkat} = req.body; 
     const file = req.file.filename;
     await get_idmerek(conn,merek).then((result) => {
         idmerek = (JSON.parse(JSON.stringify(result))[0].merek_id);
@@ -713,14 +714,159 @@ app.get('/statistikTas', (req, res) => {
  
 //-------------------------- tas -------------------------------------------------------
 
-app.get('/bag', (req, res) => {
+const get_pathFoto = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT foto FROM tas WHERE tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_namaMerek = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_merek FROM `merek` JOIN tas on merek.merek_id = tas.merek_id WHERE tas.tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_namaDesigner = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_designer FROM `designer` JOIN tas on designer.designer_id = tas.designer_id WHERE tas.tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_subkat = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_sub_kategori FROM `sub_kategori` JOIN tas on sub_kategori.sub_kategori_id = tas.sub_kategori_id WHERE tas.tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_kat = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT kategori.nama_kategori FROM sub_kategori JOIN kategori ON sub_kategori.kategori_id = kategori.kategori_id JOIN tas ON tas.sub_kategori_id = sub_kategori.sub_kategori_id WHERE tas_id =?', [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_warna = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT warna_utama FROM tas WHERE tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_panjang = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT panjang FROM tas WHERE tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_lebar = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT lebar FROM tas WHERE tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_tinggi = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT tinggi FROM tas WHERE tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.get('/bag', async (req, res) => {
+    let _id; let foto_path; let namaMerek; let namaDesigner; let ket_sub_kat; let ket_kat; let warnaTas; let panjangTas; let lebarTas; let tinggiTas;
+    await set_id(conn).then((result) => {
+        _id = (JSON.parse(JSON.stringify(result))[0].maks); //buat testing aja! jadi pake id 1
+    })
+    await get_pathFoto(conn, _id).then((result) => {
+        foto_path = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_namaMerek(conn, _id).then((result) => {
+        namaMerek = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_namaDesigner(conn, _id).then((result) => {
+        namaDesigner = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_subkat(conn, _id).then((result) => {
+        ket_sub_kat = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_kat(conn, _id).then((result) => {
+        ket_kat = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_warna(conn, _id).then((result) => {
+        warnaTas = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_panjang(conn, _id).then((result) => {
+        panjangTas = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_lebar(conn, _id).then((result) => {
+        lebarTas = (JSON.parse(JSON.stringify(result))[0])
+    })
+    await get_tinggi(conn, _id).then((result) => {
+        tinggiTas = (JSON.parse(JSON.stringify(result))[0])
+    })
+    
     res.render('bag', {
         username: sessions.username,
         url: sessions.url,
-        id: _id
-        // merek: _merek,
-        // designer: _designer,
-        // kategori: _kategori,
-        // subkat: _subkat
+        id: _id,
+        path: foto_path.foto, 
+        merek: namaMerek.nama_merek,
+        designer: namaDesigner.nama_designer,
+        kategori: ket_kat.nama_kategori,
+        subkat: ket_sub_kat.nama_sub_kategori,
+        warna: warnaTas.warna_utama,
+        panjang: panjangTas.panjang,
+        lebar : lebarTas.lebar,
+        tinggi : tinggiTas.tinggi
     });
 });
