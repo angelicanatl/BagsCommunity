@@ -65,7 +65,16 @@ kananFollowing.addEventListener('click', ()=>{
 
 // friend
 
-const friend = document.getElementsByClassName('foll');
-friend.addEventListener('click', ()=>{
-    
+const friend = document.querySelectorAll("div[class='foll']")
+friend.forEach(div => {
+    div.addEventListener('click', () => {
+        const name = div.getAttribute('name');
+        const data = {
+            user: name
+        };
+        const params = new URLSearchParams(data);
+        const u = params.toString();
+        const url = "/anotherUser?" + u;
+        fetch(url);
+    });
 });

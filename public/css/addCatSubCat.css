@@ -81,3 +81,15 @@ main{
     font-family: "nunito-bold";
     src: url(../assets/nunito/Nunito-Bold.ttf);
 }
+
+#alert{
+    color: red;
+    display: none;
+    margin: 0 120px;
+}
+
+#alert1{
+    color: red;
+    display: none;
+    margin: 0 120px;
+}

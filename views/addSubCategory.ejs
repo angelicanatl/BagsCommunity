@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Sub-Category</title>
     <link rel="stylesheet" href="../css/addCatSubCat.css">
+    <script src="/js/addSubCat.js" defer></script>
 </head>
 <body>
     <%- include('headerAdmin') %>
     <main>
-        <form class="addCategory" method="post" action="/addSubCategory/:idKategori">
+        <form class="addCategory" method="post">
             <a href="/addCategory"><%= kategori %></a>
-            <input type="text" placeholder="Tambah sub kategori.." name="addSubCat">
+            <input type="text" id="addSubCat" placeholder="Tambah sub kategori.." name="addSubCat">
             <button type="submit">+</button>
         </form>
+        <p id="alert1">*Anda belum mengisi apapun</p>
+        <p id="alert">*sub-kategori telah ditambahkan sebelumnya</p>
         <div class="category">
             <% for(let i=0; i<subkategori.length; i++){ %>
             <p><%= subkategori[i].nama_sub_kategori %></p>

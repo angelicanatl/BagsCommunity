@@ -9,8 +9,6 @@ import parse from 'csv-parser';
 import fs from 'fs';
 // import path from 'path';
 
-// import { follow } from './public/js/follow.js';
-
 const PORT = 8080;
 const app = express();
 
@@ -151,30 +149,36 @@ app.get('/about', (req, res) => {
 });
 
 //-----------------------------------------User Profile----------------------------------------------------
-app.get('/UserProfile', (req, res) => {
-    
-    following(conn, sessions.username).then((jmlhFollowing) => {
-        follower(conn, sessions.username).then((jmlhFollower) => {
-            review(conn, sessions.username).then((jmlhReview) => {
-                listFollowing(conn, sessions.username).then((lsFollowing) => {
-                    listFollower(conn, sessions.username).then((lsFollower) => {
-                        listReview(conn, sessions.username).then((lsReview) => {
-                            console.log(lsReview)
-                            res.render('UserProfile', {
-                                review: jmlhReview[0].jumlahReview,
-                                followers: jmlhFollower[0].jumlahFollower,
-                                following: jmlhFollowing[0].jumlahFollowing,
-                                lsFollower: lsFollower,
-                                lsFollowing: lsFollowing,
-                                lsReview: lsReview,
-                                username: sessions.username,
-                                url: sessions.url
-                            });
-                        });
-                    });
-                });
-            });
-        });
+app.get('/UserProfile', async (req, res) => {
+    let usrfollowing, usrfollower, barreview, listsFollowing, listsFollower, listsReview;
+    await following(conn, sessions.username).then((jmlhFollowing) => {
+        usrfollowing = jmlhFollowing;
+    });
+    await follower(conn, sessions.username).then((jmlhFollower) => {
+        usrfollower = jmlhFollower;
+    });
+    await review(conn, sessions.username).then((jmlhReview) => {
+        barreview = jmlhReview;
+    });
+    await listFollowing(conn, sessions.username).then((lsFollowing) => {
+        listsFollowing = lsFollowing;
+    });
+    await listFollower(conn, sessions.username).then((lsFollower) => {
+        listsFollower = lsFollower;
+    });
+    await listReview(conn, sessions.username).then((lsReview) => {
+        listsReview = lsReview;
+    });
+    console.log(listsReview)
+    res.render('UserProfile', {
+        following: usrfollowing[0].jumlahFollowing,
+        followers: usrfollower[0].jumlahFollower,
+        review: barreview[0].jumlahReview,
+        lsFollowing: listsFollowing,
+        lsFollower: listsFollower,
+        lsReview: listsReview,
+        username: sessions.username,
+        url: sessions.url
     });
 });
 
@@ -249,6 +253,44 @@ const listFollower = (conn, username) => {
         })
     })
 }
+
+
+// -----------------------------------Another User--------------------------------------------------------
+
+app.get("/anotherUser", async (req, res) => {
+    const { user } = req.query;
+    let usrfollowing, usrfollower, barreview, listsFollowing, listsFollower, listsReview;
+    await following(conn, user).then((jmlhFollowing) => {
+        usrfollowing = jmlhFollowing;
+    });
+    await follower(conn, user).then((jmlhFollower) => {
+        usrfollower = jmlhFollower;
+    });
+    await review(conn, user).then((jmlhReview) => {
+        barreview = jmlhReview;
+    });
+    await listFollowing(conn, user).then((lsFollowing) => {
+        listsFollowing = lsFollowing;
+    });
+    await listFollower(conn, user).then((lsFollower) => {
+        listsFollower = lsFollower;
+    });
+    await listReview(conn, user).then((lsReview) => {
+        listsReview = lsReview;
+    });
+    console.log(listsReview)
+    res.render('anotherUser', {
+        following: usrfollowing[0].jumlahFollowing,
+        followers: usrfollower[0].jumlahFollower,
+        review: barreview[0].jumlahReview,
+        lsFollowing: listsFollowing,
+        lsFollower: listsFollower,
+        lsReview: listsReview,
+        username: sessions.username,
+        url: sessions.url
+    });
+})
+
 
 // -----------------------------------User settings--------------------------------------------------------
 const cariPengguna = (conn, username) => {
@@ -328,6 +370,25 @@ const kategori = (conn) => {
     })
 }
 
+app.post('/tambahkategori', (req, res) => {
+    let namakategori = req.body.namaKategori;
+    const kosong = true;
+    if (namakategori != ''){
+        cariKat(conn, namakategori).then((result) => {
+            const gaerror = false;
+            if (result[0]){
+                addKategori(conn, namakategori).then((result) => {
+                    res.json(namakategori);
+                });
+            } else {
+                res.json(gaerror);
+            }
+        });
+    } else {
+        res.json(kosong);
+    }
+});
+
 app.get('/addCategory', (req, res) => {
     kategori(conn).then((result) => {
         res.render('addCategory', {
@@ -350,16 +411,18 @@ const addKategori = (conn, addCat) => {
     })
 }
 
-app.post('/addCategory', (req, res) => {
-    const { addCat } = req.body;
-    if (addCat) {
-        addKategori(conn, addCat).then((result) => {
-            res.redirect('/addCategory');
-        });
-    } else {
-        res.redirect('/addCategory');
-    }
-});
+const cariKat = (conn, kategori_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_kategori FROM kategori WHERE kategori_id=?", [kategori_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+//------------------subkategori
 
 const SubKategori = (conn, idKategori) => {
     return new Promise((resolve, reject) => {
@@ -372,26 +435,13 @@ const SubKategori = (conn, idKategori) => {
         })
     })
 }
-
+                    
 let idKategori = '';
-const cariKat = (conn) => {
-    return new Promise((resolve, reject) => {
-        conn.query("SELECT nama_kategori FROM kategori WHERE kategori_id=?", [idKategori], (err, result) => {
-            if(err){
-                reject(err);
-            } else{
-                // retrun katanya aja
-                resolve(result);
-            }
-        })
-    })
-}
-
 let kat = '';
 app.get('/addSubCategory/:idKategori', (req, res) => {
-    idKategori = req.params.idKategori;
+    idKategori = req.params.idKategori; // dapatkan id kategori
     SubKategori(conn, idKategori).then((result) => {
-        cariKat(conn).then((namaKat) => {
+        cariKat(conn, idKategori).then((namaKat) => {
             kat = namaKat[0].nama_kategori;
             res.render('addSubCategory', {
                 username: sessions.username,
@@ -403,9 +453,28 @@ app.get('/addSubCategory/:idKategori', (req, res) => {
     });
 });
 
-const addSubKategori = (conn, addSubCat, idKategori) => {
+app.post('/tambahsubkategori', (req, res) => {
+    let namaSubKategori = req.body.namaSubKategori;
+    const kosong = true;
+    if (namaSubKategori != ''){
+        cariSubKat(conn, namaSubKategori).then((result) => {
+            const gaerror = false;
+            if (!result[0]){
+                addSubKategori(conn, namaSubKategori, idKategori).then((result) => {
+                    res.json(namaSubKategori);
+                });
+            } else {
+                res.json(gaerror);
+            }
+        });
+    } else {
+        res.json(kosong);
+    }
+});
+
+const cariSubKat = (conn, nama_sub_kategori) => {
     return new Promise((resolve, reject) => {
-        conn.query("INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES (?,?)", [addSubCat, idKategori], (err, result) => {
+        conn.query("SELECT nama_sub_kategori FROM sub_kategori WHERE nama_sub_kategori=?", [nama_sub_kategori], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -415,16 +484,17 @@ const addSubKategori = (conn, addSubCat, idKategori) => {
     })
 }
 
-app.post('/addSubCategory/:idKategori', (req, res) => {
-    const { addSubCat } = req.body;
-    if (addSubCat){
-        addSubKategori(conn, addSubCat, idKategori).then((result) => {
-            res.redirect(`/addSubCategory/${idKategori}`);
-        });
-    } else {
-        res.redirect(`/addSubCategory/${idKategori}`);
-    }
-}); 
+const addSubKategori = (conn, addSubCat, idKat) => {
+    return new Promise((resolve, reject) => {
+        conn.query("INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES (?,?)", [addSubCat, idKat], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
 
 //-------------------------tambah item bag----------------------------------------------
 //ambil id dari database
