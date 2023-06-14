@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bag Statistics</title>
     <link rel="stylesheet" href="../css/statistikTas.css">
+    <script src="/js/statistikTas.js" defer></script>
 </head>
 <body>
     <%- include('headerAdmin') %>
@@ -20,31 +21,31 @@
             </section>
 
             <div id ='Category'>
-                <p> Category</p>
+                <button name ='kat' disabled> Category</button>
             </div>
 
             <div id ='sub_cat'>
-                <p> Sub-category</p>
+                <button name = 'subkat'disabled> Sub-category</button>
             </div>
 
             <div id ='Merek'>
-                <p> Merek</p>
+                <button name = 'merek' disabled> Merek</button>
             </div>
 
             <div id ='Designer'>
-                <p> Designer</p>
+                <button name = 'designer'disabled> Designer</button>
             </div>
         </div>
 
         <div id="forGraph">
-            <p> Per Category </p>
+            <p name="<%= showBy %>"> <%= showBy %> </p>
             <hr>
             
             <div id="graph">
 
                 <table>
                     <tr>
-                        <th rowspan="2">Category</th>
+                        <th rowspan="2"><%= showBy %></th>
                         <th rowspan="2">Banyak Review</th>
                         <th colspan="3">Nilai Review</th>
                     </tr>
@@ -53,7 +54,7 @@
                         <th>Maximum</th>
                         <th>Average</th>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>Backpack</td>
                         <td>1080</td>
                         <td>2</td>
@@ -73,7 +74,7 @@
                         <td>2</td>
                         <td>3</td>
                         <td>5</td>
-                    </tr>
+                    </tr> -->
                 </table>
             </div>
         </div>

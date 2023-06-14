@@ -36,19 +36,24 @@ const SessionStore = memoryStore(session);
 
 app.use(session({
     store: new SessionStore({
-        checkPeriod: 1*60*60*1000   //ms
+        checkPeriod: 100*60*60*1000   //ms
     }),
     name: 'nama',
     secret: 'rahasiasecret',
     resave: false,
-    saveUninitialized: true,
-    cookie: { 
-        secure: true, 
-        maxAge:30*60*1000 
-    }
+    saveUninitialized: true
+    // ,cookie: { 
+    //     secure: true, 
+    //     maxAge:30*60*1000 
+    // }
 }));
 
 app.get('/', (req, res) => {
+    //logout
+    if(req.session.username){
+        req.session.destroy;
+    }
+    //login
     res.render('login');
 });
 
@@ -435,7 +440,7 @@ const SubKategori = (conn, idKategori) => {
         })
     })
 }
-                    
+
 let idKategori = '';
 let kat = '';
 app.get('/addSubCategory/:idKategori', (req, res) => {
@@ -491,7 +496,7 @@ const addSubKategori = (conn, addSubCat, idKat) => {
                 reject(err);
             } else{
                 resolve(result);
-            }
+    }
         })
     })
 }
@@ -778,8 +783,28 @@ app.get('/reviewSettings', (req, res) => {
 app.get('/statistikTas', (req, res) => {
     res.render('statistikTas', {
         username: sessions.username,
-        url: sessions.url
+        url: sessions.url,
+        showBy: "Not Choosen Yet!"
     });
+});
+
+const per_kat = (conn, data) => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT kategori_id, COUNT(review_id) FROM statistics WHERE tanggal>=? AND tanggal<=? GROUP BY kategori_id', [data.from, data.to], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.get('/showLaporan', (req, res) => {
+    const tabel = req.body;
+    per_kat()
+    console.log(tabel);
+    res.json(tabel);
 });
  
 //-------------------------- tas -------------------------------------------------------

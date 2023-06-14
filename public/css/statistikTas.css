@@ -67,7 +67,7 @@ div#forInput div{
     padding: 25px;
 }
 
-#forGraph p{
+#forGraph button{
     text-align: center;
 }
 
@@ -112,11 +112,11 @@ table{
     src: url(../assets/nunito/Nunito-Bold.ttf);
 }
 
-#forInput p{
+#forInput button{
     font-family: "nunito-bold";
 
 }
 
-p{
+button{
     font-family: "nunito-medium";
 }
