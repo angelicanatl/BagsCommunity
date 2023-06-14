@@ -185,7 +185,7 @@ CREATE TABLE tas
 --
 
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, './public/images/1/ladydior.png', 'hitam', 1, 1, 4
+	20, 17, 8, './public/images/1/ladydior.png', 'hitam', 1, 1, 7
 );
 
 -- --------------------------------------------------------
@@ -213,6 +213,19 @@ INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Bagus bgt mo meninggal', 1);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Y', 1);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'cuaks', 1);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'anzai', 1);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'gatau mau nulis apa jujur', 1);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Kata angel sih bagus', 1);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Mehong', 1);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'recommended', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -220,7 +233,7 @@ INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 --
 
 CREATE TABLE write_review
-(	tanggal datetime NOT NULL,
+(	tanggal date NOT NULL,
 	username VARCHAR(15) NOT NULL,
 	review_id INTEGER NOT NULL,
 	FOREIGN KEY (username) 
@@ -229,8 +242,13 @@ CREATE TABLE write_review
     REFERENCES review(review_id)
 );
 
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03 14:00:45', 'Joan',1);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-03 14:00:46', 'Angel',2);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-02-03 14:00:49', 'keth',3);
-
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',1);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-03', 'Angel',2);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-02-03', 'keth',3);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',4);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',5);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',6);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',7);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',8);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',9);
 
