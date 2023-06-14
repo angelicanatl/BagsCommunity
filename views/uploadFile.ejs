@@ -9,18 +9,18 @@
 </head>
 <body>
     <header></header>
-    <form id="file" method="post" action="/uploadFile">
+    <form id="file" method="post" action="/uploadFile" enctype="multipart/form-data">
         <div id="id">
             <label for="bagid">Bag ID</label>
             <input type="text" name="bagid" value="<%= id %>" disabled="true">
         </div>
         <div id="text">
             <label for="file">Drop CSV File Here!</label>
-            <input type="file" name="file">
+            <input type="file" name="file_tas">
         </div>
         <div id="button">
-            <a name="cancel" href="/addBagItem">Cancel</a>
-            <a name="upload">Upload</a>
+            <button name="cancel" href="/addBagItem">Cancel</button>
+            <button name="upload" type="submit" >Upload</button>
         </div>
     </form>
 </body>

@@ -36,7 +36,14 @@ INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Naomixue', '
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Diyanss', 'asdfgh', 'Dian Estri', 'oskangwur@gmail.com');
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('dree_andrea', '234567890', 'Andrea Miranti', 'miranti@gmail.com');
 INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('keth', 'lkjhgfdsa', 'Ketherine Goenawan', 'kg@gmail.com');
-
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('reineaura_', 'reinee', 'Reine Aura', 'rein@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('clarissa.nadia', 'nad', 'Clarissa Nadia', 'nadia@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Galyndeo', 'gggg', 'Ghabriel Galyndeo', 'galyndeo@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('vincentmarkk', 'qwerty', 'Vincent Mark', 'vmark@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Miros', 'miross', 'Miroslav Matthew', 'mir@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('thur', 'thur', 'William Arthur', 'thur@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Vicsprat', 'vicoo', 'Vico Pratama', 'vics@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('KC', 'kcc', 'Kevin Christian', 'kc@gmail.com');
 -- --------------------------------------------------------
 
 --
@@ -65,6 +72,10 @@ INSERT INTO follow (username1,username2) VALUES('Naomixue' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('Diyanss' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('dree_andrea' , 'Joan');
 INSERT INTO follow (username1,username2) VALUES('keth' , 'Joan');
+INSERT INTO follow (username1,username2) VALUES('clarissa.nadia' , 'Joan');
+INSERT INTO follow (username1,username2) VALUES('Vicsprat' , 'Joan');
+INSERT INTO follow (username1,username2) VALUES('keth' , 'Galyndeo');
+INSERT INTO follow (username1,username2) VALUES('Joan' , 'Diyanss');
 -- --------------------------------------------------------
 
 --
@@ -80,6 +91,11 @@ CREATE TABLE merek
 -- Dumping data for table `merek`
 --
 INSERT INTO merek (nama_merek) VALUES('Dior');
+INSERT INTO merek (nama_merek) VALUES('Coach');
+INSERT INTO merek (nama_merek) VALUES('Kate Spade');
+INSERT INTO merek (nama_merek) VALUES('Tumi');
+INSERT INTO merek (nama_merek) VALUES('Eiger');
+INSERT INTO merek (nama_merek) VALUES('Herschel');
 
 -- --------------------------------------------------------
 
@@ -134,8 +150,12 @@ CREATE TABLE sub_kategori
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('School Backpack',1);
 INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Crossbody Backpack',1);
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Mini backpack',1);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Cabin size',2);
+INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Medium size',2);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Large size',2);
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 3);
-
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Bucket', 3);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Envelope', 3);
 -- --------------------------------------------------------
 
 --
@@ -209,8 +229,8 @@ CREATE TABLE write_review
     REFERENCES review(review_id)
 );
 
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:45', 'Joan',1);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:46', 'Angel',2);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2015-04-03 14:00:49', 'keth',3);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03 14:00:45', 'Joan',1);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-03 14:00:46', 'Angel',2);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-02-03 14:00:49', 'keth',3);
 
 

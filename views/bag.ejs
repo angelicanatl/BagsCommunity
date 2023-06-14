@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="../css/bagPage.css">
 </head>
 <body>
+    <%- include('headerAdmin') %>
 
     <div id="all">
     <section>
     <div id="left">
-        <h1> BAG 1067812</h1>
+        <h1> BAG <%= id %></h1>
         <div id="photos">
             <img src="../assets/gambar/ladydior.png" id="depan">
             <img src="../assets/gambar/ladydior.png" id="belakang">
@@ -24,19 +25,19 @@
         <h2> Details </h2>
         <div id="details">
             <p> Bag ID</p>
-            <input type="text" placeholder="1067812" disabled>
+            <input type="text" placeholder="<%= id %>" disabled>
             <p> Merek</p>
-            <input type="text" placeholder="Dior" disabled>
+            <input type="text" placeholder="<%= merek %>" disabled>
             <p> Designer</p>
-            <input type="text" placeholder="Christian Dior" disabled>
+            <input type="text" placeholder="<%= designer %>" disabled>
             <p> Kategori</p>
-            <input type="text" placeholder="Handbag" disabled>
+            <input type="text" placeholder="<%= kategori %>" disabled>
             <p> Sub-Kategori</p>
-            <input type="text" placeholder="Clutch" disabled>
+            <input type="text" placeholder="<%= subkat %>" disabled>
             <p> Warna</p>
-            <input type="text" placeholder="Hitam" disabled>
+            <input type="text" placeholder="<%= warna %>" disabled>
             <p> Ukuran</p>
-            <input type="text" placeholder="20 x 17 x 18 cm" disabled>
+            <input type="text" placeholder="<%= panjang %>cm x <%= lebar %>cm x <%= tinggi %>cm" disabled>
         </div>
     </div>
 
