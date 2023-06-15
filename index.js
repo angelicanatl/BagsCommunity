@@ -48,7 +48,7 @@ app.use(session({
     // }
 }));
 
-app.get('/', (req, res) => {
+app.get(['/','/login'], (req, res) => {
     //logout
     if(req.session.username){
         req.session.destroy;
@@ -138,7 +138,16 @@ const addPengguna = (conn, data) => {
     })
 }
 
-app.get('/Dashboard', (req, res) => {
+//middleware
+const auth = (req, res, next) => {
+    if(!req.session.username){
+        res.redirect('login');
+    }else{
+        next();
+    }
+}
+
+app.get('/Dashboard', auth, (req, res) => {
     res.render('Dashboard', {
         username: sessions.username,
         nama: sessions.nama,
@@ -146,7 +155,7 @@ app.get('/Dashboard', (req, res) => {
     });
 });
 
-app.get('/about', (req, res) => {
+app.get('/about', auth, (req, res) => {
     res.render('about', {
         username: sessions.username,
         url: sessions.url
@@ -154,7 +163,7 @@ app.get('/about', (req, res) => {
 });
 
 //-----------------------------------------User Profile----------------------------------------------------
-app.get('/UserProfile', async (req, res) => {
+app.get('/UserProfile', auth, async (req, res) => {
     let usrfollowing, usrfollower, barreview, listsFollowing, listsFollower, listsReview;
     await following(conn, sessions.username).then((jmlhFollowing) => {
         usrfollowing = jmlhFollowing;
@@ -309,7 +318,7 @@ app.post('/ngefollow', async (req, res) => {
 
 let username;
 
-app.get('/anotherUser/:username', async (req, res) => {
+app.get('/anotherUser/:username', auth, async (req, res) => {
     username =  req.params.username;
     if (username == sessions.username){
         res.redirect('/UserProfile');
@@ -362,7 +371,7 @@ const cariPengguna = (conn, username) => {
     })
 }
 
-app.get('/userProfileSettings', (req, res) => {
+app.get('/userProfileSettings', auth, (req, res) => {
     cariPengguna(conn, sessions.username).then((result) => {
         res.render('userProfileSettings', {
             nama: result[0].nama_lengkap,
@@ -405,7 +414,7 @@ app.post('/userProfileSettings', (req, res) => {
 
 //-----------------------Admin-----------------------------------------------------------
 
-app.get('/AdminProfile', (req, res) => {
+app.get('/AdminProfile', auth, (req, res) => {
     res.render('AdminProfile', {
         username: sessions.username,
         nama: sessions.nama,
@@ -446,7 +455,7 @@ app.post('/tambahkategori', (req, res) => {
     }
 });
 
-app.get('/addCategory', (req, res) => {
+app.get('/addCategory', auth, (req, res) => {
     kategori(conn).then((result) => {
         res.render('addCategory', {
             username: sessions.username,
@@ -495,7 +504,7 @@ const SubKategori = (conn, idKategori) => {
 
 let idKategori = '';
 let kat = '';
-app.get('/addSubCategory/:idKategori', (req, res) => {
+app.get('/addSubCategory/:idKategori', auth, (req, res) => {
     idKategori = req.params.idKategori; // dapatkan id kategori
     SubKategori(conn, idKategori).then((result) => {
         cariKat(conn, idKategori).then((namaKat) => {
@@ -669,7 +678,7 @@ const addBagManual = (conn, panjang, lebar, tinggi, warna, foto, idmerek, iddesi
     })
 }
 
-app.get('/addBagItem', (req, res) => {
+app.get('/addBagItem', auth, (req, res) => {
     res.render('addBagItem', {
         username: sessions.username,
         url: sessions.url
@@ -696,7 +705,7 @@ app.get("/getSubkat", (req, res) => {
         });
     });
 });
-app.get('/uploadManual', (req, res) => {
+app.get('/uploadManual', auth, (req, res) => {
     data_merek(conn).then((result) => {
         _merek = result;
     })
@@ -772,7 +781,7 @@ app.post('/uploadManual', upload.single('image'), async (req,res) => {
 
 
 //upload pake csv
-app.get('/uploadFile', (req, res) => {
+app.get('/uploadFile', auth, (req, res) => {
     set_id(conn).then((result) => {
         _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
         result+=1;
@@ -813,6 +822,7 @@ app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
         for (let i of result) {
             let foto = `./images/${_id}/${i[4]}`;
             addBagManual(conn, i[0], i[1], i[2], i[3], foto, i[5], i[6], i[7]);
+            _id+=1;
       }
       res.render('addBagItem', {
         username: sessions.username,
@@ -823,7 +833,7 @@ app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
 //------------------------------------Review Setting----------------------------------------------
 
 
-app.get('/reviewSettings', (req, res) => {
+app.get('/reviewSettings', auth, (req, res) => {
     res.render('reviewSettings', {
         username: sessions.username,
         url: sessions.url
@@ -832,7 +842,7 @@ app.get('/reviewSettings', (req, res) => {
 
 //-------------------------laporan sitatistika tas----------------------------------------------
 
-app.get('/statistikTas', (req, res) => {
+app.get('/statistikTas', auth, (req, res) => {
     res.render('statistikTas', {
         username: sessions.username,
         url: sessions.url,
@@ -840,9 +850,46 @@ app.get('/statistikTas', (req, res) => {
     });
 });
 
-const per_kat = (conn, data) => {
+//laporan statistik per kategori
+const per_kat = (conn, fromDate, toDate) => {
     return new Promise((resolve, reject) => {
-        conn.query('SELECT kategori_id, COUNT(review_id) FROM statistics WHERE tanggal>=? AND tanggal<=? GROUP BY kategori_id', [data.from, data.to], (err, result) => {
+        conn.query('SELECT nama_kategori, COUNT(review_id) AS "byk", MIN(angka_review) AS "min", MAX(angka_review) AS "max", AVG(angka_review) AS "avg" FROM stat_kat WHERE tanggal>=? AND tanggal<=? GROUP BY nama_kategori', [fromDate, toDate], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+//laporan statistik per sub-kategori
+const per_subkat = (conn, fromDate, toDate) => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT nama_sub_kategori, COUNT(review_id) AS "byk", MIN(angka_review) AS "min", MAX(angka_review) AS "max", AVG(angka_review) AS "avg" FROM stat_subkat WHERE tanggal>=? AND tanggal<=? GROUP BY nama_sub_kategori', [fromDate, toDate], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+//laporan statistik per merek
+const per_merek = (conn, fromDate, toDate) => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT nama_merek, COUNT(review_id) AS "byk", MIN(angka_review) AS "min", MAX(angka_review) AS "max", AVG(angka_review) AS "avg" FROM stat_merek WHERE tanggal>=? AND tanggal<=? GROUP BY nama_merek', [fromDate, toDate], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+//laporan statistik per designer
+const per_designer = (conn, fromDate, toDate) => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT nama_designer, COUNT(review_id) AS "byk", MIN(angka_review) AS "min", MAX(angka_review) AS "max", AVG(angka_review) AS "avg" FROM stat_designer WHERE tanggal>=? AND tanggal<=? GROUP BY nama_designer', [fromDate, toDate], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -852,13 +899,60 @@ const per_kat = (conn, data) => {
     })
 }
 
-app.get('/showLaporan', (req, res) => {
-    const tabel = req.body;
-    per_kat()
-    console.log(tabel);
-    res.json(tabel);
+let tabel_kat, tabel_subkat, tabel_merek, tabel_designer;
+app.post('/getTabel', async (req, res) => {
+    let fromDate = req.body.from;
+    let toDate = req.body.to;
+    console.log(fromDate,"*");
+    console.log(toDate,"*");
+    await per_kat(conn, fromDate, toDate).then((result) => {
+        tabel_kat = [];
+        for(let i of result){
+            tabel_kat.push(Object.values(JSON.parse(JSON.stringify(i))));
+        }
+    })
+    await per_subkat(conn, fromDate, toDate).then((result) => {
+        tabel_subkat = [];
+        for(let i of result){
+            tabel_subkat.push(Object.values(JSON.parse(JSON.stringify(i))));
+        }
+    })
+    await per_merek(conn, fromDate, toDate).then((result) => {
+        tabel_merek = [];
+        for(let i of result){
+            tabel_merek.push(Object.values(JSON.parse(JSON.stringify(i))));
+        }
+    })
+    await per_designer(conn, fromDate, toDate).then((result) => {
+        tabel_designer = [];
+        for(let i of result){
+            tabel_designer.push(Object.values(JSON.parse(JSON.stringify(i))));
+        }
+    })
+    console.log("kat ", tabel_kat);
+    console.log("subkat ", tabel_subkat);
+    console.log("merek ", tabel_merek);
+    console.log("designer ", tabel_designer);
+    res.json("server accessed the table");
 });
- 
+
+app.post('/showTabel', (req, res) => {
+    let by = req.body.by;
+    console.log(by);
+    if(by=="Category"){
+        res.json(tabel_kat);
+    }else if(by=="Sub-Category"){
+        res.json(tabel_subkat);
+    }else if(by=="Merek"){
+        res.json(tabel_merek);
+    }else if(by=="Designer"){
+        res.json(tabel_designer);
+    }else{
+        res.status(400).send('Input tidak dikenal');
+        return;
+    }
+})
+
 //-------------------------- tas -------------------------------------------------------
 
 const get_pathFoto = (conn, _id) => {

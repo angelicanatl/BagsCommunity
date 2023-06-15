@@ -55,11 +55,14 @@ div#forInput div{
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
-
+    
     width: 350px;
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
+}
+div#forInput p{
+    align-self: center;
 }
 
 #forGraph {
@@ -67,7 +70,7 @@ div#forInput div{
     padding: 25px;
 }
 
-#forGraph button{
+#forGraph p{
     text-align: center;
 }
 
@@ -86,6 +89,7 @@ hr{
 }
 
 table, th, td {
+    text-align: center;
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -114,9 +118,12 @@ table{
 
 #forInput button{
     font-family: "nunito-bold";
-
+    
 }
 
 button{
     font-family: "nunito-medium";
+    border: none;
+    width: 350px;
+    text-align: left;
 }

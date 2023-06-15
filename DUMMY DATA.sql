@@ -252,3 +252,72 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Jo
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',8);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',9);
 
+-- --------------------------------------------------------
+
+--
+-- View structure for statistik tas
+--
+CREATE VIEW stat_kat AS
+SELECT 
+	write_review.tanggal, 
+	write_review.username, 
+	review.review_id, 
+	review.angka_review, 
+	review.teks_review, 
+	tas.tas_id, 
+	sub_kategori.kategori_id, 
+	kategori.nama_kategori
+FROM 
+	write_review
+JOIN review ON write_review.review_id=review.review_id
+JOIN tas ON review.tas_id=tas.tas_id 
+JOIN sub_kategori ON tas.sub_kategori_id=sub_kategori.sub_kategori_id
+JOIN kategori ON sub_kategori.kategori_id=kategori.kategori_id
+
+CREATE VIEW stat_subkat AS
+SELECT
+    write_review.tanggal,
+    write_review.username,
+    review.review_id,
+    review.angka_review,
+    review.teks_review,
+    tas.tas_id,
+    tas.sub_kategori_id,
+    sub_kategori.nama_sub_kategori
+FROM
+    write_review
+JOIN review ON write_review.review_id = review.review_id
+JOIN tas ON review.tas_id = tas.tas_id
+JOIN sub_kategori ON tas.sub_kategori_id = sub_kategori.sub_kategori_id
+
+CREATE VIEW stat_merek AS
+SELECT
+    write_review.tanggal,
+    write_review.username,
+    review.review_id,
+    review.angka_review,
+    review.teks_review,
+    tas.tas_id,
+    tas.merek_id,
+    merek.nama_merek
+FROM
+    write_review
+JOIN review ON write_review.review_id = review.review_id
+JOIN tas ON review.tas_id = tas.tas_id
+JOIN merek ON tas.merek_id = merek.merek_id
+
+CREATE VIEW stat_designer AS
+SELECT
+    write_review.tanggal,
+    write_review.username,
+    review.review_id,
+    review.angka_review,
+    review.teks_review,
+    tas.tas_id,
+    tas.designer_id,
+    designer.nama_designer
+FROM
+    write_review
+JOIN review ON write_review.review_id = review.review_id
+JOIN tas ON review.tas_id = tas.tas_id
+JOIN designer ON tas.designer_id = designer.designer_id
