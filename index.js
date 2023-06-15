@@ -929,16 +929,16 @@ app.post('/getTabel', async (req, res) => {
             tabel_designer.push(Object.values(JSON.parse(JSON.stringify(i))));
         }
     })
-    console.log("kat ", tabel_kat);
-    console.log("subkat ", tabel_subkat);
-    console.log("merek ", tabel_merek);
-    console.log("designer ", tabel_designer);
+    // console.log("kat ", tabel_kat);
+    // console.log("subkat ", tabel_subkat);
+    // console.log("merek ", tabel_merek);
+    // console.log("designer ", tabel_designer);
     res.json("server accessed the table");
 });
 
 app.post('/showTabel', (req, res) => {
     let by = req.body.by;
-    console.log(by);
+    // console.log(by);
     if(by=="Category"){
         res.json(tabel_kat);
     }else if(by=="Sub-Category"){
@@ -952,6 +952,8 @@ app.post('/showTabel', (req, res) => {
         return;
     }
 })
+
+
 
 //-------------------------- tas -------------------------------------------------------
 

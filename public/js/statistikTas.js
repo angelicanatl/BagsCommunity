@@ -61,15 +61,12 @@ by.forEach(e => {
             return response.json();
         };
         function showResult(result){
-            console.log(tab);
-            console.log(result);
             while(tab.childElementCount>1){
                 tab.removeChild(tab.lastChild);
             }
             for(let prop of result){
                 const newLine = document.createElement("tr");
                 for(let count = 0; count<5; count++){
-                    console.log(prop[count]);
                     const newCol = document.createElement("td");
                     newCol.textContent = prop[count];
                     newLine.appendChild(newCol);
