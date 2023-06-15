@@ -55,6 +55,7 @@ fetch('/ngefollow')
                     a.textContent = usernamesaya;
                     a.href = `/anotherUser/${usernamesaya}`;
                     a.name = usernamesaya;
+                    container.appendChild(clonedDiv);
                 };
             });
             folowing.addEventListener('mouseover', ()=>{
