@@ -1,5 +1,6 @@
 const kat = document.querySelector("select[name='kategori']");
 const subkat = document.querySelector("select[name='subkat']");
+
 kat.addEventListener('input', function(){
   const get_kat = kat.value;
   const data = {

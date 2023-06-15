@@ -760,7 +760,7 @@ app.post('/uploadManual', upload.single('image'), async (req,res) => {
     await get_idsubkat(conn,subkat).then((result) => {
         idsubkat = (JSON.parse(JSON.stringify(result))[0].sub_kategori_id);
     })
-    const bukti = `./public/images/${id}/${file}`;
+    const bukti = `./images/${id}/${file}`;
     // console.log(bukti);
     await addBagManual(conn, panjang, lebar, tinggi, warna, bukti, idmerek, iddesigner, idsubkat).then((result) => {
         res.render('addBagItem', {
@@ -811,7 +811,7 @@ app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
         .on('data', (data) => result.push(data))
         .on('end', async () => {
         for (let i of result) {
-            let foto = `./public/images/${_id}/${i[4]}`;
+            let foto = `./images/${_id}/${i[4]}`;
             addBagManual(conn, i[0], i[1], i[2], i[3], foto, i[5], i[6], i[7]);
       }
       res.render('addBagItem', {
@@ -1078,9 +1078,33 @@ app.get('/addReview', (req, res) => {
     });
 });
 
-const addReviews = (conn, data) => {
+const addReviews = (conn, angkaReview, teksReview) => {
     return new Promise((resolve, reject) => {
-        conn.query("INSERT INTO review VALUES (?,?,?)", [data.nilai, data.review, _id], (err, result) => {
+        conn.query("INSERT INTO review (angka_review, teks_review, tas_id) VALUES (?,?,?)", [angkaReview, teksReview, _id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const get_review_id_max = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT max(review_id) from review", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+};
+
+const addWriteReview = (conn, usern, review_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("INSERT INTO write_review (tanggal, username, review_id) VALUES (curdate(),?,?)", [ usern, review_id], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -1093,21 +1117,26 @@ const addReviews = (conn, data) => {
 app.post('/addReview', async (req, res) => {
     const data = req.body;
     _id = 1; //ini cara tau id tas yg mau di add gimana yak?
-    console.log(data);
 
+    let angkaReview = data.nilai; 
+    let teksReview = data.review;
 
-    //ambil angka review dari apa yang diselect di radiobutton
-    //ambil textarea
+    if (!req.body.nilai) {
+        res.status(400).send('Anda belum menginput angka review.');
+        return;
+      }
+    
+    await addReviews(conn, angkaReview, teksReview).then((result) => {
+        // console.log(result);
+    })
 
-    // await addReviews(conn, data).then((result) => {
-    //      (JSON.parse(JSON.stringify(result))[0])
-    // })
-
-//     BUAT TANGGAL
-//     let day = date.getDate();
-// let month = date.getMonth() + 1;
-// let year = date.getFullYear();
-
-    //ambil review id yang barusan
-    //masukin ke db yang write review 
+    let review_id;
+    await get_review_id_max(conn).then((result) => {
+        review_id = result[0]['max(review_id)'];
+    })
+    
+    let usern = sessions.username;
+    await addWriteReview(conn, usern, review_id).then((result) => {
+        res.redirect('bag')
+    })
 });
