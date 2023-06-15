@@ -6,14 +6,6 @@
 --
 -- Table structure for table `pengguna`
 --
--- DROP TABLE follow;
---  DROP TABLE pengguna;
---  DROP TABLE merek;
---  DROP TABLE designer;
--- DROP TABLE sub_kategori;
---  DROP TABLE kategori;
--- DROP TABLE write_review;
---  DROP TABLE review;
 
 CREATE TABLE pengguna
 ( 	nama_lengkap VARCHAR(50) NOT NULL,
@@ -91,12 +83,13 @@ CREATE TABLE merek
 -- Dumping data for table `merek`
 --
 INSERT INTO merek (nama_merek) VALUES('Dior');
-INSERT INTO merek (nama_merek) VALUES('Coach');
-INSERT INTO merek (nama_merek) VALUES('Kate Spade');
+INSERT INTO merek (nama_merek) VALUES('Chanel');
+INSERT INTO merek (nama_merek) VALUES('Fjallraven Kanken');
+INSERT INTO merek (nama_merek) VALUES('Balenciaga');
 INSERT INTO merek (nama_merek) VALUES('Tumi');
-INSERT INTO merek (nama_merek) VALUES('Eiger');
+INSERT INTO merek (nama_merek) VALUES('Coach');
 INSERT INTO merek (nama_merek) VALUES('Herschel');
-
+INSERT INTO merek (nama_merek) VALUES('Lojel');
 -- --------------------------------------------------------
 
 --
@@ -110,8 +103,14 @@ CREATE TABLE designer
 --
 -- Dumping data for table `designer`
 --
-INSERT INTO designer (nama_designer) VALUES('Christian Dior');
-
+INSERT INTO designer (nama_designer) VALUES('Christian Dior'); -- dior
+INSERT INTO designer (nama_designer) VALUES('Karl Lagerfeld'); -- chanel 
+INSERT INTO designer (nama_designer) VALUES('Åke Nordin'); -- kanken 
+INSERT INTO designer (nama_designer) VALUES('Demna Gvasalia'); -- balenciaga 
+INSERT INTO designer (nama_designer) VALUES('Victor Sanz'); -- tumi
+INSERT INTO designer (nama_designer) VALUES('Stuart Vevers'); -- coach
+INSERT INTO designer (nama_designer) VALUES('Jamie Cormack'); -- herschel
+INSERT INTO designer (nama_designer) VALUES('Chih Chang Chiang'); -- lojel
 -- --------------------------------------------------------
 
 --
@@ -147,14 +146,14 @@ CREATE TABLE sub_kategori
 -- Dumping data for table `sub_kategori`
 --
 
-INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('School Backpack',1);
-INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Crossbody Backpack',1);
-INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Mini backpack',1);
-INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Cabin size',2);
-INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Medium size',2);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('School Backpack',1); 
+INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Crossbody Backpack',1); 
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Mini backpack',1); 
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Cabin size',2); 
+INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Medium size',2); 
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Large size',2);
-INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 3);
-INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Bucket', 3);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 3);  
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Bucket', 3); 
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Envelope', 3);
 -- --------------------------------------------------------
 
@@ -185,9 +184,23 @@ CREATE TABLE tas
 --
 
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, './public/images/1/ladydior.png', 'hitam', 1, 1, 7
-);
-
+	20, 17, 8, './images/1/ladydior.png', 'hitam', 1, 1, 7);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	25, 15, 6, './images/2/chaneldoubleflap.png', 'hitam', 2, 2, 7);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	29, 20, 13, './images/3/fjallraven.png', 'biru', 3, 3, 3);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	9, 14, 7, './images/4/crossbodybalenciaga.png', 'hitam', 4, 4, 2);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	56, 45, 25, './images/5/tumiluggage.png', 'pink', 5, 5, 4);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	60, 50, 30, './images/6/tumimedium.png', 'merah', 5, 5, 5);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	22, 11, 23, './images/7/coachbucket.png', 'hitam', 6, 6, 8);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	48, 27, 17, './images/8/herschelschool.png', 'hitam', 7, 7, 1);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	77, 55, 35, './images/9/lojellarge.png', 'kuning', 8, 8, 6);
 -- --------------------------------------------------------
 
 --
@@ -208,24 +221,56 @@ CREATE TABLE review
 --
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Bagus bgt tasnya recommended pokoknya', 1);
+	5, 'Bagus bgt tasnya recommended pokoknya!!!!', 1);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Bagus bgt mo meninggal', 1);
+	4, 'Lumayan sih tapi cukup mahal', 1);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Y', 1);
+	3, 'Ga dulu deh', 1);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'cuaks', 1);
+	4, 'Worth to buy', 1);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'anzai', 1);
-INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'gatau mau nulis apa jujur', 1);
-INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Kata angel sih bagus', 1);
-INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Mehong', 1);
-INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'recommended', 1);
+	5, 'Classic item', 1);
 
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Very recommended', 2);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Mahalll tapi kualitas oke banget', 2);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	4, 'Banyak barang kwnya, masa jadi dikira barang kw??? :(', 2);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	4, 'Kulitnya cepat rusak', 2);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Classic chanel bangett', 2);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Bagusssssssssssssss', 3);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	4, 'Warnanya cantik', 3);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Kecil tapi muat banyak', 3);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Ok', 4);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	4, '-', 4);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Mantap', 4);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Y', 4);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Saya suka pink!!! <3', 5);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Merahnya bagus', 6);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	3, 'Cepet kotor', 8);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	2, 'Ribet buka tasnya.', 8);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	5, 'Kuning. keren', 9);
 -- --------------------------------------------------------
 
 --
@@ -245,79 +290,101 @@ CREATE TABLE write_review
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',1);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-03', 'Angel',2);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-02-03', 'keth',3);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',4);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',5);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',6);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',7);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',8);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'Joan',9);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-03', 'reineaura_',4);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-09', 'clarissa.nadia',5);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-12', 'Naomixue',6);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-06-06', 'Joan',7);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-09', 'keth',8);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-18', 'Diyanss',9);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-10', 'Angel',10);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-13', 'Angel',11);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-18', 'Joan',12);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-11', 'dree_andrea',13);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-21', 'vincentmarkk',14);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-23', 'Miros',15);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-26', 'thur',16);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-28', 'Vicsprat',17);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-06-01', 'Joan',18);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-09', 'KC',19);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-30', 'thur',20);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-25', 'Galyndeo',21);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Galyndeo',22);
 
 -- --------------------------------------------------------
 
 --
 -- View structure for statistik tas
 --
-CREATE VIEW stat_kat AS
-SELECT 
-	write_review.tanggal, 
-	write_review.username, 
-	review.review_id, 
-	review.angka_review, 
-	review.teks_review, 
-	tas.tas_id, 
-	sub_kategori.kategori_id, 
-	kategori.nama_kategori
-FROM 
-	write_review
-JOIN review ON write_review.review_id=review.review_id
-JOIN tas ON review.tas_id=tas.tas_id 
-JOIN sub_kategori ON tas.sub_kategori_id=sub_kategori.sub_kategori_id
-JOIN kategori ON sub_kategori.kategori_id=kategori.kategori_id
 
-CREATE VIEW stat_subkat AS
-SELECT
-    write_review.tanggal,
-    write_review.username,
-    review.review_id,
-    review.angka_review,
-    review.teks_review,
-    tas.tas_id,
-    tas.sub_kategori_id,
-    sub_kategori.nama_sub_kategori
-FROM
-    write_review
-JOIN review ON write_review.review_id = review.review_id
-JOIN tas ON review.tas_id = tas.tas_id
-JOIN sub_kategori ON tas.sub_kategori_id = sub_kategori.sub_kategori_id
 
-CREATE VIEW stat_merek AS
-SELECT
-    write_review.tanggal,
-    write_review.username,
-    review.review_id,
-    review.angka_review,
-    review.teks_review,
-    tas.tas_id,
-    tas.merek_id,
-    merek.nama_merek
-FROM
-    write_review
-JOIN review ON write_review.review_id = review.review_id
-JOIN tas ON review.tas_id = tas.tas_id
-JOIN merek ON tas.merek_id = merek.merek_id
+-- CREATE VIEW stat_kat 
+-- SELECT 
+-- 	write_review.tanggal, 
+-- 	write_review.username, 
+-- 	review.review_id, 
+-- 	review.angka_review, 
+-- 	review.teks_review, 
+-- 	tas.tas_id, 
+-- 	sub_kategori.kategori_id, 
+-- 	kategori.nama_kategori
+-- FROM 
+-- 	write_review
+-- JOIN review ON write_review.review_id=review.review_id
+-- JOIN tas ON review.tas_id=tas.tas_id 
+-- JOIN sub_kategori ON tas.sub_kategori_id=sub_kategori.sub_kategori_id
+-- JOIN kategori ON sub_kategori.kategori_id=kategori.kategori_id
 
-CREATE VIEW stat_designer AS
-SELECT
-    write_review.tanggal,
-    write_review.username,
-    review.review_id,
-    review.angka_review,
-    review.teks_review,
-    tas.tas_id,
-    tas.designer_id,
-    designer.nama_designer
-FROM
-    write_review
-JOIN review ON write_review.review_id = review.review_id
-JOIN tas ON review.tas_id = tas.tas_id
-JOIN designer ON tas.designer_id = designer.designer_id
+-- CREATE VIEW stat_subkat 
+-- SELECT
+--     write_review.tanggal,
+--     write_review.username,
+--     review.review_id,
+--     review.angka_review,
+--     review.teks_review,
+--     tas.tas_id,
+--     tas.sub_kategori_id,
+--     sub_kategori.nama_sub_kategori
+-- FROM
+--     write_review
+-- JOIN review ON write_review.review_id = review.review_id
+-- JOIN tas ON review.tas_id = tas.tas_id
+-- JOIN sub_kategori ON tas.sub_kategori_id = sub_kategori.sub_kategori_id
+
+-- CREATE VIEW stat_merek 
+-- SELECT
+--     write_review.tanggal,
+--     write_review.username,
+--     review.review_id,
+--     review.angka_review,
+--     review.teks_review,
+--     tas.tas_id,
+--     tas.merek_id,
+--     merek.nama_merek
+-- FROM
+--     write_review
+-- JOIN review ON write_review.review_id = review.review_id
+-- JOIN tas ON review.tas_id = tas.tas_id
+-- JOIN merek ON tas.merek_id = merek.merek_id
+
+-- CREATE VIEW stat_designer 
+-- SELECT
+--     write_review.tanggal,
+--     write_review.username,
+--     review.review_id,
+--     review.angka_review,
+--     review.teks_review,
+--     tas.tas_id,
+--     tas.designer_id,
+--     designer.nama_designer
+-- FROM
+--     write_review
+-- JOIN review ON write_review.review_id = review.review_id
+-- JOIN tas ON review.tas_id = tas.tas_id
+-- JOIN designer ON tas.designer_id = designer.designer_id
