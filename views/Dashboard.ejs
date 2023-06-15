@@ -9,6 +9,7 @@
 </head>
 <body>
     <%- include('header') %>
+
     <section>
         <div id="grafikTopTen">
             <h1> DASHBOARD </h1>
@@ -19,69 +20,40 @@
             </div>
             
         </div>
+
         <div id="topreviews">
             <h1> TOP REVIEWS</h1>
+            <div id="r">
             <section id="Bags">
-                <div class ="bag">
-                        <div class="left">
-                            <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                            <p class="Merek"> Dior</p>
-                        </div>
+                        <% for(let i=0; i<10; i++){ %>
+                    <div class="bag">
+			            <div class="left">
+                            <img src="<%= lsReview[i].foto %>" class="fotoTas">
+                            <p class="Merek"><%= lsReview[i].nama_merek %></p>
+                            <p class="subkat"><%= lsReview[i].subkat %></p>
+                    	</div>
                         <div class="right">
                             <div class="prof">
                                 <img src="../assets/profile.png" class="fotoProf">
-                                <p class="profile"> Angelica Natalie </p>
+                                <p class="profile"><%= lsReview[i].username %></p>
+                                <% const date = new Date(lsReview[i].tanggal); %>
+                                <% const year = date.getFullYear(); %>
+                                <% const month = date.getMonth() + 1; %>
+                                <% const day = date.getDate(); %>
+                                <% const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`; %>
+                                <p class="time"><%= formattedDate %></p>
                             </div>
-                            
                             <div class="bintangs">
+                                <% for(let j=0; j<Number(lsReview[i].angka_review); j++){ %>
                                 <img src="../assets/gambar/bintang.png" class="bintang">
-                                <img src="../assets/gambar/bintang.png" class="bintang">
-                                <img src="../assets/gambar/bintang.png" class="bintang">
+                                <% } %>
                             </div>
-                            <p class="reviewUser"> Lorem ipsum dolor sit amet, consec tetur adipiscing elit.</p>
-                        </div>
-                </div>
-
-                <div class ="bag">
-                    <div class="left">
-                        <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                        <p class="Merek"> Dior</p>
-                    </div>
-                    <div class="right">
-                        <div class="prof">
-                            <img src="../assets/profile.png" class="fotoProf">
-                            <p class="profile"> Ketherine Natalie </p>
-                        </div>
-                        <div class="bintangs">
-                            <img src="../assets/gambar/bintang.png" class="bintang">
-                            <img src="../assets/gambar/bintang.png" class="bintang">
-                            <img src="../assets/gambar/bintang.png" class="bintang">
-                        </div>
-                        <p class="reviewUser"> Lorem ipsum dolor sit amet, consec tetur adipiscing elit.</p>
+                            <p class="reviewUser"><%= lsReview[i].teks_review %></p>
                     </div>
                 </div>
-
-                <div class ="bag">
-                    <div class="left">
-                        <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                        <p class="Merek"> Dior</p>
-                    </div>
-                    <div class="right">
-                        <div class="prof">
-                            <img src="../assets/profile.png" class="fotoProf">
-                            <p class="profile"> Joan Natalie </p>
-                        </div>
-                        
-                        <div class="bintangs">
-                            <img src="../assets/gambar/bintang.png" class="bintang">
-                            <img src="../assets/gambar/bintang.png" class="bintang">
-                            <img src="../assets/gambar/bintang.png" class="bintang">
-                            <img src="../assets/gambar/bintang.png" class="bintang">
-                        </div>
-                        <p class="reviewUser"> Lorem ipsum dolor sit amet, consec tetur adipiscing elit.</p>
-                    </div>
-                </div>
+                <% } %>
             </section>
+            </div>
         </div>
     </section>
     <%- include('footer') %>

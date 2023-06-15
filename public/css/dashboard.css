@@ -21,11 +21,12 @@ section{
 }
 
 #grafikTopTen{
-    padding: 0 60px;
+    padding: 30px 60px;
 }
 
 #topreviews{
     padding-right: 60px;
+    padding-top: 30px;
 }
 
 #graphs{
@@ -45,7 +46,6 @@ section{
     color: #a48df0;
     margin: 10px;
 }
-
 
 #Bags{
     display: grid;
@@ -85,7 +85,7 @@ section{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 20px;
+    padding: 20px 20px 0 0;
 }
 
 .prof{
@@ -96,17 +96,19 @@ section{
 }
 
 .fotoTas{
-    width: 75px;
-    height: 75px;
+    width: 80px;
+    height: 80px;
 }
 
 .fotoProf{
     width: 30px;
     height: 30px;
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 
 .profile{
-    font-size: 14px;
+    font-size: 18px;
 }
 .bintangs{
     display: flex;
@@ -120,3 +122,23 @@ section{
     text-align: left;
     font-size: 12px;
 } 
+
+.time {
+    color: gray;
+    font-size: x-small;
+    grid-column: span 2;
+}
+
+.Merek{
+    font-weight: bold;
+    text-align: center;
+}
+
+.subkat{
+    font-size: x-small;
+    text-align: center;
+}
+
+p.reviewUser{
+    font-size: 15px;
+}

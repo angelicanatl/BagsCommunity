@@ -147,20 +147,39 @@ const auth = (req, res, next) => {
     }
 }
 
-app.get('/Dashboard', auth, (req, res) => {
-    res.render('Dashboard', {
-        username: sessions.username,
-        nama: sessions.nama,
-        url: sessions.url
-    });
-});
-
 app.get('/about', auth, (req, res) => {
     res.render('about', {
         username: sessions.username,
         url: sessions.url
     });
 });
+
+//-----------------------------------------------------Dashboard--------------------------------------------------------------
+const listReviewTasTop10  = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT `write_review`.`username`, sub_kategori.nama_sub_kategori as subkat, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` ORDER BY tanggal DESC LIMIT 10", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                console.log(result);
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.get('/Dashboard', auth, async (req, res) => {
+    await listReviewTasTop10(conn, _id).then((result) => { 
+        res.render('Dashboard', {
+        username: sessions.username,
+        nama: sessions.nama,
+        url: sessions.url,
+        lsReview: result
+    })
+    });
+});
+
+
 
 //-----------------------------------------User Profile----------------------------------------------------
 app.get('/UserProfile', auth, async (req, res) => {
@@ -929,16 +948,16 @@ app.post('/getTabel', async (req, res) => {
             tabel_designer.push(Object.values(JSON.parse(JSON.stringify(i))));
         }
     })
-    // console.log("kat ", tabel_kat);
-    // console.log("subkat ", tabel_subkat);
-    // console.log("merek ", tabel_merek);
-    // console.log("designer ", tabel_designer);
+    console.log("kat ", tabel_kat);
+    console.log("subkat ", tabel_subkat);
+    console.log("merek ", tabel_merek);
+    console.log("designer ", tabel_designer);
     res.json("server accessed the table");
 });
 
 app.post('/showTabel', (req, res) => {
     let by = req.body.by;
-    // console.log(by);
+    console.log(by);
     if(by=="Category"){
         res.json(tabel_kat);
     }else if(by=="Sub-Category"){
@@ -952,8 +971,6 @@ app.post('/showTabel', (req, res) => {
         return;
     }
 })
-
-
 
 //-------------------------- tas -------------------------------------------------------
 
@@ -1067,7 +1084,7 @@ const get_tinggi = (conn, _id) => {
 
 const listReviewTas  = (conn, _id) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE tas.tas_id=?", [_id], (err, result) => {
+        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE tas.tas_id=? ORDER BY tanggal DESC", [_id], (err, result) => {
             if(err){
                 reject(err);
             } else{
