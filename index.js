@@ -174,7 +174,6 @@ app.get('/UserProfile', async (req, res) => {
     await listReview(conn, sessions.username).then((lsReview) => {
         listsReview = lsReview;
     });
-    console.log(listsReview)
     res.render('UserProfile', {
         following: usrfollowing[0].jumlahFollowing,
         followers: usrfollower[0].jumlahFollower,
@@ -259,42 +258,95 @@ const listFollower = (conn, username) => {
     })
 }
 
-
 // -----------------------------------Another User--------------------------------------------------------
+const follow = (conn, username1, username2) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(username1) as teman FROM follow WHERE username1=? AND username2=?", [username1, username2], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
 
-app.get("/anotherUser", async (req, res) => {
-    const { user } = req.query;
-    let usrfollowing, usrfollower, barreview, listsFollowing, listsFollower, listsReview;
-    await following(conn, user).then((jmlhFollowing) => {
-        usrfollowing = jmlhFollowing;
+const addFollow = (conn, username1, username2) => {
+    return new Promise((resolve, reject) => {
+        conn.query("INSERT INTO follow (username1, username2) VALUE (?,?)", [username1, username2], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.get('/ngefollow', async (req, res) => {
+    let follow2an = 0;
+    await follow(conn, sessions.username, username).then((follow) => {
+        follow2an = follow[0].teman;
     });
-    await follower(conn, user).then((jmlhFollower) => {
-        usrfollower = jmlhFollower;
+    const data = {
+        follow: follow2an
+    }
+    res.send(data);
+});
+
+app.post('/ngefollow', async (req, res) => {
+    await addFollow(conn, sessions.username, username).then((follow) => {
     });
-    await review(conn, user).then((jmlhReview) => {
-        barreview = jmlhReview;
+    await follower(conn, username).then((jmlhFollower) => {
+        const data = {
+            angkaFollower: jmlhFollower,
+            usernamesaya: sessions.username
+        }
+        res.json(data);
     });
-    await listFollowing(conn, user).then((lsFollowing) => {
-        listsFollowing = lsFollowing;
-    });
-    await listFollower(conn, user).then((lsFollower) => {
-        listsFollower = lsFollower;
-    });
-    await listReview(conn, user).then((lsReview) => {
-        listsReview = lsReview;
-    });
-    console.log(listsReview)
-    res.render('anotherUser', {
-        following: usrfollowing[0].jumlahFollowing,
-        followers: usrfollower[0].jumlahFollower,
-        review: barreview[0].jumlahReview,
-        lsFollowing: listsFollowing,
-        lsFollower: listsFollower,
-        lsReview: listsReview,
-        username: sessions.username,
-        url: sessions.url
-    });
-})
+});
+
+
+let username;
+
+app.get('/anotherUser/:username', async (req, res) => {
+    username =  req.params.username;
+    if (username == sessions.username){
+        res.redirect('/UserProfile');
+    } else {
+        let usrfollowing, usrfollower, barreview, listsFollowing, listsFollower, listsReview;
+        
+        await following(conn, username).then((jmlhFollowing) => {
+            usrfollowing = jmlhFollowing;
+        });
+        await follower(conn, username).then((jmlhFollower) => {
+            usrfollower = jmlhFollower;
+        });
+        await review(conn, username).then((jmlhReview) => {
+            barreview = jmlhReview;
+        });
+        await listFollowing(conn, username).then((lsFollowing) => {
+            listsFollowing = lsFollowing;
+        });
+        await listFollower(conn, username).then((lsFollower) => {
+            listsFollower = lsFollower;
+        });
+        await listReview(conn, username).then((lsReview) => {
+            listsReview = lsReview;
+        });
+        res.render('anotherUser', {
+            following: usrfollowing[0].jumlahFollowing,
+            followers: usrfollower[0].jumlahFollower,
+            review: barreview[0].jumlahReview,
+            lsFollowing: listsFollowing,
+            lsFollower: listsFollower,
+            lsReview: listsReview,
+            username: sessions.username,
+            usernameAnother: username,
+            url: sessions.url
+        });
+    }
+});
 
 
 // -----------------------------------User settings--------------------------------------------------------

@@ -63,18 +63,3 @@ kananFollowing.addEventListener('click', ()=>{
     barFollowing.style.display = 'block';
 });
 
-// friend
-
-const friend = document.querySelectorAll("div[class='foll']")
-friend.forEach(div => {
-    div.addEventListener('click', () => {
-        const name = div.getAttribute('name');
-        const data = {
-            user: name
-        };
-        const params = new URLSearchParams(data);
-        const u = params.toString();
-        const url = "/anotherUser?" + u;
-        fetch(url);
-    });
-});

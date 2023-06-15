@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= username %>'s Profile - Bag's Community</title>
     <link rel="stylesheet" href="../css/userProfile.css">
-    <script src="/js/follow.js" defer></script>
+    <script src="/js/userProfile.js" defer></script>
 </head>
 <body>
     <%- include('header') %>
@@ -74,9 +74,9 @@
             <div id="Follows">
                 <section>
                     <% for (let i=0; i<lsFollower.length; i++){ %>
-                    <div class="foll" name="<%= lsFollower[i].username1 %>">
+                    <div class="foll" >
                         <img src="../assets/profile.png" width="50px" height="50px">
-                        <p name="<%= lsFollower[i].username1 %>"><%= lsFollower[i].username1 %></p>
+                        <a href="/anotherUser/<%= lsFollower[i].username1 %>" name="<%= lsFollower[i].username1 %>"><%= lsFollower[i].username1 %></a>
                     </div>
                     <% } %>
                 </section>
@@ -86,7 +86,7 @@
                     <% for (let i=0; i<lsFollowing.length; i++){ %>
                     <div class="foll">
                         <img src="../assets/profile.png" width="50px" height="50px">
-                        <p name="<%= lsFollowing[i].username2 %>"><%= lsFollowing[i].username2 %></p>
+                        <a href="/anotherUser/<%= lsFollowing[i].username2 %>" name="<%= lsFollowing[i].username2 %>"><%= lsFollowing[i].username2 %></a>
                     </div>
                     <% } %>
                 </section>

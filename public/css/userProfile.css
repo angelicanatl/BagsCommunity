@@ -62,6 +62,27 @@ img{
     justify-content: center;
     align-items: center;
 }
+#followingUser{
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    background-color: #E6E8FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#followedUser{
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    background-color: #B29DF8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #Follow{
     height: 40px;
@@ -175,8 +196,8 @@ hr{
 
 #Reviews h1{
     color: lightgray;
-
 }
+
 @font-face {
     font-family: "nunito-medium";
     src: url(../assets/nunito/Nunito-Medium.ttf);
@@ -223,7 +244,6 @@ hr{
     width: 90px;
     height: 90px;
 }
-
 .fotoProf{
     width: 35px;
     height: 35px;
@@ -241,7 +261,6 @@ hr{
     width: 20px;
     height: 20px;
 }
-
 .reviewUser{
     text-align: left;
     font-size: 12px;

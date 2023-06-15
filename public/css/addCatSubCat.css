@@ -86,10 +86,12 @@ main{
     color: red;
     display: none;
     margin: 0 120px;
+    font-size: smaller;
 }
 
 #alert1{
     color: red;
     display: none;
     margin: 0 120px;
+    font-size: smaller;
 }
