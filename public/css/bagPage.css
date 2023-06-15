@@ -75,34 +75,6 @@ section{
     height: 350px;
 }
 
-/* #belakang{
-    grid-column: 1 ;
-    grid-row: 5;
-    width: 100px;
-    width: 100px;
-}
-
-#kanan{
-    grid-column: 2 ;
-    grid-row: 5;
-    width: 100px;
-    width: 100px;
-}
-
-#kiri{
-    grid-column: 3 ;
-    grid-row: 5;
-    width: 100px;
-    width: 100px;
-}
-
-#dalam{
-    grid-column: 4 ;
-    grid-row: 5;
-    width: 100px;
-    width: 100px;
-} */
-
 #details{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -126,10 +98,12 @@ section{
     margin: 10px;
 }
 
-input[type="button"]{
+button{
     margin-left: auto;
     background-color: #cfd3f1;
     border: 0;
+    width: 100px;
+    height: 30px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
 }
@@ -203,7 +177,17 @@ input[type="text"]{
     height: 25px;
 }
 
+.bintangs{
+    display: flex;
+    gap: 5px;
+}
+
 .reviewUser{
     text-align: left;
     font-size: 14px;
 } 
+
+.time{
+    color: gray;
+    font-size: x-small;
+}

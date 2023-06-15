@@ -917,8 +917,45 @@ const get_tinggi = (conn, _id) => {
     })
 }
 
+const listReviewTas  = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE tas.tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const rataReview = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT round(avg(angka_review)) FROM review WHERE tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const cekReview = (conn, _id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(review_id) FROM review WHERE tas_id=?", [_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 app.get('/bag', async (req, res) => {
     let _id; let foto_path; let namaMerek; let namaDesigner; let ket_sub_kat; let ket_kat; let warnaTas; let panjangTas; let lebarTas; let tinggiTas;
+    let jumlahR; let lsReview; ;let rataR;
     await set_id(conn).then((result) => {
         _id = (JSON.parse(JSON.stringify(result))[0].maks); //buat testing aja! jadi pake id 1
     })
@@ -949,19 +986,76 @@ app.get('/bag', async (req, res) => {
     await get_tinggi(conn, _id).then((result) => {
         tinggiTas = (JSON.parse(JSON.stringify(result))[0])
     })
-    
-    res.render('bag', {
+   
+    await cekReview(conn, _id).then((result) => {
+        jumlahR = result[0]['COUNT(review_id)'];
+    })
+
+    await rataReview(conn, _id).then((result) => {
+        rataR = result[0]['round(avg(angka_review))'];
+    })
+
+    await listReviewTas(conn, _id).then((result) => { 
+        res.render('bag', {
+            ///async: true,
+            username: sessions.username,
+            url: sessions.url,
+            id: _id,
+            path: foto_path.foto, 
+            merek: namaMerek.nama_merek,
+            designer: namaDesigner.nama_designer,
+            kategori: ket_kat.nama_kategori,
+            subkat: ket_sub_kat.nama_sub_kategori,
+            warna: warnaTas.warna_utama,
+            panjang: panjangTas.panjang,
+            lebar : lebarTas.lebar,
+            tinggi : tinggiTas.tinggi,
+            rataReview : rataR,
+            review: jumlahR,
+            lsReview: result
+        });
+    })
+})
+
+//---------------------add review-----------------------------------------------
+
+app.get('/addReview', (req, res) => {
+    res.render('addReview', {
         username: sessions.username,
-        url: sessions.url,
-        id: _id,
-        path: foto_path.foto, 
-        merek: namaMerek.nama_merek,
-        designer: namaDesigner.nama_designer,
-        kategori: ket_kat.nama_kategori,
-        subkat: ket_sub_kat.nama_sub_kategori,
-        warna: warnaTas.warna_utama,
-        panjang: panjangTas.panjang,
-        lebar : lebarTas.lebar,
-        tinggi : tinggiTas.tinggi
+        url: sessions.url
     });
+});
+
+const addReviews = (conn, data) => {
+    return new Promise((resolve, reject) => {
+        conn.query("INSERT INTO review VALUES (?,?,?)", [data.nilai, data.review, _id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.post('/addReview', async (req, res) => {
+    const data = req.body;
+    _id = 1; //ini cara tau id tas yg mau di add gimana yak?
+    console.log(data);
+
+
+    //ambil angka review dari apa yang diselect di radiobutton
+    //ambil textarea
+
+    // await addReviews(conn, data).then((result) => {
+    //      (JSON.parse(JSON.stringify(result))[0])
+    // })
+
+//     BUAT TANGGAL
+//     let day = date.getDate();
+// let month = date.getMonth() + 1;
+// let year = date.getFullYear();
+
+    //ambil review id yang barusan
+    //masukin ke db yang write review 
 });

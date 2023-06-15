@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Review - Bag's Community</title>
     <link rel="stylesheet" href="../css/addReview.css">
+    <script src="/js/addReview.js" defer></script>
 </head>
 <body>
     <header></header>
@@ -15,15 +16,15 @@
         </div>
         <form method="post" action="/addReview">
             <div id="nilai">
-                <input type="radio" name="nilai1">
+                <input type="radio" name="nilai" value = 1>;
                 <label for="nilai1">1</label>
-                <input type="radio" name="nilai2">
+                <input type="radio" name="nilai" value = 2>
                 <label for="nilai2">2</label>
-                <input type="radio" name="nilai3">
+                <input type="radio" name="nilai" value = 3>
                 <label for="nilai3">3</label>
-                <input type="radio" name="nilai4">
+                <input type="radio" name="nilai" value = 4>
                 <label for="nilai4">4</label>
-                <input type="radio" name="nilai5">
+                <input type="radio" name="nilai" value = 5>
                 <label for="nilai5">5</label>
             </div>
             <div id="deskripsi">
@@ -31,8 +32,8 @@
                 <textarea name="review"></textarea>
             </div>
             <div id="button">
-                <button name="cancel">Cancel</button>
-                <button name="upload">Upload Your Review</button>
+                <button name="cancel" href="/addReview">Cancel</button>
+                <button name="upload" type="submit">Upload Your Review</button>
             </div>
         </form>
     </main>

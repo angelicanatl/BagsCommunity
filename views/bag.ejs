@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/bagPage.css">
 </head>
 <body>
-    <%- include('headerAdmin') %> 
+    <%- include('header') %>
     <!-- header admin atau biasa? -->
 
     <div id="all">
@@ -43,109 +43,48 @@
     <div id="right">
         <div id="upperR">
             <h2> Reviews</h2>
-            <img src="../assets/gambar/bintang.png" class="bintang">
-            <input type="button" value="+ Add Review" href="/addReview">
+            <div class="bintangs">
+                <% for(let j=0; j<rataReview; j++){ %>
+                <img src="../assets/gambar/bintang.png" class="bintang">
+                <% } %>
+            </div>
+            <a href="/addReview">
+                <button name="addReview">+ Add Review</button>
+              </a>
         </div>
         
         <div class ="reviews">
-            <div class ="userReviews">
-                <div class="left">
-                    <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                    <p class="Merek"> Dior</p>
-                </div>
-                <div class="right">
-                    <div class="prof">
-                        <img src="../assets/profile.png" class="fotoProf">
-                        <p class="profile"> Joan Natalie </p>
+            <% if(review==0){ %>
+                <h1>*Belum ada yang melakukan review :)</h1>
+            <% } %>
+            <section>
+                <% for(let i=0; i<review; i++){ %>
+                <div class ="userReviews">
+                    <div class="left">
+                        <img src="<%= lsReview[i].foto %>" class="fotoTas">
+                        <p class="Merek"><%= merek %></p>
                     </div>
-                    
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <p class="reviewUser"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-
-            <div class ="userReviews">
-                <div class="left">
-                    <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                    <p class="Merek"> Dior</p>
-                </div>
-                <div class="right">
-                    <div class="prof">
-                        <img src="../assets/profile.png" class="fotoProf">
-                        <p class="profile"> Ketherine Arc </p>
+                    <div class="right">
+                        <div class="prof">
+                            <img src="../assets/profile.png" class="fotoProf">
+                            <p class="profile"><%= lsReview[i].username %></p>
+                            <% const date = new Date(lsReview[i].tanggal); %>
+                            <% const year = date.getFullYear(); %>
+                            <% const month = date.getMonth() + 1; %>
+                            <% const day = date.getDate(); %>
+                            <% const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`; %>
+                            <p class="time"><%= formattedDate %></p>
+                        </div>
+                        <div class="bintangs">
+                            <% for(let j=0; j<Number(lsReview[i].angka_review); j++){ %>
+                            <img src="../assets/gambar/bintang.png" class="bintang">
+                            <% } %>
+                        </div>
+                        <p class="reviewUser"><%= lsReview[i].teks_review %></p>
                     </div>
-                    
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <p class="reviewUser"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
-            </div>
-
-            <div class ="userReviews">
-                <div class="left">
-                    <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                    <p class="Merek"> Dior</p>
-                </div>
-                <div class="right">
-                    <div class="prof">
-                        <img src="../assets/profile.png" class="fotoProf">
-                        <p class="profile"> Angelica Arc </p>
-                    </div>
-                    
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <p class="reviewUser"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-
-            <div class ="userReviews">
-                <div class="left">
-                    <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                    <p class="Merek"> Dior</p>
-                </div>
-                <div class="right">
-                    <div class="prof">
-                        <img src="../assets/profile.png" class="fotoProf">
-                        <p class="profile"> Angelica Arc Natalie </p>
-                    </div>
-                    
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <p class="reviewUser"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-
-            <div class ="userReviews">
-                <div class="left">
-                    <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                    <p class="Merek"> Dior</p>
-                </div>
-                <div class="right">
-                    <div class="prof">
-                        <img src="../assets/profile.png" class="fotoProf">
-                        <p class="profile"> Arc Natalie </p>
-                    </div>
-                    
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <p class="reviewUser"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-
-            <div class ="userReviews">
-                <div class="left">
-                    <img src="../assets/gambar/ladydior.png" class="fotoTas">
-                    <p class="Merek"> Dior</p>
-                </div>
-                <div class="right">
-                    <div class="prof">
-                        <img src="../assets/profile.png" class="fotoProf">
-                        <p class="profile"> Natalie </p>
-                    </div>
-                    
-                    <img src="../assets/gambar/bintang.png" class="bintang">
-                    <p class="reviewUser"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
+                <% } %>
+            </section>
         </div>
     </div>
     </section>
