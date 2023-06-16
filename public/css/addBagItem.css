@@ -29,8 +29,107 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 @font-face {
     font-family: "nunito-medium";
     src: url(../assets/nunito/Nunito-Medium.ttf);
 }
+#box {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+#fill{
+    background-color: #B29DF8;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+form#file{
+    row-gap: 8px;
+    padding: 20px;
+    height: 480px;
+    width: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#text>input{
+    background-color: white;
+    width: 400px;
+    height: 200px;
+    cursor: pointer;
+}
+#text>label{
+    background-color: #E6E8FA;
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form#manual{
+    row-gap: 8px;
+    padding: 20px;
+    height: 480px;
+    width: auto;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 15fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+#lab{
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: 2fr 5fr;
+    row-gap: 10px;
+}
+#lab>label{
+    background-color: #E6E8FA;
+    padding: 8px 15px;
+    text-align: left;
+}
+#lab>select{
+    background-color: white;
+    border: none;
+    padding: 8px 15px;
+}
+#lab>input{
+    background-color: white;
+    border: none;
+    padding: 8px 15px;
+}
+
+#button{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+#button>button{
+    background-color: #B29DF8;
+    border: none;
+    cursor: pointer;
+}
+

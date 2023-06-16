@@ -619,12 +619,18 @@ const addSubKategori = (conn, addSubCat, idKat) => {
                 reject(err);
             } else{
                 resolve(result);
-    }
+            }
         })
     })
 }
 
 //-------------------------tambah item bag----------------------------------------------
+let _id;
+let _merek = [];
+let _designer = [];
+let _kategori = [];
+let _subkat = [];
+let k, idK;
 //ambil id dari database
 const set_id = (conn) => {
     return new Promise((resolve, reject) => {
@@ -637,7 +643,7 @@ const set_id = (conn) => {
         })
     })
 };
-
+//ambil data merek, designer, kategori, dan sub-kategori berdasarkan kategorinya dari database
 const data_merek = (conn) => {
     return new Promise((resolve, reject) => {
         conn.query("SELECT nama_merek FROM merek", (err, result) => {
@@ -727,6 +733,7 @@ const data_subkat = (conn, id_kat) => {
         })
     })
 }
+//tambahkan item bag ke dalam database
 const addBagManual = (conn, panjang, lebar, tinggi, warna, foto, idmerek, iddesigner, idsubkat) => {
     return new Promise((resolve, reject) => {
         conn.query("INSERT INTO tas (panjang, lebar, tinggi, warna_utama, foto, merek_id, designer_id, sub_kategori_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
@@ -739,20 +746,6 @@ const addBagManual = (conn, panjang, lebar, tinggi, warna, foto, idmerek, iddesi
         })
     })
 }
-
-app.get('/addBagItem', auth, (req, res) => {
-    res.render('addBagItem', {
-        username: sessions.username,
-        url: sessions.url
-    });
-});
-
-let _id;
-let _merek = [];
-let _designer = [];
-let _kategori = [];
-let _subkat = [];
-let k, idK;
 app.get("/getSubkat", (req, res) => {
     k = req.query.kategori;
     get_idkat(conn, k).then((result)=>{
@@ -767,21 +760,26 @@ app.get("/getSubkat", (req, res) => {
         });
     });
 });
-app.get('/uploadManual', auth, (req, res) => {
+
+app.get('/addBagItem', auth, (req, res) => {
     data_merek(conn).then((result) => {
         _merek = result;
+        console.log(_merek);
     })
     data_designer(conn).then((result) => {
         _designer = result;
+        console.log(_designer);
     })
     data_kategori(conn).then((result) => {
         _kategori = result;
+        console.log(_kategori);
     })
-
     set_id(conn).then((result) => {
         _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
         result+=1;
-        res.render('uploadManual', {
+        res.render('addBagItem', {
+            username: sessions.username,
+            url: sessions.url,
             id: _id,
             merek: _merek,
             designer: _designer,
@@ -791,14 +789,12 @@ app.get('/uploadManual', auth, (req, res) => {
     })
 });
 
-
 //MULTER
-let id;
 const storageUploadFoto = multer.diskStorage({
     destination: function (req, file, callBack) {
-        id = _id; //harusnya pake bagid?
+        // id = _id; //harusnya pake bagid?
         // console.log(id);
-        const bukti = `./public/images/${id}`;
+        const bukti = `/public/images/${_id}`;
         try {
             if (!fs.existsSync(bukti)) {
                 fs.mkdirSync(bukti);
@@ -806,13 +802,12 @@ const storageUploadFoto = multer.diskStorage({
         } catch (err) {
             console.error(err);
         }
-        callBack(null, `./public/images/${id}/`);
+        callBack(null, `/public/images/${_id}/`);
     },
     filename: function (req, file, callBack){
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
-
  
 let upload = multer({
     storage: storageUploadFoto
@@ -831,27 +826,24 @@ app.post('/uploadManual', upload.single('image'), async (req,res) => {
     await get_idsubkat(conn,subkat).then((result) => {
         idsubkat = (JSON.parse(JSON.stringify(result))[0].sub_kategori_id);
     })
-    const bukti = `./images/${id}/${file}`;
+    const bukti = `/images/${_id}/${file}`;
     // console.log(bukti);
     await addBagManual(conn, panjang, lebar, tinggi, warna, bukti, idmerek, iddesigner, idsubkat).then((result) => {
-        res.render('addBagItem', {
-            username: sessions.username,
-            url: sessions.url
-        });
+        set_id(conn).then((result) => {
+            _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
+            result+=1;
+            res.render('addBagItem', {
+                username: sessions.username,
+                url: sessions.url,
+                id: _id,
+                merek: _merek,
+                designer: _designer,
+                kategori: _kategori,
+                subkat: _subkat
+            });
+        })
     })
 })
-
-
-//upload pake csv
-app.get('/uploadFile', auth, (req, res) => {
-    set_id(conn).then((result) => {
-        _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
-        result+=1;
-        res.render('uploadFile', {
-            id: _id
-        });
-    })
-});
 
 const storageUploadCSV = multer.diskStorage({
     destination: function (req, file, callBack) {
@@ -888,7 +880,12 @@ app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
       }
       res.render('addBagItem', {
         username: sessions.username,
-        url: sessions.url
+        url: sessions.url,
+        id: _id,
+        merek: _merek,
+        designer: _designer,
+        kategori: _kategori,
+        subkat: _subkat
       });
     });
 });
