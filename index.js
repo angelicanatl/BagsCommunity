@@ -7,6 +7,7 @@ import multer from 'multer';
 import path from 'path' ;
 import parse from 'csv-parser';
 import fs from 'fs';
+import { get } from 'http';
 // import path from 'path';
 
 const PORT = 8080;
@@ -77,7 +78,7 @@ app.post('/login', (req, res) => {
                 } else {
                     sessions.url = '/UserProfile';
                 }
-                res.redirect('Dashboard');
+                res.redirect('Dashboard?p=1');
             }
         })
     } else {
@@ -155,27 +156,69 @@ app.get('/about', auth, (req, res) => {
 });
 
 //-----------------------------------------------------Dashboard--------------------------------------------------------------
-const listReviewTasTop10  = (conn) => {
+const listNewestReview  = (conn) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT `write_review`.`username`, sub_kategori.nama_sub_kategori as subkat, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` ORDER BY tanggal DESC LIMIT 10", (err, result) => {
+        conn.query("SELECT * FROM items ORDER BY tanggal DESC", (err, result) => {
             if(err){
                 reject(err);
             } else{
-                console.log(result);
+                // console.log(result);
                 resolve(result);
             }
         })
     })
 }
 
-app.get('/Dashboard', auth, async (req, res) => {
-    await listReviewTasTop10(conn, _id).then((result) => { 
-        res.render('Dashboard', {
-        username: sessions.username,
-        nama: sessions.nama,
-        url: sessions.url,
-        lsReview: result
+const itemCount = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(tas_id) AS 'total' FROM items", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
     })
+}
+const itemShow = 4;
+const getItems = (conn, p)=> {
+    const start = (p-1)*itemShow;
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT * FROM items LIMIT ?, ?", [start, itemShow], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+app.get('/Dashboard', auth, (req, res) => {
+    const pageNum = [];
+    const {p} = req.query;
+    listNewestReview(conn, _id).then(async (result) => { 
+        let listRev = result;
+        await itemCount(conn).then((result) => {
+            const pageCount = Math.ceil(JSON.parse(JSON.stringify(result))[0].total/itemShow);
+            for(let i = 1; i<=pageCount; i++){
+                pageNum[i-1] = i;
+            }
+        })
+        await getItems(conn, p).then((result)=>{
+            const start = (p-1)*itemShow;
+            const end = start + itemShow;
+            // console.log(result);
+            res.render('Dashboard', {
+                username: sessions.username,
+                nama: sessions.nama,
+                url: sessions.url,
+                lsReview: listRev,
+                results: result,
+                pages: pageNum,
+                start: start,
+                end: end
+            })
+        })
     });
 });
 

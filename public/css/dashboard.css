@@ -27,6 +27,8 @@ section{
 #topreviews{
     padding-right: 60px;
     padding-top: 30px;
+    display: grid;
+    grid-template-rows: 50px 400px 50px;
 }
 
 #graphs{
@@ -70,6 +72,8 @@ section{
 
     display: grid;
     grid-template-columns: 1fr 2fr;
+    height: 180px;
+    width: auto;
 }
 
 .left{
@@ -141,4 +145,22 @@ section{
 
 p.reviewUser{
     font-size: 15px;
+}
+
+a#page{
+    background-color: #a48df0;
+    color: #F2F2FF;
+    margin: 5px;
+    border: solid 3px;
+    border-color: #a48df0;
+    height: 25px;
+    width: 15px;
+    box-shadow: 2px 2px 8px rgb(185, 185, 185);
+}
+
+div#page{
+    display: flex;
+    justify-content: right;
+    padding-top: 20px;
+    align-items: center;
 }

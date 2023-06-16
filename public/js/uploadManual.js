@@ -1,5 +1,6 @@
 const kat = document.querySelector("select[name='kategori']");
 const subkat = document.querySelector("select[name='subkat']");
+const cancel = document.querySelector("button[name='cancel']");
 
 kat.addEventListener('input', function(){
   const get_kat = kat.value;
@@ -25,3 +26,8 @@ kat.addEventListener('input', function(){
     subkat.removeAttribute('disabled');
   };
 });
+
+cancel.addEventListener('click', function(event){
+  event.preventDefault();
+
+})

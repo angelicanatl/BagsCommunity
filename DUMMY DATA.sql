@@ -324,7 +324,7 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Ga
 --
 
 
--- CREATE VIEW stat_kat 
+-- CREATE VIEW stat_kat AS
 -- SELECT 
 -- 	write_review.tanggal, 
 -- 	write_review.username, 
@@ -341,7 +341,7 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Ga
 -- JOIN sub_kategori ON tas.sub_kategori_id=sub_kategori.sub_kategori_id
 -- JOIN kategori ON sub_kategori.kategori_id=kategori.kategori_id
 
--- CREATE VIEW stat_subkat 
+-- CREATE VIEW stat_subkat AS
 -- SELECT
 --     write_review.tanggal,
 --     write_review.username,
@@ -357,7 +357,7 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Ga
 -- JOIN tas ON review.tas_id = tas.tas_id
 -- JOIN sub_kategori ON tas.sub_kategori_id = sub_kategori.sub_kategori_id
 
--- CREATE VIEW stat_merek 
+-- CREATE VIEW stat_merek AS
 -- SELECT
 --     write_review.tanggal,
 --     write_review.username,
@@ -373,7 +373,7 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Ga
 -- JOIN tas ON review.tas_id = tas.tas_id
 -- JOIN merek ON tas.merek_id = merek.merek_id
 
--- CREATE VIEW stat_designer 
+-- CREATE VIEW stat_designer AS
 -- SELECT
 --     write_review.tanggal,
 --     write_review.username,
@@ -388,3 +388,28 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Ga
 -- JOIN review ON write_review.review_id = review.review_id
 -- JOIN tas ON review.tas_id = tas.tas_id
 -- JOIN designer ON tas.designer_id = designer.designer_id
+
+-- --------------------------------------------------------
+
+--
+-- View structure for bag items
+--
+
+
+-- CREATE VIEW items AS
+-- SELECT 
+-- `write_review`.`username`, 
+-- `sub_kategori`.`nama_sub_kategori` as 'subkat', 
+-- `write_review`.`tanggal` as 'tanggal', 
+-- `review`.`teks_review`, 
+-- `review`.`angka_review`, 
+-- `tas`.`foto`, 
+-- `merek`.`nama_merek`, 
+-- `tas`.`tas_id`
+-- FROM 
+-- 	`write_review` 
+-- JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` 
+-- JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` 
+-- JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` 
+-- JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` 
+-- JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id`

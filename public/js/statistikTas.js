@@ -34,14 +34,21 @@ tglAwal.addEventListener("input", function(){
 const _title = document.querySelector("#tab");
 const _tableHead = document.querySelector("th#tab");
 const _section = document.querySelector("#graph");
-// const _table = document.createElement("table");
 const tab = document.querySelector("#graph table");
 
 let _by;
 by.forEach(e => {
     e.removeAttribute('disabled');
+    let curr;
     e.addEventListener("click", (event)=>{
-        event.target.style.backgroundColor = '#E6E8FA';
+        console.log(curr);
+        console.log('tes');
+        if(curr){
+            curr.style.backgroundColor = 'white';
+        }
+        curr=event.target;
+        console.log(curr);
+        curr.style.backgroundColor = '#E6E8FA';
         _by = event.target.name;
         _title.textContent=_by;
         _tableHead.textContent=_by;
