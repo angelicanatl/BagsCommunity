@@ -52,6 +52,12 @@ input{
 form>[name="username"]{
     background-color: rgb(229 221 255);
 }
+form>[name="nama"]{
+    background-color: rgb(229 221 255);
+}
+form>[name="email"]{
+    background-color: rgb(229 221 255);
+}
 label{
     text-align: left;
     background-color: #B29DF8;

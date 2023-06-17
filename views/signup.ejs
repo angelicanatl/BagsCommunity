@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Bag's Community</title>
     <link rel="stylesheet" href="../css/login.css">
+    <script src="/js/login.js" defer></script>
 </head>
 <body>
-    <form method="post" action="/signup">
+    <form id="signup" method="post" action="/signup">
         <div id="head">
             <h2>Welcome to</h2>
             <img src="../assets/ogol1.png">
@@ -22,7 +23,9 @@
         <input type="text" name="username">
         <label for="password">Password</label>
         <input type="password" name="password">
-        <button>Sign Up</button>
+        <p id="warnUname">Username sudah dipakai oleh User lain!</p>
+        <p id="warnPass">Password harus terdiri dari 5-20 karakter!</p>
+        <button id="signup" type="submit" disabled="true">Sign Up</button>
     </form>
 </body>
 </html>

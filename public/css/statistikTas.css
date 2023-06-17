@@ -38,11 +38,13 @@ input[type="date"]{
 
 #forGraph{
     width: 400px;
+    /* height: 350px; */
 
     grid-column: 2; 
     background-color: white; 
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    /* overflow: auto; */
 }
 
 #forInput{

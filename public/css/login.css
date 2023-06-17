@@ -83,3 +83,11 @@ div{
     font-size: smaller;
     color: red;
 }
+#warnUname{
+    display: none;
+    color: red;
+}
+#warnPass{
+    display: none;
+    color: red;
+}

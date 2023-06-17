@@ -37,25 +37,20 @@ const SessionStore = memoryStore(session);
 
 app.use(session({
     store: new SessionStore({
-        checkPeriod: 100*60*60*1000   //ms
+        checkPeriod: 10*60*60*1000   //ms
     }),
     name: 'nama',
     secret: 'rahasiasecret',
     resave: false,
     saveUninitialized: true
-    // ,cookie: { 
-    //     secure: true, 
-    //     maxAge:30*60*1000 
-    // }
 }));
-
 app.get(['/','/login'], (req, res) => {
     //logout
     if(req.session.username){
         req.session.destroy;
     }
     //login
-    res.render('login');
+    res.render('login')
 });
 
 app.get('/signup', (req, res) => {
@@ -114,6 +109,20 @@ app.post('/signup', (req, res) => {
         res.redirect('/signup');
     }
 });
+
+app.post('/cekUsername', (req, res) => {
+    const cek = req.body.new;
+    cekUsername(conn, cek).then((result) => {
+        const warn = {
+            message: 'invalid'
+        }
+        if (result[0].count > 0){
+            res.send(warn);
+        }else{
+            res.send();
+        }
+    });
+})
 
 const cekUsername = (conn, username) => {
     return new Promise((resolve, reject) => {
