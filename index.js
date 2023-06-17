@@ -1017,13 +1017,29 @@ app.post('/uploadFile', auth, uploadCSV.single('file_tas'), (req, res) => {
 });
 //------------------------------------Review Setting----------------------------------------------
 
-
+let minRev, rev1, rev2, rev3, rev4, rev5;
 app.get('/reviewSettings', auth, (req, res) => {
     res.render('reviewSettings', {
         username: sessions.username,
         url: sessions.url
     });
 });
+
+app.post('/uploadForm', auth, (req, res) => {
+    console.log(req.body)
+    minRev = req.body.minimal;
+    rev1 = req.body.satu;
+    rev2 = req.body.dua;
+    rev3 = req.body.tiga;
+    rev4 = req.body.empat;
+    rev5 = req.body.lima;
+    console.log(minRev, rev1, rev2, rev3, rev4, rev5);
+    res.render('AdminProfile', {
+        username: sessions.username,
+        nama: sessions.nama,
+        url: sessions.url
+    });
+})
 
 //-------------------------laporan sitatistika tas----------------------------------------------
 

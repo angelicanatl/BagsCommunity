@@ -34,12 +34,12 @@ form{
 }
 #rentang{
     display: grid;
-    grid-template-columns: 200px 300px 300px;
+    grid-template-columns: 200px 200px 50px 200px;
     margin: 15px;
 }
 #artiNilai{
     display: grid;
-    grid-template-columns: 200px 300px 300px;
+    grid-template-columns: 200px 200px;
     margin: 15px;
 }
 #nilai{

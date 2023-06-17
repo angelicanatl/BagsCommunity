@@ -10,7 +10,7 @@
 <body>
     <%- include('headerAdmin') %>
     <main>
-        <form id="review" method="post" action="/uploadFile">
+        <form id="review" method="post" action="/uploadForm">
             <div id="dashboard">
                 <h2>Dashboard</h2>
                 <div id="minimal">
@@ -22,28 +22,29 @@
                 <h2>Rentang Nilai Review</h2>
                 <div id="rentang">
                     <label for="rentang">Rentang Review:</label>
-                    <button name="rentang5">1 sampai 5</button>
-                    <button name="rentang10">1 sampai 10</button>
+                    <input type="text" name="rentangBawah" value="1" disabled>
+                    <p>s/d</p>
+                    <input type="text" name="rentangAtas" value="5" disabled>
                 </div>
                 <div id="artiNilai">
                     <label for="arti">Arti Nilai Review:</label>
                     <div id="nilai">
-                        <label for="1">1:</label>
-                        <input type="text" name="1">
-                        <label for="2">2:</label>
-                        <input type="text" name="2">
-                        <label for="3">3:</label>
-                        <input type="text" name="3">
-                        <label for="4">4:</label>
-                        <input type="text" name="4">
-                        <label for="5">5:</label>
-                        <input type="text" name="5">
+                        <label for="satu">1:</label>
+                        <input type="text" name="satu" value="Sangat Buruk" readonly>
+                        <label for="dua">2:</label>
+                        <input type="text" name="dua" value="Buruk" readonly>
+                        <label for="tiga">3:</label>
+                        <input type="text" name="tiga" value="Biasa saja" readonly>
+                        <label for="empat">4:</label>
+                        <input type="text" name="empat" value="Baik" readonly>
+                        <label for="lima">5:</label>
+                        <input type="text" name="lima" value="Sangat Baik" readonly>
                     </div>
                 </div>
             </div>
             <div id="button">
-                <button name="cancel">Cancel</button>
-                <button name="upload">Set</button>
+                <button type="button" name="cancel">Cancel</button>
+                <button type="submit" name="upload">Set</button>
             </div>
         </form>
     </main>
