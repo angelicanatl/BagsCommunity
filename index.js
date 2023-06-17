@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mysql from 'mysql';
+import crypto from 'crypto';
 import session from 'express-session';
 import memoryStore from 'memorystore';
 import multer from 'multer';
@@ -61,8 +62,11 @@ let sessions;
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     if (username && password) {
-        cekPengguna(conn, username, password).then((nama) => {
+        const hashed_pass = crypto.createHash('sha256').update(password).digest('base64');
+        console.log(hashed_pass);
+        cekPengguna(conn, username, hashed_pass).then((nama) => {
             if (!nama[0]){
+                console.log("Username atau Password yang Anda masukkan salah.")
                 res.redirect('/');
             } else {
                 sessions = req.session;
@@ -137,8 +141,10 @@ const cekUsername = (conn, username) => {
 }
 
 const addPengguna = (conn, data) => {
+    const hashed_pass = crypto.createHash('sha256').update(data.password).digest('base64');
+    console.log(hashed_pass);
     return new Promise((resolve, reject) => {
-        conn.query("INSERT INTO pengguna VALUES (?,?,?,?)", [data.nama, data.email, data.username, data.password], (err, result) => {
+        conn.query("INSERT INTO pengguna VALUES (?,?,?,?)", [data.nama, data.email, data.username, hashed_pass], (err, result) => {
             if(err){
                 reject(err);
             } else{
