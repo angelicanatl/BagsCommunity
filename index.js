@@ -237,77 +237,79 @@ app.get('/Dashboard', auth, (req, res) => {
     });
 });
 
-
-const get_jumlahKat = (conn) => {
+let minRev = 0;
+const get_jumlahKat = (conn, minRev) => {
+    console.log(minRev);
     return new Promise((resolve, reject) => {
-        conn.query("SELECT kategori.nama_kategori, count(review_id) FROM `stat_kat` RIGHT OUTER JOIN kategori ON kategori.nama_kategori = stat_kat.nama_kategori GROUP BY kategori.nama_kategori ORDER BY count(review_id) DESC LIMIT 10", (err, result) => {
+        conn.query("SELECT kategori.nama_kategori, count(review_id) FROM `stat_kat` RIGHT OUTER JOIN kategori ON kategori.nama_kategori = stat_kat.nama_kategori GROUP BY kategori.nama_kategori HAVING count(review_id) >= ? ORDER BY count(review_id) DESC LIMIT 10",[minRev], (err, result) => {
             if(err){
                 reject(err);
             } else{
-                console.log(result)
+                console.log(result);
                 resolve(result);
             }
         })
     })
 };
 
-const get_jumlahSubKat = (conn) => {
+const get_jumlahSubKat = (conn, minRev) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT sub_kategori.nama_sub_kategori, COUNT(review_id) FROM stat_subkat RIGHT OUTER JOIN sub_kategori on sub_kategori.sub_kategori_id = stat_subkat.sub_kategori_id GROUP BY stat_subkat.nama_sub_kategori ORDER BY COUNT(review_id) DESC LIMIT 10", (err, result) => {
+        conn.query("SELECT sub_kategori.nama_sub_kategori, COUNT(review_id) FROM stat_subkat RIGHT OUTER JOIN sub_kategori on sub_kategori.sub_kategori_id = stat_subkat.sub_kategori_id GROUP BY stat_subkat.nama_sub_kategori HAVING count(review_id) >= ? ORDER BY COUNT(review_id) DESC LIMIT 10",[minRev], (err, result) => {
             if(err){
                 reject(err);
             } else{
-                console.log(result)
                 resolve(result);
             }
         })
     })
 };
 
-const get_nilaiKat = (conn) => {
+const get_nilaiKat = (conn, minRev) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT kategori.nama_kategori, CAST(AVG(angka_review) as INT) FROM stat_kat RIGHT OUTER JOIN kategori on kategori.kategori_id = stat_kat.kategori_id GROUP BY kategori.nama_kategori ORDER BY AVG(angka_review) DESC LIMIT 10", (err, result) => {
+        conn.query("SELECT kategori.nama_kategori, CAST(AVG(angka_review) as INT) FROM stat_kat RIGHT OUTER JOIN kategori on kategori.kategori_id = stat_kat.kategori_id GROUP BY kategori.nama_kategori HAVING count(review_id) >= ? ORDER BY AVG(angka_review) DESC LIMIT 10",[minRev], (err, result) => {
             if(err){
                 reject(err);
             } else{
-                console.log(result)
                 resolve(result);
             }
         })
     })
 };
 
-const get_nilaiSubKat = (conn) => {
+const get_nilaiSubKat = (conn, minRev) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT sub_kategori.nama_sub_kategori, CAST(AVG(angka_review) as INT) FROM stat_subkat RIGHT OUTER JOIN sub_kategori on sub_kategori.sub_kategori_id = stat_subkat.sub_kategori_id GROUP BY sub_kategori.nama_sub_kategori ORDER BY AVG(angka_review) DESC LIMIT 10", (err, result) => {
+        conn.query("SELECT sub_kategori.nama_sub_kategori, CAST(AVG(angka_review) as INT) FROM stat_subkat RIGHT OUTER JOIN sub_kategori on sub_kategori.sub_kategori_id = stat_subkat.sub_kategori_id GROUP BY sub_kategori.nama_sub_kategori HAVING count(review_id) >= ? ORDER BY AVG(angka_review) DESC LIMIT 10",[minRev], (err, result) => {
             if(err){
                 reject(err);
             } else{
-                console.log(result)
                 resolve(result);
             }
         })
     })
 };
+
+// app.post('/getMinRev', async (req, res) => {
+//     res.json(minRev);
+// })
 
 app.post('/getDataGrafikSatu', async (req, res) => {
-    let dataJumlah = await get_jumlahKat(conn);
+    let dataJumlah = await get_jumlahKat(conn, minRev);
     res.json(dataJumlah);
 
 })
 
 app.post('/getDataGrafikDua', async (req, res) => {
-    let dataJumlah = await get_jumlahSubKat(conn);
+    let dataJumlah = await get_jumlahSubKat(conn, minRev);
     res.json(dataJumlah);
 })
 
 app.post('/getDataGrafikTiga', async (req, res) => {
-    let dataJumlah = await get_nilaiKat(conn);
+    let dataJumlah = await get_nilaiKat(conn, minRev);
     res.json(dataJumlah);
 })
 
 app.post('/getDataGrafikEmpat', async (req, res) => {
-    let dataJumlah = await get_nilaiSubKat(conn);
+    let dataJumlah = await get_nilaiSubKat(conn, minRev);
     res.json(dataJumlah);
 })
 
@@ -603,7 +605,6 @@ const listSearchBag  = (conn, kataKunciTertentu) => {
             if(err){
                 reject(err);
             } else{
-                // console.log(result);
                 resolve(result);
             }
         })
@@ -1017,7 +1018,7 @@ app.post('/uploadFile', auth, uploadCSV.single('file_tas'), (req, res) => {
 });
 //------------------------------------Review Setting----------------------------------------------
 
-let minRev, rev1, rev2, rev3, rev4, rev5;
+let rev1, rev2, rev3, rev4, rev5;
 app.get('/reviewSettings', auth, (req, res) => {
     res.render('reviewSettings', {
         username: sessions.username,

@@ -1,5 +1,5 @@
 let counter = 1;
-let myChart;
+let myChart; let minRev;
 let ctx = document.getElementById('chart1').getContext('2d');
 let forward = document.getElementById('forward')
 let back = document.getElementById('back')
@@ -14,8 +14,6 @@ let init = {
 };
 
 fetch('/getDataGrafikSatu', init).then(onSuccess1).then(showResult1);
-
-let dataLabel;
 
 function onSuccess1(response){
     return response.json();
@@ -150,7 +148,7 @@ forward.addEventListener("click", function(){
         counter = 1;
     }
     myChart.destroy();
-
+    console.log("maju")
     if(counter === 2){
         fetch('/getDataGrafikDua', init).then(onSuccess1).then(showResult2);
     } else if (counter === 3){
@@ -167,7 +165,7 @@ back.addEventListener("click", function(){
     if(counter < 0){
         counter = 4;
     }
-
+    console.log("mundur")
     myChart.destroy();
     if(counter === 2){
         fetch('/getDataGrafikDua', init).then(onSuccess1).then(showResult2);
