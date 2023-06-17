@@ -50,6 +50,7 @@ section{
     display: grid;
     grid-template-columns: 1fr 2fr;
     padding: 5px 10px;
+    margin: 8px;
 }
 
 .left{
@@ -83,8 +84,8 @@ section{
 .fotoProf{
     width: 30px;
     height: 30px;
-    margin-right: 10px;
-    margin-bottom: 5px;
+    grid-row-start: 1;
+    grid-row-end: 3;
 }
 
 .profile{
@@ -106,7 +107,6 @@ section{
 .time {
     color: gray;
     font-size: x-small;
-    grid-column: span 2;
 }
 
 .Merek{
@@ -136,12 +136,12 @@ p.reviewUser{
 }
 
 #listUser div{
-    margin: 5px;
+    margin: 8px;
     padding: 5px 10px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
-
+    
     width: 250px;
     height: 55px;
     gap: 10px;

@@ -57,14 +57,19 @@ header img{
     border-bottom-left-radius: 20px;
     box-shadow: 3px 3px 5px rgb(185, 185, 185);
 }
-#search{
+button#search{
     border: none;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 35px;
+    width: 30px;
     background-color: white;
     cursor: pointer;
     box-shadow: 3px 3px 5px rgb(185, 185, 185);
     padding: 5px;
+    align-self: center;
 }
 #search img{
     width: 18px;

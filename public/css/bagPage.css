@@ -7,6 +7,9 @@
     font-family: "nunito-bold";
     src: url(../assets/nunito/Nunito-Bold.ttf);
 }
+*{
+    margin: 0;
+}
 
 html, body{
     background-color: #F2F2FF;
@@ -15,9 +18,10 @@ html, body{
 }
 
 #all{
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
+    grid-template-columns: 1fr 1fr;
 }
 
 h1,h2{
@@ -27,18 +31,13 @@ h1,h2{
 p{
     font-family: "nunito-medium";
 }
-section{
-    display: grid;
-}
 
 #left{
     grid-column: 1;
-    overflow-y: auto ;
+    overflow-y: auto;
     overflow-x: hidden;
-    height: 800px;
-    width: 500px;
-
-    margin-right: 50px;
+    height: 525px;
+    margin: 30px 30px 30px 60px;
 }
 
 #right{
@@ -46,7 +45,8 @@ section{
     width: 530px;
     overflow-y: auto ;
     overflow-x: hidden;
-    height: 800px;
+    height: 525px;
+    margin: 30px 60px 30px 30px;
 }
 
 #photoContainer{
@@ -76,7 +76,7 @@ section{
 
 #details{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     grid-template-rows: repeat(7, 1fr);
     row-gap: 10px;
 }
@@ -84,8 +84,6 @@ section{
 #details p{
     background-color: #cfd3f1;
     padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 #upperR{
@@ -97,7 +95,7 @@ section{
     margin: 10px;
 }
 
-button{
+button#add{
     margin-left: auto;
     background-color: #cfd3f1;
     border: 0;
@@ -110,23 +108,18 @@ button{
 input[type="text"]{   
     border: 0;
     background-color: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding: 10px;
 }
 
 .userReviews{
     background-color: white;
     width: 500px;
-    height: 160px;
     margin-bottom: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
-
     display: grid;
-    grid-template-columns: 0.7fr 2fr;
+    grid-template-columns: 2fr 5fr;
+    justify-items: center;
 }
 
 .left{
@@ -135,13 +128,15 @@ input[type="text"]{
 
 .right{
     grid-column: 2;
+    padding: 10px;
 }
-
 
 .prof{
     display: grid;
     grid-template-columns: 1fr 5fr;
     text-align: left;
+    align-items: center;
+    column-gap: 10px;
 }
 
 .fotoTas{
@@ -161,13 +156,12 @@ input[type="text"]{
     margin:7px;
     width: 40px;
     height: 40px;
+    grid-row-end: 3;
+    grid-row-start: 1;
 }
 
 .profile{
-    text-align: left;
     font-size: 18px;
-    display: flex;
-    margin-top: 15px;
 }
 
 .bintang{

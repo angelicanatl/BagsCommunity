@@ -29,13 +29,13 @@
                         <div class="bag">
                             <div class="left">
                                 <img src="<%= lsReview[i].foto %>" class="fotoTas">
-                                <p class="Merek"><%= lsReview[i].nama_merek %></p>
+                                <a class="Merek" href="/bag/<%= lsReview[i].tas_id %>"><%= lsReview[i].nama_merek %></a>
                                 <p class="subkat"><%= lsReview[i].subkat %></p>
                             </div>
                             <div class="right">
                                 <div class="prof">
                                     <img src="../assets/profile.png" class="fotoProf">
-                                    <p class="profile"><%= lsReview[i].username %></p>
+                                    <a class="profile" href="/anotherUser/<%= lsReview[i].username %>"><%= lsReview[i].username %></a>
                                     <% const date = new Date(lsReview[i].tanggal); %>
                                     <% const year = date.getFullYear(); %>
                                     <% const month = date.getMonth() + 1; %>

@@ -259,7 +259,7 @@ app.get('/UserProfile', auth, async (req, res) => {
 
 const listReview  = (conn, username) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek` FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE `write_review`.`username`=?", [username], (err, result) => {
+        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, `tas`.`tas_id` FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE `write_review`.`username`=?", [username], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -687,7 +687,7 @@ let _designer = [];
 let _kategori = [];
 let _subkat = [];
 let k, idK;
-//ambil id dari database
+
 const set_id = (conn) => {
     return new Promise((resolve, reject) => {
         conn.query("SELECT tas_id AS 'maks' FROM tas HAVING tas_id = (SELECT MAX(tas_id) FROM tas)", (err, result) => {
@@ -699,6 +699,7 @@ const set_id = (conn) => {
         })
     })
 };
+
 //ambil data merek, designer, kategori, dan sub-kategori berdasarkan kategorinya dari database
 const data_merek = (conn) => {
     return new Promise((resolve, reject) => {
@@ -1178,7 +1179,7 @@ const get_tinggi = (conn, _id) => {
 
 const listReviewTas  = (conn, _id) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE tas.tas_id=? ORDER BY tanggal DESC LIMIT", [_id], (err, result) => {
+        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE tas.tas_id=? ORDER BY tanggal DESC", [_id], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -1211,54 +1212,50 @@ const cekReview = (conn, _id) => {
         })
     })
 }
+let id_bag;
+app.get('/bag/:idbag', async (req, res) => {
+    id_bag = req.params.idbag;
+    let foto_path; let namaMerek; let namaDesigner; let ket_sub_kat; let ket_kat; let warnaTas; let panjangTas; let lebarTas; let tinggiTas;
+    let jumlahR; let lsReview; ;let rataR;
 
-app.get('/bag', async (req, res) => {
-    let _id, foto_path, namaMerek, namaDesigner, ket_sub_kat, ket_kat, warnaTas, panjangTas, lebarTas, tinggiTas, jumlahR, lsReview, rataR;
-    await set_id(conn).then((result) => {
-        _id = (JSON.parse(JSON.stringify(result))[0].maks);
-    })
-    await get_pathFoto(conn, _id).then((result) => {
+    await get_pathFoto(conn, id_bag).then((result) => {
         foto_path = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_namaMerek(conn, _id).then((result) => {
+    await get_namaMerek(conn, id_bag).then((result) => {
         namaMerek = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_namaDesigner(conn, _id).then((result) => {
+    await get_namaDesigner(conn, id_bag).then((result) => {
         namaDesigner = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_subkat(conn, _id).then((result) => {
+    await get_subkat(conn, id_bag).then((result) => {
         ket_sub_kat = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_kat(conn, _id).then((result) => {
+    await get_kat(conn, id_bag).then((result) => {
         ket_kat = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_warna(conn, _id).then((result) => {
+    await get_warna(conn, id_bag).then((result) => {
         warnaTas = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_panjang(conn, _id).then((result) => {
+    await get_panjang(conn, id_bag).then((result) => {
         panjangTas = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_lebar(conn, _id).then((result) => {
+    await get_lebar(conn, id_bag).then((result) => {
         lebarTas = (JSON.parse(JSON.stringify(result))[0])
     })
-    await get_tinggi(conn, _id).then((result) => {
+    await get_tinggi(conn, id_bag).then((result) => {
         tinggiTas = (JSON.parse(JSON.stringify(result))[0])
     })
-   
-    await cekReview(conn, _id).then((result) => {
+    await cekReview(conn, id_bag).then((result) => {
         jumlahR = result[0]['COUNT(review_id)'];
     })
-
-    await rataReview(conn, _id).then((result) => {
+    await rataReview(conn, id_bag).then((result) => {
         rataR = result[0]['round(avg(angka_review))'];
     })
-
-    await listReviewTas(conn, _id).then((result) => { 
+    await listReviewTas(conn, id_bag).then((result) => { 
         res.render('bag', {
-            ///async: true,
             username: sessions.username,
             url: sessions.url,
-            id: _id,
+            id: id_bag,
             path: foto_path.foto, 
             merek: namaMerek.nama_merek,
             designer: namaDesigner.nama_designer,
@@ -1322,7 +1319,7 @@ const addWriteReview = (conn, usern, review_id) => {
 
 app.post('/addReview', async (req, res) => {
     const data = req.body;
-    _id = 1; //ini cara tau id tas yg mau di add gimana yak?
+    _id = id_bag; //ini cara tau id tas yg mau di add gimana yak?
 
     let angkaReview = data.nilai; 
     let teksReview = data.review;
