@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Bag's Community</title>
     <link rel="stylesheet" href="../css/dashboard.css">
+    <script type="text/javascript" src="../js/grafik.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <%- include('header') %>
@@ -15,14 +17,15 @@
             <h1> DASHBOARD </h1>
 
             <div id="graphs">
-                <a class="Back">&#10094;</a>
-                <a class="forward">&#10095;</a>
+                <a id="back">&#10094;</a>
+                    <canvas id="chart1"></canvas>
+                <a id="forward">&#10095;</a>
             </div>
             
         </div>
 
         <div id="topreviews">
-            <h1> TOP REVIEWS</h1>
+            <h1> NEWEST REVIEWS</h1>
             <div id="r">
                 <section id="Bags">
                     <% for(let i=start; i<end && i<(lsReview.length); i++){ %>

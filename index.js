@@ -223,6 +223,78 @@ app.get('/Dashboard', auth, (req, res) => {
 });
 
 
+const get_jumlahKat = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT kategori.nama_kategori, count(review_id) FROM `stat_kat` RIGHT OUTER JOIN kategori ON kategori.nama_kategori = stat_kat.nama_kategori GROUP BY kategori.nama_kategori ORDER BY count(review_id) DESC LIMIT 10", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                console.log(result)
+                resolve(result);
+            }
+        })
+    })
+};
+
+const get_jumlahSubKat = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT sub_kategori.nama_sub_kategori, COUNT(review_id) FROM stat_subkat RIGHT OUTER JOIN sub_kategori on sub_kategori.sub_kategori_id = stat_subkat.sub_kategori_id GROUP BY stat_subkat.nama_sub_kategori ORDER BY COUNT(review_id) DESC LIMIT 10", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                console.log(result)
+                resolve(result);
+            }
+        })
+    })
+};
+
+const get_nilaiKat = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT kategori.nama_kategori, CAST(AVG(angka_review) as INT) FROM stat_kat RIGHT OUTER JOIN kategori on kategori.kategori_id = stat_kat.kategori_id GROUP BY kategori.nama_kategori ORDER BY AVG(angka_review) DESC LIMIT 10", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                console.log(result)
+                resolve(result);
+            }
+        })
+    })
+};
+
+const get_nilaiSubKat = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT sub_kategori.nama_sub_kategori, CAST(AVG(angka_review) as INT) FROM stat_subkat RIGHT OUTER JOIN sub_kategori on sub_kategori.sub_kategori_id = stat_subkat.sub_kategori_id GROUP BY sub_kategori.nama_sub_kategori ORDER BY AVG(angka_review) DESC LIMIT 10", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                console.log(result)
+                resolve(result);
+            }
+        })
+    })
+};
+
+app.post('/getDataGrafikSatu', async (req, res) => {
+    let dataJumlah = await get_jumlahKat(conn);
+    res.json(dataJumlah);
+
+})
+
+app.post('/getDataGrafikDua', async (req, res) => {
+    let dataJumlah = await get_jumlahSubKat(conn);
+    res.json(dataJumlah);
+})
+
+app.post('/getDataGrafikTiga', async (req, res) => {
+    let dataJumlah = await get_nilaiKat(conn);
+    res.json(dataJumlah);
+})
+
+app.post('/getDataGrafikEmpat', async (req, res) => {
+    let dataJumlah = await get_nilaiSubKat(conn);
+    res.json(dataJumlah);
+})
 
 //-----------------------------------------User Profile----------------------------------------------------
 app.get('/UserProfile', auth, async (req, res) => {

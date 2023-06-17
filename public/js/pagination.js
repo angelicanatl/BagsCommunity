@@ -1,5 +1,4 @@
 const num = document.querySelectorAll('a#page');
-console.log(num);
 num.forEach(e => {
     let curr;
     e.addEventListener("click", (event)=>{

@@ -17,7 +17,7 @@ h1{
 
 section{
     display: grid; 
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 2fr 2fr;
 }
 
 #grafikTopTen{
@@ -33,7 +33,7 @@ section{
 
 #graphs{
     background-color: white;
-    height: 400px;
+    /* height: 400px; */
 
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
@@ -43,7 +43,7 @@ section{
     align-items: center;
 }
 
-.Back, .forward {  
+#back, #forward {  
     font-size: 40px;
     color: #a48df0;
     margin: 10px;
