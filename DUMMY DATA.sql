@@ -19,23 +19,23 @@ CREATE TABLE pengguna
 --
 
 -- ADMIN
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'ADMIN', 'admin@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'ADMIN', 'admin@gmail.com');
 
 -- PENGGUNA 
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Angel', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Angelica Natalie', 'angelica@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Joan', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Joan Arc', 'joan@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Naomixue', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Naomi Elianora', 'naomiii@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Diyanss', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Dian Estri', 'oskangwur@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('dree_andrea', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Andrea Miranti', 'miranti@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('keth', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Ketherine Goenawan', 'kg@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('reineaura_', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Reine Aura', 'rein@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('clarissa.nadia', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Clarissa Nadia', 'nadia@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Galyndeo', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Ghabriel Galyndeo', 'galyndeo@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('vincentmarkk', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Vincent Mark', 'vmark@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Miros', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Miroslav Matthew', 'mir@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('thur', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'William Arthur', 'thur@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Vicsprat', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Vico Pratama', 'vics@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Kace', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Kevin Christian', 'kc@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Angel', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Angelica Natalie', 'angelica@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Joan', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Joan Arc', 'joan@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Naomixue', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Naomi Elianora', 'naomiii@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Diyanss', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Dian Estri', 'oskangwur@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('dree_andrea', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Andrea Miranti', 'miranti@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('keth', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Ketherine Goenawan', 'kg@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('reineaura_', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Reine Aura', 'rein@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('clarissa.nadia', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Clarissa Nadia', 'nadia@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Galyndeo', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Ghabriel Galyndeo', 'galyndeo@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('vincentmarkk', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Vincent Mark', 'vmark@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Miros', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Miroslav Matthew', 'mir@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('thur', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'William Arthur', 'thur@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Vicsprat', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Vico Pratama', 'vics@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Kace', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Kevin Christian', 'kc@gmail.com');
 -- --------------------------------------------------------
 
 --
@@ -318,7 +318,7 @@ INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Kuning. keren', 9);
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	4, 'PINKKKKKKKKKKKKKKKKKKKKK!! <3 tpi kecil', 10);
+	4, 'PINKKKKKK!! <3 tpi kecil', 10);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	1, 'gasuka pink.', 10);
 
@@ -411,7 +411,7 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-28', 'Vi
 
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-06-01', 'Joan',18);
 
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-09', 'KC',19);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-09', 'Kace',19);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-09', 'Diyanss',20);
 
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-30', 'thur',21);
@@ -436,7 +436,7 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-19', 'vi
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-28', 'Miros',35);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-22', 'thur',36);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-10', 'Galyndeo',37);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-18', 'KC',38);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-18', 'Kace',38);
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-01', 'Vicsprat',39);
 
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-06-10', 'Naomixue',40);
@@ -519,20 +519,20 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-05', 'Ke
 -- JOIN tas ON review.tas_id = tas.tas_id
 -- JOIN designer ON tas.designer_id = designer.designer_id
 
--- CREATE VIEW items AS
--- SELECT 
--- `write_review`.`username`, 
--- `sub_kategori`.`nama_sub_kategori` as 'subkat', 
--- `write_review`.`tanggal` as 'tanggal', 
--- `review`.`teks_review`, 
--- `review`.`angka_review`, 
--- `tas`.`foto`, 
--- `merek`.`nama_merek`, 
--- `tas`.`tas_id`
--- FROM 
--- 	`write_review` 
--- JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` 
--- JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` 
--- JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` 
--- JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` 
--- JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id`
+CREATE VIEW items AS
+SELECT 
+`write_review`.`username`, 
+`sub_kategori`.`nama_sub_kategori` as 'subkat', 
+`write_review`.`tanggal` as 'tanggal', 
+`review`.`teks_review`, 
+`review`.`angka_review`, 
+`tas`.`foto`, 
+`merek`.`nama_merek`, 
+`tas`.`tas_id`
+FROM 
+	`write_review` 
+JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` 
+JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` 
+JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` 
+JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` 
+JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id`
