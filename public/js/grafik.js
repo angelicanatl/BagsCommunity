@@ -24,8 +24,6 @@ function onSuccess1(response){
 function showResult1(result){
     const namaKategori = result.map(item => item.nama_kategori);
     const jumlahR = result.map(item => item['count(review_id)']);
-    console.log(namaKategori);
-    console.log(jumlahR);
 
     myChart = new Chart(ctx, {
         type: 'bar',
@@ -56,9 +54,7 @@ function showResult1(result){
 
 function showResult2(result){
     const namaSubKategori = result.map(item => item.nama_sub_kategori);
-    console.log(namaSubKategori)
     const jumlahR = result.map(item => item['COUNT(review_id)']);
-    console.log(jumlahR)
 
     myChart = new Chart(ctx, {
         type: 'bar',
@@ -167,7 +163,6 @@ forward.addEventListener("click", function(){
 });
 
 back.addEventListener("click", function(){
-    console.log("mundurrrrr");
     counter = counter - 1;
     if(counter < 0){
         counter = 4;

@@ -11,7 +11,7 @@ CREATE TABLE pengguna
 ( 	nama_lengkap VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	username VARCHAR(15) NOT NULL PRIMARY KEY,
-	password VARCHAR(20) NOT NULL
+	password VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB;
 
 --
@@ -19,23 +19,23 @@ CREATE TABLE pengguna
 --
 
 -- ADMIN
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '12345678', 'ADMIN', 'admin@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Admin123', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'ADMIN', 'admin@gmail.com');
 
 -- PENGGUNA 
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Angel', '12345678', 'Angelica Natalie', 'angelica@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Joan', '12345678', 'Joan Arc', 'joan@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Naomixue', 'zxcvbnm', 'Naomi Elianora', 'naomiii@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Diyanss', 'asdfgh', 'Dian Estri', 'oskangwur@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('dree_andrea', '234567890', 'Andrea Miranti', 'miranti@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('keth', 'lkjhgfdsa', 'Ketherine Goenawan', 'kg@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('reineaura_', 'reinee', 'Reine Aura', 'rein@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('clarissa.nadia', 'nad', 'Clarissa Nadia', 'nadia@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Galyndeo', 'gggg', 'Ghabriel Galyndeo', 'galyndeo@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('vincentmarkk', 'qwerty', 'Vincent Mark', 'vmark@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Miros', 'miross', 'Miroslav Matthew', 'mir@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('thur', 'thur', 'William Arthur', 'thur@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Vicsprat', 'vicoo', 'Vico Pratama', 'vics@gmail.com');
-INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('KC', 'kcc', 'Kevin Christian', 'kc@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Angel', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Angelica Natalie', 'angelica@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Joan', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Joan Arc', 'joan@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Naomixue', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Naomi Elianora', 'naomiii@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Diyanss', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Dian Estri', 'oskangwur@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('dree_andrea', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Andrea Miranti', 'miranti@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('keth', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Ketherine Goenawan', 'kg@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('reineaura_', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Reine Aura', 'rein@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('clarissa.nadia', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Clarissa Nadia', 'nadia@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Galyndeo', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Ghabriel Galyndeo', 'galyndeo@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('vincentmarkk', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Vincent Mark', 'vmark@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Miros', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Miroslav Matthew', 'mir@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('thur', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'William Arthur', 'thur@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Vicsprat', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Vico Pratama', 'vics@gmail.com');
+INSERT INTO pengguna (username,password,nama_lengkap,email) VALUES('Kace', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8', 'Kevin Christian', 'kc@gmail.com');
 -- --------------------------------------------------------
 
 --
@@ -454,7 +454,6 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-05', 'Ke
 -- View structure for statistik tas
 --
 
-
 -- CREATE VIEW stat_kat AS
 -- SELECT 
 -- 	write_review.tanggal, 
@@ -519,8 +518,6 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-05', 'Ke
 -- JOIN review ON write_review.review_id = review.review_id
 -- JOIN tas ON review.tas_id = tas.tas_id
 -- JOIN designer ON tas.designer_id = designer.designer_id
-
--- -- --------------------------------------------------------
 
 -- CREATE VIEW items AS
 -- SELECT 
