@@ -14,7 +14,7 @@ const PORT = 8080;
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use(express.static(path.resolve('public')));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -381,6 +381,7 @@ app.post('/ngefollow', async (req, res) => {
 let username;
 
 app.get('/anotherUser/:username', auth, async (req, res) => {
+    
     username =  req.params.username;
     if (username == sessions.username){
         res.redirect('/UserProfile');
@@ -472,6 +473,61 @@ app.post('/userProfileSettings', (req, res) => {
     } else {
         res.redirect('/userProfileSettings');
     }
+});
+
+//-----------------------Search-----------------------------------------------------------
+
+app.get('/search', auth, async (req, res) => {
+    const kataKunci = req.query.search;
+    let lsUsers;
+    await searchUser(conn, kataKunci).then((result) => {
+        lsUsers = result;
+    });
+    let lsBags;
+    await listSearchBag(conn, kataKunci).then((result) => {
+        lsBags = result;
+    });
+    res.render('search', {
+        username: sessions.username,
+        nama: sessions.nama,
+        url: sessions.url,
+        listUsers: lsUsers,
+        listBags: lsBags
+    });
+});
+
+const searchUser = (conn, kataKunciTertentu) => {
+    return new Promise((resolve, reject) => {
+        const like = kataKunciTertentu.replace(/_/g, "\\_");
+        conn.query("SELECT username FROM `pengguna` WHERE username LIKE '%" + like + "%' AND username != 'Admin123'", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const listSearchBag  = (conn, kataKunciTertentu) => {
+    return new Promise((resolve, reject) => {
+        const like = kataKunciTertentu.replace(/_/g, "\\_");
+        conn.query("SELECT * FROM items WHERE nama_merek LIKE '%" + like + "%' ORDER BY tanggal DESC", (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                // console.log(result);
+                resolve(result);
+            }
+        })
+    })
+}
+
+app.post('/cari', (req, res) => {
+    let kataKunci = req.body.kataKunci;
+    searchUser(conn, kataKunci).then((result) => {
+        res.json(result);
+    });
 });
 
 //-----------------------Admin-----------------------------------------------------------

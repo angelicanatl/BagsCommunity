@@ -15,7 +15,6 @@ reviewsButton.addEventListener('click', ()=>{
 fetch('/ngefollow')
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         const folowing = document.getElementById('followingUser');
         const folowed = document.getElementById('followedUser');
         if (data.follow == 0){
@@ -26,7 +25,6 @@ fetch('/ngefollow')
                 folowing.style.display = 'none';
                 folowed.style.display = 'flex';
                 folowed.style.backgroundColor = '#B29DF8';
-                console.log("masuk db")
                 let init = {
                     method: 'post',
                     headers:{

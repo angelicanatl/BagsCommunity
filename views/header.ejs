@@ -7,17 +7,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/styleAllHeader.css">
     <title>Bag's Community</title>
+    <script src="/js/search.js" defer></script>
 </head>
 <body>
     <header>
         <div class="logos">
-            <a href="/Dashboard"><img src="../assets/ogol.png"></a>
+            <a href="/Dashboard?p=1"><img src="../assets/ogol.png"></a>
             <a href="/about">About</a>
         </div>
-        <div class="searchContainer">
+        <form class="searchContainer" method="get" action="/search">
             <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
+            <button id="search" type="submit"><img src="../assets/search.png"></button>
+        </form>
         <div class="names">
             <a name="username" href="<%= url %>"><%- username %></a>
             <img src="../assets/profile.png">

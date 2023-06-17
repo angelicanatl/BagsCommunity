@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>//hasil search</title>
+    <link rel="stylesheet" href="../css/search.css">
+</head>
+<body>
+    <%- include('header') %>
+    <section>
+        <div id="topreviews">
+            <h1> Bags </h1>
+            <section id="Bags">
+                <% for(let i=0; i<listBags.length; i++){ %>
+                <div class="bag">
+                    <div class="left">
+                        <img src="<%= listBags[i].foto %>" class="fotoTas">
+                        <p class="Merek"><%= listBags[i].nama_merek %></p>
+                        <p class="subkat"><%= listBags[i].subkat %></p>
+                    </div>
+                    <div class="right">
+                        <div class="prof">
+                            <img src="../assets/profile.png" class="fotoProf">
+                            <p class="profile"><%= listBags[i].username %></p>
+                            <%  const date = new Date(listBags[i].tanggal); %>
+                            <%  const year = date.getFullYear(); %>
+                            <%  const month = date.getMonth() + 1; %>
+                            <%  const day = date.getDate(); %>
+                            <%  const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`; %>
+                            <p class="time"><%= formattedDate %></p>
+                        </div>
+                        <div class="bintangs">
+                            <%  for(let j=0; j<Number(listBags[i].angka_review); j++){ %>
+                            <img src="../assets/gambar/bintang.png" class="bintang">
+                            <%  } %>
+                        </div>
+                        <p class="reviewUser"><%= listBags[i].teks_review %></p>
+                
+                    </div>
+                </div>
+                <% } %>
+            </section>
+        </div>
+        <div id="users">
+            <h1> Users </h1>
+            <section id="listUser">
+                <% for (let i=0; i<listUsers.length; i++){ %>
+                    <div class="foll" >
+                        <img src="../assets/profile.png" width="50px" height="50px">
+                        <a href="/anotherUser/<%= listUsers[i].username %>" name="<%= listUsers[i].username %>"><%= listUsers[i].username %></a>
+                    </div>
+                 <% } %>
+            </section>
+        </div>
+    </section>
+</body>
+</html>

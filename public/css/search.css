@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    font-family: "nunito-medium";
+}
+html, body{
+    background-color: #F2F2FF;
+    height: 100%;
+    width: 100%;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    color: #a48df0;
+    margin-bottom: 15px;
+}
+#topreviews{
+    margin: 30px 60px;
+}
+#users{
+    margin: 30px 60px 30px 0;
+}
+section{
+    display: grid; 
+    grid-template-columns: 3fr 1fr;
+}
+
+#Bags{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 445px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+@font-face {
+    font-family: "nunito-medium";
+    src: url(../assets/nunito/Nunito-Medium.ttf);
+}
+
+.bag{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+    height: 180px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 5px 10px;
+}
+
+.left{
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 20px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 20px 0 0;
+}
+
+.prof{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    text-align: left;
+    align-items: center;
+}
+
+.fotoTas{
+    width: 80px;
+    height: 80px;
+}
+
+.fotoProf{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.profile{
+    font-size: 18px;
+}
+.bintangs{
+    display: flex;
+}
+.bintang{
+    width: 20px;
+    height: 20px;
+}
+
+.reviewUser{
+    text-align: left;
+    font-size: 12px;
+} 
+
+.time {
+    color: gray;
+    font-size: x-small;
+    grid-column: span 2;
+}
+
+.Merek{
+    font-weight: bold;
+    text-align: center;
+}
+
+.subkat{
+    font-size: x-small;
+    text-align: center;
+}
+
+p.reviewUser{
+    font-size: 15px;
+}
+
+/* ----------- */
+
+#listUser{
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 445px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+}
+
+#listUser div{
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+
+    width: 250px;
+    height: 55px;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    text-align: left;
+    align-items: center;
+}
