@@ -959,15 +959,7 @@ app.post('/uploadManual', auth, upload.single('image'), async (req,res) => {
         set_id(conn).then((result) => {
             _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
             result+=1;
-            res.render('addBagItem', {
-                username: sessions.username,
-                url: sessions.url,
-                id: _id,
-                merek: _merek,
-                designer: _designer,
-                kategori: _kategori,
-                subkat: _subkat
-            });
+            res.redirect('/addBagItem');
         })
     })
 })
@@ -1005,15 +997,7 @@ app.post('/uploadFile', auth, uploadCSV.single('file_tas'), (req, res) => {
             addBagManual(conn, i[0], i[1], i[2], i[3], foto, i[5], i[6], i[7]);
             _id+=1;
       }
-      res.render('addBagItem', {
-        username: sessions.username,
-        url: sessions.url,
-        id: _id,
-        merek: _merek,
-        designer: _designer,
-        kategori: _kategori,
-        subkat: _subkat
-      });
+      res.redirect('/addBagItem');
     });
 });
 //------------------------------------Review Setting----------------------------------------------
@@ -1292,6 +1276,8 @@ app.get('/bag/:idbag', async (req, res) => {
 
     await get_pathFoto(conn, id_bag).then((result) => {
         foto_path = (JSON.parse(JSON.stringify(result))[0])
+        foto_path = foto_path.foto;
+        console.log(foto_path)
     })
     await get_namaMerek(conn, id_bag).then((result) => {
         namaMerek = (JSON.parse(JSON.stringify(result))[0])
@@ -1328,7 +1314,7 @@ app.get('/bag/:idbag', async (req, res) => {
             username: sessions.username,
             url: sessions.url,
             id: id_bag,
-            path: foto_path.foto, 
+            path: foto_path, 
             merek: namaMerek.nama_merek,
             designer: namaDesigner.nama_designer,
             kategori: ket_kat.nama_kategori,
@@ -1389,7 +1375,7 @@ const addWriteReview = (conn, usern, review_id) => {
     })
 }
 
-app.post('/addReview', async (req, res) => {
+app.post('/uploadRev', async (req, res) => {
     const data = req.body;
     _id = id_bag; //ini cara tau id tas yg mau di add gimana yak?
 
@@ -1412,6 +1398,6 @@ app.post('/addReview', async (req, res) => {
     
     let usern = sessions.username;
     await addWriteReview(conn, usern, review_id).then((result) => {
-        res.redirect('bag')
+        res.redirect('/bag/'+_id);
     })
 });

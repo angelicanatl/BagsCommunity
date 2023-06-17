@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bag Page</title>
     <link rel="stylesheet" href="../css/bagPage.css">
+    <script src="/js/bag.js" defer></script>
 </head>
 <body>
     <%- include('header') %>
@@ -46,9 +47,7 @@
                     <img src="../assets/gambar/bintang.png" class="bintang">
                     <% } %>
                 </div>
-                <a href="/addReview">
-                    <button id="add" name="addReview">+ Add Review</button>
-                </a>
+                <button id="add" name="addReview">+ Add Review</button>
             </div>
             
             <div class ="reviews">
@@ -85,6 +84,36 @@
                 </section>
             </div>
         </div>
+        <div id="addReview">
+            <div class="fill_file" id="fill">
+                <div id="head">
+                    <h2>ADD REVIEW</h2>
+                </div>
+                <form method="post" action="/uploadRev">
+                    <div id="nilai">
+                        <input type="radio" name="nilai" value = 1>
+                        <label for="nilai1">1</label>
+                        <input type="radio" name="nilai" value = 2>
+                        <label for="nilai2">2</label>
+                        <input type="radio" name="nilai" value = 3>
+                        <label for="nilai3">3</label>
+                        <input type="radio" name="nilai" value = 4>
+                        <label for="nilai4">4</label>
+                        <input type="radio" name="nilai" value = 5>
+                        <label for="nilai5">5</label>
+                    </div>
+                    <div id="deskripsi">
+                        <label for="review">Write your review</label>
+                        <textarea name="review"></textarea>
+                    </div>
+                    <div id="button">
+                        <button name="cancel" type="button">Cancel</button>
+                        <button name="upload" type="submit">Upload Your Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
     </section>
 </body>
 </html>
