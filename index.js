@@ -158,7 +158,7 @@ app.get('/about', auth, (req, res) => {
 //-----------------------------------------------------Dashboard--------------------------------------------------------------
 const listNewestReview  = (conn) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT * FROM items ORDER BY tanggal DESC", (err, result) => {
+        conn.query("SELECT * FROM items ORDER BY tanggal DESC LIMIT 20", (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -171,7 +171,7 @@ const listNewestReview  = (conn) => {
 
 const itemCount = (conn) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT COUNT(tas_id) AS 'total' FROM items", (err, result) => {
+        conn.query("SELECT COUNT(tas_id) AS 'total' FROM (SELECT * FROM items ORDER BY tanggal DESC LIMIT 20) AS ct", (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -196,9 +196,9 @@ const getItems = (conn, p)=> {
 app.get('/Dashboard', auth, (req, res) => {
     const pageNum = [];
     const {p} = req.query;
-    listNewestReview(conn, _id).then(async (result) => { 
+    listNewestReview(conn).then(async (result) => { 
         let listRev = result;
-        await itemCount(conn).then((result) => {
+        await itemCount(conn, listRev).then((result) => {
             const pageCount = Math.ceil(JSON.parse(JSON.stringify(result))[0].total/itemShow);
             for(let i = 1; i<=pageCount; i++){
                 pageNum[i-1] = i;
@@ -848,9 +848,7 @@ app.get('/addBagItem', auth, (req, res) => {
 //MULTER
 const storageUploadFoto = multer.diskStorage({
     destination: function (req, file, callBack) {
-        // id = _id; //harusnya pake bagid?
-        // console.log(id);
-        const bukti = `/public/images/${_id}`;
+        const bukti = `./public/images/${_id}`;
         try {
             if (!fs.existsSync(bukti)) {
                 fs.mkdirSync(bukti);
@@ -858,7 +856,7 @@ const storageUploadFoto = multer.diskStorage({
         } catch (err) {
             console.error(err);
         }
-        callBack(null, `/public/images/${_id}/`);
+        callBack(null, `./public/images/${_id}/`);
     },
     filename: function (req, file, callBack){
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -870,7 +868,7 @@ let upload = multer({
 });
 
 let idmerek, iddesigner, idsubkat;
-app.post('/uploadManual', upload.single('image'), async (req,res) => {
+app.post('/uploadManual', auth, upload.single('image'), async (req,res) => {
     const {bagid, panjang, lebar, tinggi, warna, merek, designer, subkat} = req.body; 
     const file = req.file.filename;
     await get_idmerek(conn,merek).then((result) => {
@@ -914,7 +912,7 @@ let uploadCSV = multer({
     storage: storageUploadCSV
 });
 
-app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
+app.post('/uploadFile', auth, uploadCSV.single('file_tas'), (req, res) => {
     if (!req.file) {
         res.status(400).send('No file uploaded.');
         return;
@@ -930,7 +928,7 @@ app.post('/uploadFile', uploadCSV.single('file_tas'), (req, res) => {
         .on('data', (data) => result.push(data))
         .on('end', async () => {
         for (let i of result) {
-            let foto = `./images/${_id}/${i[4]}`;
+            let foto = `/images/default/default.jpg`;
             addBagManual(conn, i[0], i[1], i[2], i[3], foto, i[5], i[6], i[7]);
             _id+=1;
       }
@@ -1180,7 +1178,7 @@ const get_tinggi = (conn, _id) => {
 
 const listReviewTas  = (conn, _id) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE tas.tas_id=? ORDER BY tanggal DESC", [_id], (err, result) => {
+        conn.query("SELECT `write_review`.`username`, DATE(`write_review`.`tanggal`) as tanggal, `review`.`teks_review`, `review`.`angka_review`, `tas`.`foto`, `merek`.`nama_merek`, tas.tas_id FROM `write_review` JOIN `review` ON `write_review`.`review_id` = `review`.`review_id` JOIN `tas` ON `tas`.`tas_id` = `review`.`tas_id` JOIN `merek` ON `tas`.`merek_id` = `merek`.`merek_id` JOIN `sub_kategori` ON `sub_kategori`.`sub_kategori_id` = `tas`.`sub_kategori_id` JOIN `kategori` ON `kategori`.`kategori_id` = `sub_kategori`.`kategori_id` WHERE tas.tas_id=? ORDER BY tanggal DESC LIMIT", [_id], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -1215,10 +1213,9 @@ const cekReview = (conn, _id) => {
 }
 
 app.get('/bag', async (req, res) => {
-    let _id; let foto_path; let namaMerek; let namaDesigner; let ket_sub_kat; let ket_kat; let warnaTas; let panjangTas; let lebarTas; let tinggiTas;
-    let jumlahR; let lsReview; ;let rataR;
+    let _id, foto_path, namaMerek, namaDesigner, ket_sub_kat, ket_kat, warnaTas, panjangTas, lebarTas, tinggiTas, jumlahR, lsReview, rataR;
     await set_id(conn).then((result) => {
-        _id = (JSON.parse(JSON.stringify(result))[0].maks); //buat testing aja! jadi pake id 1
+        _id = (JSON.parse(JSON.stringify(result))[0].maks);
     })
     await get_pathFoto(conn, _id).then((result) => {
         foto_path = (JSON.parse(JSON.stringify(result))[0])
