@@ -90,6 +90,7 @@ INSERT INTO merek (nama_merek) VALUES('Tumi');
 INSERT INTO merek (nama_merek) VALUES('Coach');
 INSERT INTO merek (nama_merek) VALUES('Herschel');
 INSERT INTO merek (nama_merek) VALUES('Lojel');
+INSERT INTO merek (nama_merek) VALUES('Nike');
 -- --------------------------------------------------------
 
 --
@@ -111,6 +112,7 @@ INSERT INTO designer (nama_designer) VALUES('Victor Sanz'); -- tumi
 INSERT INTO designer (nama_designer) VALUES('Stuart Vevers'); -- coach
 INSERT INTO designer (nama_designer) VALUES('Jamie Cormack'); -- herschel
 INSERT INTO designer (nama_designer) VALUES('Chih Chang Chiang'); -- lojel
+INSERT INTO designer (nama_designer) VALUES('Tinker Linn Hatfield, Jr.'); -- Nike
 -- --------------------------------------------------------
 
 --
@@ -127,7 +129,14 @@ CREATE TABLE kategori
 INSERT INTO kategori (nama_kategori) VALUES('Backpack');
 INSERT INTO kategori (nama_kategori) VALUES('Koper');
 INSERT INTO kategori (nama_kategori) VALUES('Handbag');
-
+INSERT INTO kategori (nama_kategori) VALUES('Purse'); 
+INSERT INTO kategori (nama_kategori) VALUES('Travel'); 
+INSERT INTO kategori (nama_kategori) VALUES('Sport'); 
+INSERT INTO kategori (nama_kategori) VALUES('Camera'); 
+INSERT INTO kategori (nama_kategori) VALUES('Shopping bag'); 
+INSERT INTO kategori (nama_kategori) VALUES('Belt bag'); 
+INSERT INTO kategori (nama_kategori) VALUES('Laptop bag');  
+INSERT INTO kategori (nama_kategori) VALUES('Sling bag');  
 -- --------------------------------------------------------
 
 --
@@ -145,7 +154,6 @@ CREATE TABLE sub_kategori
 --
 -- Dumping data for table `sub_kategori`
 --
-
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('School Backpack',1); 
 INSERT INTO sub_kategori (nama_sub_kategori,kategori_id) VALUES('Crossbody Backpack',1); 
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Mini backpack',1); 
@@ -155,6 +163,17 @@ INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Large size',2)
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Clutch', 3);  
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Bucket', 3); 
 INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Envelope', 3);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Coin purse', 4); 
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Wallet', 4);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Briefcase', 5);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Duffel', 6); 
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Gym sacks', 6);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Pouch', 7);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Plastic', 8);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Waist', 9);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('14 inch', 10);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('16 inch', 10);
+INSERT INTO sub_kategori (nama_sub_kategori, kategori_id) VALUES('Slingbag', 11);
 -- --------------------------------------------------------
 
 --
@@ -167,7 +186,7 @@ CREATE TABLE tas
 	lebar INTEGER NOT NULL,
 	tinggi INTEGER NOT NULL,
 	warna_utama varchar(30) NOT NULL,
-	foto varchar(100), -- UDAH GANTI VARCHAR BUAT PATH
+	foto varchar(100),  
 	merek_id INTEGER,
 	designer_id INTEGER,
 	sub_kategori_id INTEGER,
@@ -184,23 +203,35 @@ CREATE TABLE tas
 --
 
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	20, 17, 8, './images/1/ladydior.png', 'hitam', 1, 1, 7);
+	20, 17, 8, '/images/1/ladydior.png', 'hitam', 1, 1, 7);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	25, 15, 6, './images/2/chaneldoubleflap.png', 'hitam', 2, 2, 7);
+	25, 15, 6, '/images/2/chaneldoubleflap.png', 'hitam', 2, 2, 7);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	29, 20, 13, './images/3/fjallraven.png', 'biru', 3, 3, 3);
+	29, 20, 13, '/images/3/fjallraven.png', 'biru', 3, 3, 3);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	9, 14, 7, './images/4/crossbodybalenciaga.png', 'hitam', 4, 4, 2);
+	9, 14, 7, '/images/4/crossbodybalenciaga.png', 'hitam', 4, 4, 2);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	56, 45, 25, './images/5/tumiluggage.png', 'pink', 5, 5, 4);
+	56, 45, 25, '/images/5/tumiluggage.png', 'pink', 5, 5, 4);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	60, 50, 30, './images/6/tumimedium.png', 'merah', 5, 5, 5);
+	60, 50, 30, '/images/6/tumimedium.png', 'merah', 5, 5, 5);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	22, 11, 23, './images/7/coachbucket.png', 'hitam', 6, 6, 8);
+	22, 11, 23, '/images/7/coachbucket.png', 'hitam', 6, 6, 8);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	48, 27, 17, './images/8/herschelschool.png', 'hitam', 7, 7, 1);
+	48, 27, 17, '/images/8/herschelschool.png', 'hitam', 7, 7, 1);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	77, 55, 35, './images/9/lojellarge.png', 'kuning', 8, 8, 6);
+	77, 55, 35, '/images/9/lojellarge.png', 'kuning', 8, 8, 6);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	10, 10, 8, '/images/10/coin.png', 'pink', 6, 6, 10);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	51, 36, 5, '/images/11/gymsack.png', 'hitam', 9, 9, 14);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	8, 8, 4, '/images/12/balenciagamini.png', 'silver', 4, 4, 20);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	34, 25, 8, '/images/13/coachlaptop.png', 'cream', 6, 6, 18);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	34, 25, 8, '/images/14/balenwaist.png', 'hitam', 4, 4, 17);
+INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
+	40, 30, 15, '/images/15/shop.png', 'hitam', 4, 4, 16);
 -- --------------------------------------------------------
 
 --
@@ -238,7 +269,7 @@ INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	4, 'Banyak barang kwnya, masa jadi dikira barang kw??? :(', 2);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	4, 'Kulitnya cepat rusak', 2);
+	2, 'Kulitnya cepat rusak', 2);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Classic chanel bangett', 2);
 
@@ -250,19 +281,21 @@ INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Kecil tapi muat banyak', 3);
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Ok', 4);
+	2, 'Ok', 4);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	4, '-', 4);
+	2, '-', 4);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Mantap', 4);
+	3, 'Mantap', 4);
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Y', 4);
+	1, 'Y', 4);
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Saya suka pink!!! <3', 5);
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
-	5, 'Merahnya bagus', 6);
+	4, 'Merahnya bagus', 6);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'Merahnya serem kaya darah:()', 6);
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	3, 'Cepet kotor', 8);
@@ -271,6 +304,62 @@ INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 
 INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
 	5, 'Kuning. keren', 9);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	4, 'PINKKKKKKKKKKKKKKKKKKKKK!! <3 tpi kecil', 10);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'gasuka pink.', 10);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'pasaran.', 11);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	2, 'banyak yg pake.', 11);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'talinya lepas.', 11);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	3, 'g dulu.', 11);
+
+	
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'gaada yg cukup sumpa.', 12);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	2, 'ga worth it sama sekali', 12);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'beli yg laen deh', 12);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	3, 'ga makasih', 12);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	3, 'Vibes bapak-bapak.', 14);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	4, 'jadi keren gini gua', 14);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	3, 'kecil amat dah', 14);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'g dulu.', 14);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'nanges', 14);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'huh.', 14);
+
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'Gangerti konsepnya gimana', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'Apaan neh', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	2, 'Kek shopping bag ikea', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'Mahal tapi kok gini', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'nanges', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, '???', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'apaan sih', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'gajelassssssssssssss', 15);
+INSERT INTO review (angka_review, teks_review, tas_id) VALUES (
+	1, 'skip', 15);
 -- --------------------------------------------------------
 
 --
@@ -311,12 +400,42 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-28', 'Vi
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-06-01', 'Joan',18);
 
 INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-09', 'KC',19);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-09', 'Diyanss',20);
 
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-30', 'thur',20);
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-25', 'Galyndeo',21);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-30', 'thur',21);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-25', 'Galyndeo',22);
 
-INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Galyndeo',22);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Galyndeo',23);
 
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-06-11', 'Joan',24);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-01', 'Keth',25);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-21', 'vincentmarkk',26);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-27', 'Miros',27);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-22', 'thur',28);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-14', 'Galyndeo',29);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-21', 'Naomixue',30);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-27', 'diyanss',31);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-22', 'Joan',32);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-14', 'Angel',33);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-19', 'vincentmarkk',34);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-28', 'Miros',35);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-22', 'thur',36);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-10', 'Galyndeo',37);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-04-18', 'KC',38);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-01', 'Vicsprat',39);
+
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-06-10', 'Naomixue',40);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-13', 'diyanss',41);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-28', 'dree_andrea',42);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-02-07', 'Galyndeo',43);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-09', 'Joan',44);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-03-14', 'Vicsprat',45);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-17', 'vincentmarkk',46);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-12', 'Miros',47);
+INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-01-05', 'Keth',48);
 -- --------------------------------------------------------
 
 --
@@ -390,11 +509,6 @@ INSERT INTO write_review (tanggal, username,review_id) VALUES ('2023-05-29', 'Ga
 -- JOIN designer ON tas.designer_id = designer.designer_id
 
 -- --------------------------------------------------------
-
---
--- View structure for bag items
---
-
 
 -- CREATE VIEW items AS
 -- SELECT 
