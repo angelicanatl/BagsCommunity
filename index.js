@@ -117,27 +117,9 @@ app.get('/signup', (req, res) => {
 
 app.post('/signup', (req, res) => {
     const data = req.body;
-<<<<<<< Updated upstream
-    if (data){
-        cekUsername(conn, data.username).then((result) => {
-            if (result[0].count == 0){
-                addPengguna(conn,data).then((result) => {
-                    res.render('login', {
-                        cek: true
-                    });
-                });
-            } else {
-                res.redirect('/signup');
-            }
-        });
-    } else {
-        res.redirect('/signup');
-    }
-=======
     addPengguna(conn,data).then((result) => {
         res.render('otpKode');
     });
->>>>>>> Stashed changes
 });
 
 app.post('/cekUsername', (req, res) => {

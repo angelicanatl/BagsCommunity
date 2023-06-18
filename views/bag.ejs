@@ -70,7 +70,7 @@
                         <div class="right">
                             <div class="prof">
                                 <img src="../assets/profile.png" class="fotoProf">
-                                <p class="profile"><%= lsReview[i].username %></p>
+                                <a class="profile" href="/anotherUser/<%= lsReview[i].username %>"><%= lsReview[i].username %></a>
                                 <% const date = new Date(lsReview[i].tanggal); %>
                                 <% const year = date.getFullYear(); %>
                                 <% const month = date.getMonth() + 1; %>
