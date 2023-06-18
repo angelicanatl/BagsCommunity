@@ -21,7 +21,7 @@ section{
 }
 
 #grafikTopTen{
-    padding: 30px 60px;
+    padding: 30px 30px 30px 60px;
 }
 
 #topreviews{
@@ -32,11 +32,16 @@ section{
 }
 
 #graphs{
+    display: flex;
+    align-items: center;
+    height: 400px;
     background-color: white;
-    /* height: 400px; */
-
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
+}
+
+#graph{
+    height: 250px;
 
     display: flex;
     justify-content: space-between;
@@ -52,7 +57,7 @@ section{
 #Bags{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    row-gap: 20px;
 }
 
 *{
@@ -73,7 +78,7 @@ section{
     display: grid;
     grid-template-columns: 1fr 2fr;
     height: 180px;
-    width: auto;
+    width: 300px;
 }
 
 .left{
