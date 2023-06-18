@@ -56,9 +56,6 @@ app.get(['/','/login'], (req, res) => {
     });
 });
 
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
 
 let sessions;
 app.post('/login', async (req, res) => {
@@ -101,8 +98,26 @@ const cekPengguna = (conn, username, password) => {
     })
 }
 
+app.get('/otpKode', (req, res) => {
+    res.render('otpKode');
+});
+
+app.post('/otpKode', (req, res) => {
+    const {kode1, kode2, kode3, kode4, kode5, kode6} = req.body;
+    if((kode1=="0")&&(kode2=="8")&&(kode3=="1")&&(kode4=="4")&&(kode5=="2")&&(kode6=="2")){
+        res.render('login')
+    }else{
+        res.redirect('otpKode')
+    }
+})
+
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
 app.post('/signup', (req, res) => {
     const data = req.body;
+<<<<<<< Updated upstream
     if (data){
         cekUsername(conn, data.username).then((result) => {
             if (result[0].count == 0){
@@ -118,6 +133,11 @@ app.post('/signup', (req, res) => {
     } else {
         res.redirect('/signup');
     }
+=======
+    addPengguna(conn,data).then((result) => {
+        res.render('otpKode');
+    });
+>>>>>>> Stashed changes
 });
 
 app.post('/cekUsername', (req, res) => {
@@ -148,7 +168,6 @@ const cekUsername = (conn, username) => {
 
 const addPengguna = (conn, data) => {
     const hashed_pass = crypto.createHash('sha256').update(data.password).digest('base64');
-    console.log(hashed_pass);
     return new Promise((resolve, reject) => {
         conn.query("INSERT INTO pengguna VALUES (?,?,?,?)", [data.nama, data.email, data.username, hashed_pass], (err, result) => {
             if(err){
