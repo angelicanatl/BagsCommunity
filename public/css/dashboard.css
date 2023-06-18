@@ -164,3 +164,7 @@ div#page{
     padding-top: 20px;
     align-items: center;
 }
+
+#chart1{
+    width: 10px;
+}

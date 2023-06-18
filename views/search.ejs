@@ -17,27 +17,30 @@
                 <div class="bag">
                     <div class="left">
                         <img src="<%= listBags[i].foto %>" class="fotoTas">
-                        <a class="Merek" href="/Bag/<%= listBags[i].tas_id %>"><%= listBags[i].nama_merek %></a>
-                        <p class="subkat"><%= listBags[i].subkat %></p>
                     </div>
                     <div class="right">
                         <div class="prof">
-                            <img src="../assets/profile.png" class="fotoProf">
-                            <a class="profile" href="/anotherUser/<%= listBags[i].username %>"><%= listBags[i].username %></a>
-                            <%  const date = new Date(listBags[i].tanggal); %>
-                            <%  const year = date.getFullYear(); %>
-                            <%  const month = date.getMonth() + 1; %>
-                            <%  const day = date.getDate(); %>
-                            <%  const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`; %>
-                            <p class="time"><%= formattedDate %></p>
+                            <a class="Merek" href="/Bag/<%= listBags[i].tas_id %>"><%= listBags[i].nama_merek %></a>
+                            <p class="subkat"><%= listBags[i].nama_sub_kategori %></p>
                         </div>
                         <div class="bintangs">
-                            <%  for(let j=0; j<Number(listBags[i].angka_review); j++){ %>
+                            <%  for(let j=0; j<listBags[i].bintang; j++){ %>
                             <img src="../assets/gambar/bintang.png" class="bintang">
                             <%  } %>
+                            <% if(listBags[i].bintang == null){ %>
+                            <p>(not reviewed yet!)</p>
+                            <% } %>
                         </div>
-                        <p class="reviewUser"><%= listBags[i].teks_review %></p>
-                
+                        <div class="reviewUser">
+                            <p>Designer: <%= listBags[i].nama_designer %></p>
+                            <p>Warna: <%= listBags[i].warna_utama %></p>
+                            <div class="plt">
+                                <p>Panjang: <%= listBags[i].panjang %></p>
+                                <p>Lebar: <%= listBags[i].lebar %></p>
+                                <p>Tinggi: <%= listBags[i].tinggi %></p>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <% } %>

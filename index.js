@@ -601,7 +601,7 @@ const searchUser = (conn, kataKunciTertentu) => {
 const listSearchBag  = (conn, kataKunciTertentu) => {
     return new Promise((resolve, reject) => {
         const like = kataKunciTertentu.replace(/_/g, "\\_");
-        conn.query("SELECT * FROM items WHERE nama_merek LIKE '%" + like + "%' ORDER BY tanggal DESC", (err, result) => {
+        conn.query("SELECT tas.tas_id, tas.panjang, tas.lebar, tas.tinggi, tas.warna_utama, tas.foto, merek.nama_merek, designer.nama_designer, sub_kategori.nama_sub_kategori, rata2Bintang.bintang FROM tas LEFT OUTER JOIN merek ON tas.merek_id = merek.merek_id LEFT OUTER JOIN designer ON designer.designer_id = tas.designer_id LEFT OUTER JOIN sub_kategori ON sub_kategori.sub_kategori_id = tas.sub_kategori_id LEFT OUTER JOIN (SELECT tas_id, round(avg(angka_review)) AS bintang FROM review GROUP BY tas_id) AS rata2Bintang ON rata2Bintang.tas_id = tas.tas_id WHERE nama_merek LIKE '%" + like + "%'", (err, result) => {
             if(err){
                 reject(err);
             } else{

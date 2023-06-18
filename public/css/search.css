@@ -60,25 +60,23 @@ section{
     align-items: center;
     gap: 5px;
     padding: 20px;
+    justify-content: center;
 }
 
 .right{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 20px 20px 0 0;
+    padding: 20px 0;
 }
 
 .prof{
-    display: grid;
-    grid-template-columns: 1fr 5fr;
     text-align: left;
     align-items: center;
 }
 
 .fotoTas{
-    width: 80px;
-    height: 80px;
+    width: 120px;
 }
 
 .fotoProf{
@@ -108,19 +106,25 @@ section{
     color: gray;
     font-size: x-small;
 }
-
+.plt{
+    display:flex;
+    gap: 10px;
+}
 .Merek{
     font-weight: bold;
-    text-align: center;
 }
 
 .subkat{
     font-size: x-small;
-    text-align: center;
 }
 
 p.reviewUser{
     font-size: 15px;
+}
+
+.bintangs>p{
+    font-size: x-small;
+    color: gray;
 }
 
 /* ----------- */

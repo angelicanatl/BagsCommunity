@@ -33,7 +33,7 @@ function showResult1(result){
             backgroundColor: 'rgba(213, 184, 255, 1)',
             borderColor: 'rgba(191, 85, 236, 1)',
             borderWidth: 1,
-            barThickness: 20
+            barThickness: 20, width: 10
           }]
         },
         options: {
