@@ -1057,8 +1057,7 @@ app.post('/uploadForm', auth, (req, res) => {
 app.get('/statistikTas', auth, (req, res) => {
     res.render('statistikTas', {
         username: sessions.username,
-        url: sessions.url,
-        showBy: "Not Choosen Yet!"
+        url: sessions.url
     });
 });
 

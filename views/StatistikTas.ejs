@@ -21,21 +21,19 @@
                 </form>
             </section>
 
-            <button name ='Category' disabled> Category</button>
-            <button name = 'Sub-Category'disabled> Sub-Category</button>
-            <button name = 'Merek' disabled> Merek</button>
-            <button name = 'Designer'disabled> Designer</button>
+            <button class="label" name ='Category' disabled> Category</button>
+            <button class="label" name = 'Sub-Category'disabled> Sub-Category</button>
+            <button class="label" name = 'Merek' disabled> Merek</button>
+            <button class="label" name = 'Designer'disabled> Designer</button>
         </div>
 
         <div id="forGraph">
-            <p id="tab"> <%= showBy %> </p>
+            <p id="tab"> Not Chosen Yet </p>
             <hr>
-            <button id="download" type="button" onclick="window.print()">Download PDF File</button>
-            <div id="graph">
-
+            <div class="graph" id="graph">
                 <table>
                     <tr>
-                        <th rowspan="2" id="tab"><%= showBy %></th>
+                        <th rowspan="2" id="tab"> Not Chosen Yet </th>
                         <th rowspan="2">Banyak Review</th>
                         <th colspan="3">Nilai Review</th>
                     </tr>
@@ -47,6 +45,31 @@
                 </table>
             </div>
         </div>
+        <div id="pdf">
+            <button id="preview" type="button">Preview PDF</button>
+        </div>
     </section>
+    <div class="printPreview">
+        <div class="contentPreview">
+            <span class="close">&times;</span>
+            <p id="tab"> Not Chosen Yet </p>
+            <button id="download" type="button">Download PDF</button>
+            <hr>
+            <div id="graph">
+                <table>
+                    <tr>
+                        <th rowspan="2" id="tab"> Not Chosen Yet </th>
+                        <th rowspan="2">Banyak Review</th>
+                        <th colspan="3">Nilai Review</th>
+                    </tr>
+                    <tr>
+                        <th>Minimum</th>
+                        <th>Maximum</th>
+                        <th>Average</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
