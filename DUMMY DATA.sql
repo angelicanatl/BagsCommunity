@@ -243,7 +243,7 @@ INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,su
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
 	30,24, 9, '/images/20/pouch.png', 'hitam', 4, 4, 15);
 INSERT INTO tas (panjang,lebar,tinggi, foto, warna_utama,merek_id,designer_id,sub_kategori_id) VALUES (
-	30,24, 9, '/images/21/laptopbiru.png', 'biru muda', 4, 4, 15);
+	37,30, 10, '/images/21/laptopbiru.png', 'biru muda', 6, 6, 19);
 -- --------------------------------------------------------
 
 --
