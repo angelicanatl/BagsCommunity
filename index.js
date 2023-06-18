@@ -181,11 +181,10 @@ app.get('/about', auth, (req, res) => {
 //-----------------------------------------------------Dashboard--------------------------------------------------------------
 const listNewestReview  = (conn) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT * FROM items ORDER BY tanggal DESC LIMIT 20", (err, result) => {
+        conn.query("SELECT DISTINCT tas_id, username, subkat, tanggal, teks_review, angka_review, foto, nama_merek FROM items GROUP BY tas_id ORDER BY tanggal DESC", (err, result) => {
             if(err){
                 reject(err);
             } else{
-                // console.log(result);
                 resolve(result);
             }
         })
