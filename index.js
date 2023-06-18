@@ -66,8 +66,8 @@ app.post('/login', async (req, res) => {
         await cekPengguna(conn, username, hashed_pass).then((nama) => {
             if (!nama[0]){
                 console.log("Username atau Password yang dimasukkan salah.")
-                    res.render('login', {
-                        cek: false
+                res.render('login', {
+                    cek: false
                 });
             } else {
                 sessions = req.session;
@@ -88,7 +88,7 @@ app.post('/login', async (req, res) => {
 
 const cekPengguna = (conn, username, password) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT nama_lengkap FROM pengguna WHERE username=? AND password=?", [username, password], (err, result) => {
+        conn.query("SELECT * FROM `pengguna` WHERE username LIKE BINARY ? AND password LIKE BINARY ?", [username, password], (err, result) => {
             if(err){
                 reject(err);
             } else{
@@ -105,7 +105,12 @@ app.get('/otpKode', (req, res) => {
 app.post('/otpKode', (req, res) => {
     const {kode1, kode2, kode3, kode4, kode5, kode6} = req.body;
     if((kode1=="0")&&(kode2=="8")&&(kode3=="1")&&(kode4=="4")&&(kode5=="2")&&(kode6=="2")){
-        res.render('login')
+        addPengguna(conn,data_new_pengguna).then((result) => {
+            //login
+            res.render('login', {
+                cek: true
+            });
+        });
     }else{
         res.redirect('otpKode')
     }
@@ -115,11 +120,10 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+let data_new_pengguna;
 app.post('/signup', (req, res) => {
-    const data = req.body;
-    addPengguna(conn,data).then((result) => {
-        res.render('otpKode');
-    });
+    data_new_pengguna = req.body;
+    res.render('otpKode');
 });
 
 app.post('/cekUsername', (req, res) => {
@@ -537,41 +541,9 @@ app.get('/userProfileSettings', auth, (req, res) => {
             nama: result[0].nama_lengkap,
             email: result[0].email,
             username: sessions.username,
-            password: result[0].password,
             url: sessions.url
         });
     });
-});
-
-const updatePengguna = (conn, data, usernameOld) => {
-    return new Promise((resolve, reject) => {
-        conn.query("UPDATE Pengguna SET nama_lengkap=?, email=?, password=? WHERE username=?", [data.nama, data.email, data.password, usernameOld], (err, result) => {
-            if(err){
-                reject(err);
-            } else{
-                resolve(result);
-            }
-        })
-    })
-}
-
-app.post('/userProfileSettings', (req, res) => {
-    const data = req.body;
-    if (data){ 
-        cekUsername(conn, sessions.username).then((result) => {
-            if (result[0].count == 1){
-                updatePengguna(conn, data, sessions.username).then((result) => {
-                    res.render('login', {
-                        cek: true
-                    });
-                });
-            } else {
-                res.redirect('/userProfileSettings');
-            }
-        });
-    } else {
-        res.redirect('/userProfileSettings');
-    }
 });
 
 //-----------------------Search-----------------------------------------------------------
@@ -656,7 +628,7 @@ app.post('/tambahkategori', (req, res) => {
     let namakategori = req.body.namaKategori;
     const kosong = true;
     if (namakategori != ''){
-        cariKat(conn, namakategori).then((result) => {
+        cariKatNama(conn, namakategori).then((result) => {
             const gaerror = false;
             if (!result[0]){
                 addKategori(conn, namakategori).then((result) => {
@@ -693,7 +665,7 @@ const addKategori = (conn, addCat) => {
     })
 }
 
-const cariKat = (conn, nama_kategori) => {
+const cariKatNama = (conn, nama_kategori) => {
     return new Promise((resolve, reject) => {
         conn.query("SELECT nama_kategori FROM kategori WHERE nama_kategori=?", [nama_kategori], (err, result) => {
             if(err){
@@ -753,6 +725,18 @@ app.post('/tambahsubkategori', (req, res) => {
         res.json(kosong);
     }
 });
+
+const cariKat = (conn, kategori_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT nama_kategori FROM kategori WHERE kategori_id=?", [kategori_id], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
 
 const cariSubKat = (conn, nama_sub_kategori) => {
     return new Promise((resolve, reject) => {
@@ -919,15 +903,15 @@ app.get("/getSubkat", (req, res) => {
 app.get('/addBagItem', auth, (req, res) => {
     data_merek(conn).then((result) => {
         _merek = result;
-        console.log(_merek);
+        // console.log(_merek);
     })
     data_designer(conn).then((result) => {
         _designer = result;
-        console.log(_designer);
+        // console.log(_designer);
     })
     data_kategori(conn).then((result) => {
         _kategori = result;
-        console.log(_kategori);
+        // console.log(_kategori);
     })
     set_id(conn).then((result) => {
         _id = (JSON.parse(JSON.stringify(result))[0].maks)+1;
@@ -1044,7 +1028,7 @@ app.post('/uploadForm', auth, (req, res) => {
     rev3 = req.body.tiga;
     rev4 = req.body.empat;
     rev5 = req.body.lima;
-    console.log(minRev, rev1, rev2, rev3, rev4, rev5);
+    // console.log(minRev, rev1, rev2, rev3, rev4, rev5);
     res.render('AdminProfile', {
         username: sessions.username,
         nama: sessions.nama,
@@ -1114,8 +1098,8 @@ let tabel_kat, tabel_subkat, tabel_merek, tabel_designer;
 app.post('/getTabel', async (req, res) => {
     let fromDate = req.body.from;
     let toDate = req.body.to;
-    console.log(fromDate,"*");
-    console.log(toDate,"*");
+    // console.log(fromDate,"*");
+    // console.log(toDate,"*");
     await per_kat(conn, fromDate, toDate).then((result) => {
         tabel_kat = [];
         for(let i of result){
@@ -1140,16 +1124,16 @@ app.post('/getTabel', async (req, res) => {
             tabel_designer.push(Object.values(JSON.parse(JSON.stringify(i))));
         }
     })
-    console.log("kat ", tabel_kat);
-    console.log("subkat ", tabel_subkat);
-    console.log("merek ", tabel_merek);
-    console.log("designer ", tabel_designer);
+    // console.log("kat ", tabel_kat);
+    // console.log("subkat ", tabel_subkat);
+    // console.log("merek ", tabel_merek);
+    // console.log("designer ", tabel_designer);
     res.json("server accessed the table");
 });
 
 app.post('/showTabel', (req, res) => {
     let by = req.body.by;
-    console.log(by);
+    // console.log(by);
     if(by=="Category"){
         res.json(tabel_kat);
     }else if(by=="Sub-Category"){

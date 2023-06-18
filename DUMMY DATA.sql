@@ -186,10 +186,10 @@ CREATE TABLE tas
 	lebar INTEGER NOT NULL,
 	tinggi INTEGER NOT NULL,
 	warna_utama varchar(30) NOT NULL,
-	foto varchar(100),  
-	merek_id INTEGER,
-	designer_id INTEGER,
-	sub_kategori_id INTEGER,
+	foto varchar(100) NOT NULL,  
+	merek_id INTEGER NOT NULL,
+	designer_id INTEGER NOT NULL,
+	sub_kategori_id INTEGER NOT NULL,
 	FOREIGN KEY (merek_id) 
     REFERENCES merek(merek_id),
 	FOREIGN KEY (designer_id) 
