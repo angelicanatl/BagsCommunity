@@ -2,10 +2,12 @@ const num = document.querySelectorAll('a#page');
 num.forEach(e => {
     let curr;
     e.addEventListener("click", (event)=>{
+        curr = event.target;
         if(curr){
             curr.style.color = '#F2F2FF';
+        } else {
+
         }
-        curr = event.ta;
-        curr.style.color = 'black';
+        curr.style.background = 'black';
     });
 })

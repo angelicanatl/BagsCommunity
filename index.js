@@ -648,7 +648,7 @@ app.post('/tambahkategori', (req, res) => {
     if (namakategori != ''){
         cariKat(conn, namakategori).then((result) => {
             const gaerror = false;
-            if (result[0]){
+            if (!result[0]){
                 addKategori(conn, namakategori).then((result) => {
                     res.json(namakategori);
                 });
@@ -683,9 +683,9 @@ const addKategori = (conn, addCat) => {
     })
 }
 
-const cariKat = (conn, kategori_id) => {
+const cariKat = (conn, nama_kategori) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT nama_kategori FROM kategori WHERE kategori_id=?", [kategori_id], (err, result) => {
+        conn.query("SELECT nama_kategori FROM kategori WHERE nama_kategori=?", [nama_kategori], (err, result) => {
             if(err){
                 reject(err);
             } else{
