@@ -51,7 +51,9 @@ app.get(['/','/login'], (req, res) => {
         req.session.destroy;
     }
     //login
-    res.render('login')
+    res.render('login', {
+        cek: true
+    });
 });
 
 app.get('/signup', (req, res) => {
@@ -59,15 +61,17 @@ app.get('/signup', (req, res) => {
 });
 
 let sessions;
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     if (username && password) {
         const hashed_pass = crypto.createHash('sha256').update(password).digest('base64');
-        console.log(hashed_pass);
-        cekPengguna(conn, username, hashed_pass).then((nama) => {
+        // console.log(hashed_pass);
+        await cekPengguna(conn, username, hashed_pass).then((nama) => {
             if (!nama[0]){
-                console.log("Username atau Password yang Anda masukkan salah.")
-                res.redirect('/');
+                console.log("Username atau Password yang dimasukkan salah.")
+                    res.render('login', {
+                        cek: false
+                });
             } else {
                 sessions = req.session;
                 sessions.username = username;
@@ -103,7 +107,9 @@ app.post('/signup', (req, res) => {
         cekUsername(conn, data.username).then((result) => {
             if (result[0].count == 0){
                 addPengguna(conn,data).then((result) => {
-                    res.render('login');
+                    res.render('login', {
+                        cek: true
+                    });
                 });
             } else {
                 res.redirect('/signup');
@@ -157,7 +163,9 @@ const addPengguna = (conn, data) => {
 //middleware
 const auth = (req, res, next) => {
     if(!req.session.username){
-        res.redirect('login');
+        res.render('login', {
+            cek: true
+        });
     }else{
         next();
     }
@@ -553,7 +561,9 @@ app.post('/userProfileSettings', (req, res) => {
         cekUsername(conn, sessions.username).then((result) => {
             if (result[0].count == 1){
                 updatePengguna(conn, data, sessions.username).then((result) => {
-                    res.render('login');
+                    res.render('login', {
+                        cek: true
+                    });
                 });
             } else {
                 res.redirect('/userProfileSettings');
