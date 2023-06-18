@@ -1,4 +1,3 @@
-console.log("y");
 const tglAwal = document.querySelector("input#dateAwal");
 const tglAkhir = document.querySelector("input#dateAkhir");
 const by = document.querySelectorAll("button");
@@ -41,13 +40,9 @@ by.forEach(e => {
     e.removeAttribute('disabled');
     let curr;
     e.addEventListener("click", (event)=>{
-        console.log(curr);
-        console.log('tes');
-        if(curr){
-            curr.style.backgroundColor = 'white';
-        }
-        curr=event.target;
-        console.log(curr);
+        by.forEach(e => {
+            e.style.backgroundColor = 'white';
+        })
         curr.style.backgroundColor = '#E6E8FA';
         _by = event.target.name;
         _title.textContent=_by;
