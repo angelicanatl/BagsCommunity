@@ -40,6 +40,7 @@ by.forEach(e => {
     e.removeAttribute('disabled');
     let curr;
     e.addEventListener("click", (event)=>{
+        curr = event.target;
         by.forEach(e => {
             e.style.backgroundColor = 'white';
         })
