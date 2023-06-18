@@ -194,7 +194,7 @@ const listNewestReview  = (conn) => {
 
 const itemCount = (conn) => {
     return new Promise((resolve, reject) => {
-        conn.query("SELECT COUNT(tas_id) AS 'total' FROM (SELECT * FROM items ORDER BY tanggal DESC LIMIT 20) AS ct", (err, result) => {
+        conn.query("SELECT COUNT(tas_id) AS 'total' FROM (SELECT * FROM items ORDER BY tanggal DESC LIMIT 12) AS ct", (err, result) => {
             if(err){
                 reject(err);
             } else{
