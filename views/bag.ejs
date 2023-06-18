@@ -48,7 +48,11 @@
                     <% } %>
                 </div>
                 <% if(username != 'Admin123'){ %>
-                <button id="add" name="addReview">+ Add Review</button>
+                    <% if(sudah==0){ %>
+                    <button id="add" name="addReview">+ Add Review</button>
+                    <% } else { %>
+                    <button id="add1" name="addReview" disabled>+ Add Review</button>
+                    <% } %>
                 <% } %>
             </div>
             
@@ -95,12 +99,16 @@
                     <div id="nilai">
                         <input type="radio" name="nilai" value = 1>
                         <label for="nilai1">1</label>
+                        <br>
                         <input type="radio" name="nilai" value = 2>
                         <label for="nilai2">2</label>
+                        <br>
                         <input type="radio" name="nilai" value = 3>
                         <label for="nilai3">3</label>
+                        <br>
                         <input type="radio" name="nilai" value = 4>
                         <label for="nilai4">4</label>
+                        <br>
                         <input type="radio" name="nilai" value = 5>
                         <label for="nilai5">5</label>
                     </div>

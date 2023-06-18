@@ -103,6 +103,17 @@ button#add{
     box-shadow: 5px 5px 10px rgb(185, 185, 185);
 }
 
+button#add1{
+    margin-left: auto;
+    background-color: #cfd3f1;
+    color: gray;
+    border: 0;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(185, 185, 185);
+}
+
 input[type="text"]{   
     border: 0;
     background-color: white;
