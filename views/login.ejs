@@ -20,6 +20,9 @@
         <label for="password">Password</label>
         <input type="password" name="password">
         <button>Login</button>
+        <% if (cek === false) { %>
+            <p>Username or password entered is incorrect!</p>
+        <% } %>
         <div>
             Don’t have any account?
             <a href="signup">Sign Up</a>
