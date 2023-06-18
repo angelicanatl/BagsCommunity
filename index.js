@@ -1314,7 +1314,7 @@ let id_bag;
 app.get('/bag/:idbag', async (req, res) => {
     id_bag = req.params.idbag;
     let foto_path; let namaMerek; let namaDesigner; let ket_sub_kat; let ket_kat; let warnaTas; let panjangTas; let lebarTas; let tinggiTas;
-    let jumlahR; let lsReview; ;let rataR;
+    let jumlahR; let lsReview; let sudahReview ;let rataR;
 
     await get_pathFoto(conn, id_bag).then((result) => {
         foto_path = (JSON.parse(JSON.stringify(result))[0])
@@ -1351,6 +1351,9 @@ app.get('/bag/:idbag', async (req, res) => {
     await rataReview(conn, id_bag).then((result) => {
         rataR = result[0]['round(avg(angka_review))'];
     })
+    await udahReview(conn, id_bag, sessions.username).then((result) => {
+        sudahReview = result[0].jumlah;
+    })
     await listReviewTas(conn, id_bag).then((result) => { 
         res.render('bag', {
             username: sessions.username,
@@ -1367,10 +1370,23 @@ app.get('/bag/:idbag', async (req, res) => {
             tinggi : tinggiTas.tinggi,
             rataReview : rataR,
             review: jumlahR,
-            lsReview: result
+            lsReview: result,
+            sudah: sudahReview
         });
     })
 })
+
+const udahReview  = (conn, _id, username) => {
+    return new Promise((resolve, reject) => {
+        conn.query("SELECT COUNT(teks_review) as 'jumlah' FROM `items` WHERE tas_id = ? AND username = ?", [_id, username], (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
 
 //---------------------add review-----------------------------------------------
 

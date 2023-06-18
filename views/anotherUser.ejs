@@ -28,8 +28,10 @@
                     <p>Following</p>
                 </div>
             </section>
-            <a id="followingUser">Following</a>
+            <% if(username!="Admin123"){ %>
+            <a id="followingUser">Follow</a>
             <a id="followedUser">Followed</a>
+            <% } %>
         </div>
         
         <div id="Reviews">
