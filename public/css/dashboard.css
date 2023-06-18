@@ -33,6 +33,7 @@ section{
 
 #graphs{
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
     height: 400px;
     background-color: white;
@@ -42,7 +43,6 @@ section{
 
 #graph{
     height: 250px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
